@@ -1,0 +1,199 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "hermes-agent",
+  "elements": [
+    {
+      "type": "text",
+      "id": "title_0",
+      "x": 50,
+      "y": 20,
+      "text": "Insulin Helper — UI 设计稿",
+      "fontSize": 24,
+      "fontFamily": 1,
+      "originalText": "Insulin Helper — UI 设计稿",
+      "autoResize": true
+    },
+    {
+      "type": "text",
+      "id": "subtitle_0",
+      "x": 50,
+      "y": 50,
+      "text": "底部Tab栏：记录 | 计算器 | 报告   + 右上角设置齿轮",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "originalText": "底部Tab栏：记录 | 计算器 | 报告   + 右上角设置齿轮",
+      "autoResize": true
+    },
+
+    {"type":"rectangle","id":"sep_1","x":5,"y":85,"width":1,"height":10,"opacity":0},
+
+    {"type":"rectangle","id":"s1_bg","x":8,"y":90,"width":240,"height":400,"roundness":{"type":3},"strokeColor":"#343a40","backgroundColor":"#f8f9fa","fillStyle":"solid","strokeWidth":2,"roughness":0},
+    {"type":"text","id":"s1_label","x":10,"y":92,"fontSize":14,"fontFamily":1,"originalText":"① 首页 — 血糖记录","autoResize":true,"text":"① 首页 — 血糖记录","strokeColor":"#868e96"},
+
+    {"type":"text","id":"s1_topbar","x":20,"y":110,"fontSize":16,"fontFamily":1,"originalText":"Insulin Helper","autoResize":true,"text":"Insulin Helper","strokeColor":"#343a40"},
+    {"type":"text","id":"s1_topbar_gear","x":210,"y":110,"fontSize":18,"fontFamily":1,"originalText":"⚙","autoResize":true,"text":"⚙","strokeColor":"#495057"},
+
+    {"type":"rectangle","id":"s1_today","x":20,"y":140,"width":215,"height":50,"backgroundColor":"#a5d8ff","fillStyle":"solid","roundness":{"type":3},"boundElements":[{"id":"t_s1_today","type":"text"}]},
+    {"type":"text","id":"t_s1_today","x":50,"y":148,"width":160,"height":35,"containerId":"s1_today","originalText":"今日血糖趋势折线图\n最高 8.5 / 最低 5.2","autoResize":true,"fontSize":14,"fontFamily":1,"text":"今日血糖趋势折线图\n最高 8.5 / 最低 5.2","strokeColor":"#1e1e1e","textAlign":"center","verticalAlign":"middle"},
+
+    {"type":"rectangle","id":"s1_notif","x":20,"y":200,"width":215,"height":35,"backgroundColor":"#fff3bf","fillStyle":"solid","roundness":{"type":3},"boundElements":[{"id":"t_s1_notif","type":"text"}]},
+    {"type":"text","id":"t_s1_notif","x":25,"y":207,"width":205,"height":21,"containerId":"s1_notif","originalText":"⏰ 下次测量：12:30（餐后2h）","autoResize":true,"fontSize":13,"fontFamily":1,"text":"⏰ 下次测量：12:30（餐后2h）","strokeColor":"#e67700","textAlign":"center","verticalAlign":"middle"},
+
+    {"type":"text","id":"s1_listtitle","x":20,"y":250,"fontSize":14,"fontFamily":1,"originalText":"最近记录","autoResize":true,"text":"最近记录","strokeColor":"#868e96"},
+
+    {"type":"rectangle","id":"s1_item1","x":20,"y":270,"width":215,"height":45,"backgroundColor":"#ffffff","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#dee2e6","strokeWidth":1},
+    {"type":"text","id":"s1_i1_time","x":24,"y":274,"fontSize":11,"fontFamily":1,"originalText":"07:30  空腹","autoResize":true,"text":"07:30  空腹","strokeColor":"#868e96"},
+    {"type":"text","id":"s1_i1_val","x":190,"y":280,"fontSize":14,"fontFamily":1,"originalText":"6.2","autoResize":true,"text":"6.2","strokeColor":"#2f9e44"},
+    {"type":"text","id":"s1_i1_note","x":24,"y":291,"fontSize":11,"fontFamily":1,"originalText":"注射 4U · 早饭：馒头+鸡蛋","autoResize":true,"text":"注射 4U · 早饭：馒头+鸡蛋","strokeColor":"#495057"},
+
+    {"type":"rectangle","id":"s1_item2","x":20,"y":320,"width":215,"height":45,"backgroundColor":"#ffffff","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#dee2e6","strokeWidth":1},
+    {"type":"text","id":"s1_i2_time","x":24,"y":324,"fontSize":11,"fontFamily":1,"originalText":"09:45  餐后2h","autoResize":true,"text":"09:45  餐后2h","strokeColor":"#868e96"},
+    {"type":"text","id":"s1_i2_val","x":190,"y":330,"fontSize":14,"fontFamily":1,"originalText":"8.5","autoResize":true,"text":"8.5","strokeColor":"#e67700"},
+    {"type":"text","id":"s1_i2_note","x":24,"y":341,"fontSize":11,"fontFamily":1,"originalText":"餐后偏高","autoResize":true,"text":"餐后偏高","strokeColor":"#495057"},
+
+    {"type":"rectangle","id":"s1_item3","x":20,"y":370,"width":215,"height":45,"backgroundColor":"#ffffff","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#dee2e6","strokeWidth":1},
+    {"type":"text","id":"s1_i3_time","x":24,"y":374,"fontSize":11,"fontFamily":1,"originalText":"11:00  餐前","autoResize":true,"text":"11:00  餐前","strokeColor":"#868e96"},
+    {"type":"text","id":"s1_i3_val","x":190,"y":380,"fontSize":14,"fontFamily":1,"originalText":"5.8","autoResize":true,"text":"5.8","strokeColor":"#2f9e44"},
+    {"type":"text","id":"s1_i3_note","x":24,"y":391,"fontSize":11,"fontFamily":1,"originalText":"正常，准备午餐","autoResize":true,"text":"正常，准备午餐","strokeColor":"#495057"},
+
+    {"type":"rectangle","id":"s1_item4","x":20,"y":420,"width":215,"height":45,"backgroundColor":"#ffffff","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#dee2e6","strokeWidth":1},
+    {"type":"text","id":"s1_i4_time","x":24,"y":424,"fontSize":11,"fontFamily":1,"originalText":"11:30  午餐前","autoResize":true,"text":"11:30  午餐前","strokeColor":"#868e96"},
+    {"type":"text","id":"s1_i4_val","x":190,"y":430,"fontSize":14,"fontFamily":1,"originalText":"+","autoResize":true,"text":"+","strokeColor":"#1c7ed6"},
+
+    {"type":"text","id":"s1_fab","x":200,"y":440,"fontSize":24,"fontFamily":1,"originalText":"＋","autoResize":true,"text":"＋","strokeColor":"#1c7ed6"},
+
+    {"type":"rectangle","id":"s1_bottombar","x":8,"y":470,"width":240,"height":20,"backgroundColor":"#e9ecef","fillStyle":"solid","strokeColor":"#ced4da","strokeWidth":1,"roughness":0},
+    {"type":"text","id":"s1_bottomtxt","x":40,"y":471,"fontSize":11,"fontFamily":1,"originalText":"📋 记录    💉 计算器    📊 报告","autoResize":true,"text":"📋 记录    💉 计算器    📊 报告","strokeColor":"#868e96"},
+
+    {"type":"rectangle","id":"sep_2","x":268,"y":85,"width":1,"height":10,"opacity":0},
+
+    {"type":"rectangle","id":"s2_bg","x":270,"y":90,"width":240,"height":400,"roundness":{"type":3},"strokeColor":"#343a40","backgroundColor":"#f8f9fa","fillStyle":"solid","strokeWidth":2,"roughness":0},
+    {"type":"text","id":"s2_label","x":272,"y":92,"fontSize":14,"fontFamily":1,"originalText":"② 计算器页","autoResize":true,"text":"② 计算器页","strokeColor":"#868e96"},
+
+    {"type":"rectangle","id":"s2_safebar","x":282,"y":115,"width":215,"height":25,"backgroundColor":"#b2f2bb","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#69db7c","strokeWidth":1},
+    {"type":"text","id":"t_s2_safe","x":310,"y":117,"fontSize":12,"fontFamily":1,"originalText":"✅ 当前血糖安全","autoResize":true,"text":"✅ 当前血糖安全","strokeColor":"#2f9e44","containerId":"s2_safebar","textAlign":"center","verticalAlign":"middle","width":158},
+
+    {"type":"text","id":"s2_label_g","x":282,"y":150,"fontSize":12,"fontFamily":1,"originalText":"当前血糖 (mmol/L)","autoResize":true,"text":"当前血糖 (mmol/L)","strokeColor":"#495057"},
+    {"type":"rectangle","id":"s2_glucose_input","x":282,"y":168,"width":215,"height":50,"roundness":{"type":3},"backgroundColor":"#a5d8ff","fillStyle":"solid","strokeColor":"#4dabf7","boundElements":[{"id":"t_s2_g_val","type":"text"}]},
+    {"type":"text","id":"t_s2_g_val","x":342,"y":178,"width":94,"height":30,"containerId":"s2_glucose_input","originalText":"8.5  mmol/L","autoResize":true,"fontSize":20,"fontFamily":1,"text":"8.5  mmol/L","strokeColor":"#1e1e1e","textAlign":"center","verticalAlign":"middle"},
+
+    {"type":"text","id":"s2_label_c","x":282,"y":228,"fontSize":12,"fontFamily":1,"originalText":"碳水摄入 (g)   [📷拍照识别] [📖选食物]","autoResize":true,"text":"碳水摄入 (g)   [📷拍照识别] [📖选食物]","strokeColor":"#495057"},
+    {"type":"rectangle","id":"s2_carbs_input","x":282,"y":246,"width":215,"height":50,"roundness":{"type":3},"backgroundColor":"#b2f2bb","fillStyle":"solid","strokeColor":"#69db7c","boundElements":[{"id":"t_s2_c_val","type":"text"}]},
+    {"type":"text","id":"t_s2_c_val","x":320,"y":254,"width":140,"height":34,"containerId":"s2_carbs_input","originalText":"45g（1碗米饭≈45g碳","autoResize":true,"fontSize":18,"fontFamily":1,"text":"45g（1碗米饭≈45g碳","strokeColor":"#1e1e1e","textAlign":"center","verticalAlign":"middle"},
+
+    {"type":"text","id":"s2_label_iob","x":282,"y":306,"fontSize":11,"fontFamily":1,"originalText":"活性胰岛素 IOB: 1.2U (上次注射后2h)","autoResize":true,"text":"活性胰岛素 IOB: 1.2U (上次注射后2h)","strokeColor":"#868e96"},
+
+    {"type":"rectangle","id":"s2_calcbtn","x":282,"y":330,"width":215,"height":45,"backgroundColor":"#1c7ed6","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#1864ab","strokeWidth":2},
+    {"type":"text","id":"t_s2_calc","x":322,"y":340,"width":134,"height":28,"containerId":"s2_calcbtn","originalText":"计算剂量","autoResize":true,"fontSize":18,"fontFamily":1,"text":"计算剂量","strokeColor":"#ffffff","textAlign":"center","verticalAlign":"middle"},
+
+    {"type":"rectangle","id":"s2_result","x":282,"y":385,"width":215,"height":90,"backgroundColor":"#d0bfff","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#845ef7"},
+    {"type":"text","id":"t_s2_r_title","x":288,"y":388,"fontSize":12,"fontFamily":1,"originalText":"🤚 计算过程","autoResize":true,"text":"🤚 计算过程","strokeColor":"#6741d9"},
+    {"type":"text","id":"t_s2_r_detail","x":288,"y":404,"fontSize":11,"fontFamily":1,"originalText":"食物覆盖：45÷12 = 3.8U\n校正：(8.5-7.2)÷2.5 = 0.5U\n扣除IOB：-1.2U\n────────────\n推荐总量：3.1U","autoResize":true,"text":"食物覆盖：45÷12 = 3.8U\n校正：(8.5-7.2)÷2.5 = 0.5U\n扣除IOB：-1.2U\n────────────\n推荐总量：3.1U","strokeColor":"#343a40"},
+
+    {"type":"rectangle","id":"s2_bottombar","x":270,"y":470,"width":240,"height":20,"backgroundColor":"#e9ecef","fillStyle":"solid","strokeColor":"#ced4da","strokeWidth":1,"roughness":0},
+    {"type":"text","id":"s2_bottomtxt","x":305,"y":471,"fontSize":11,"fontFamily":1,"originalText":"📋 记录    💉 计算器    📊 报告","autoResize":true,"text":"📋 记录    💉 计算器    📊 报告","strokeColor":"#1c7ed6"},
+
+    {"type":"rectangle","id":"sep_3","x":530,"y":85,"width":1,"height":10,"opacity":0},
+
+    {"type":"rectangle","id":"s3_bg","x":530,"y":90,"width":240,"height":400,"roundness":{"type":3},"strokeColor":"#343a40","backgroundColor":"#f8f9fa","fillStyle":"solid","strokeWidth":2,"roughness":0},
+    {"type":"text","id":"s3_label","x":532,"y":92,"fontSize":14,"fontFamily":1,"originalText":"③ 报告页","autoResize":true,"text":"③ 报告页","strokeColor":"#868e96"},
+
+    {"type":"text","id":"s3_title","x":540,"y":112,"fontSize":16,"fontFamily":1,"originalText":"本周摘要","autoResize":true,"text":"本周摘要","strokeColor":"#343a40"},
+    {"type":"text","id":"s3_range","x":540,"y":130,"fontSize":11,"fontFamily":1,"originalText":"5/28 - 6/3","autoResize":true,"text":"5/28 - 6/3","strokeColor":"#868e96"},
+
+    {"type":"rectangle","id":"s3_card1","x":540,"y":150,"width":100,"height":55,"backgroundColor":"#a5d8ff","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#4dabf7"},
+    {"type":"text","id":"t_s3_avg","x":542,"y":152,"fontSize":10,"fontFamily":1,"originalText":"平均血糖","autoResize":true,"text":"平均血糖","strokeColor":"#495057"},
+    {"type":"text","id":"t_s3_avg_val","x":542,"y":168,"fontSize":18,"fontFamily":1,"originalText":"7.2","autoResize":true,"text":"7.2","strokeColor":"#1e1e1e"},
+    {"type":"text","id":"t_s3_avg_unit","x":580,"y":175,"fontSize":10,"fontFamily":1,"originalText":"mmol/L","autoResize":true,"text":"mmol/L","strokeColor":"#495057"},
+
+    {"type":"rectangle","id":"s3_card2","x":650,"y":150,"width":100,"height":55,"backgroundColor":"#b2f2bb","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#69db7c"},
+    {"type":"text","id":"t_s3_dose","x":652,"y":152,"fontSize":10,"fontFamily":1,"originalText":"日均胰岛素","autoResize":true,"text":"日均胰岛素","strokeColor":"#495057"},
+    {"type":"text","id":"t_s3_dose_val","x":652,"y":168,"fontSize":18,"fontFamily":1,"originalText":"38","autoResize":true,"text":"38","strokeColor":"#1e1e1e"},
+    {"type":"text","id":"t_s3_dose_unit","x":690,"y":175,"fontSize":10,"fontFamily":1,"originalText":"U","autoResize":true,"text":"U","strokeColor":"#495057"},
+
+    {"type":"text","id":"s3_chart_label","x":540,"y":218,"fontSize":12,"fontFamily":1,"originalText":"血糖趋势（7天）","autoResize":true,"text":"血糖趋势（7天）","strokeColor":"#495057"},
+
+    {"type":"rectangle","id":"s3_chart_area","x":540,"y":235,"width":210,"height":100,"backgroundColor":"#ffffff","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#dee2e6","strokeWidth":1},
+    {"type":"text","id":"t_s3_chart_ph","x":560,"y":265,"fontSize":14,"fontFamily":1,"originalText":"[折线图: 血糖曲线]","autoResize":true,"text":"[折线图: 血糖曲线]","strokeColor":"#adb5bd"},
+
+    {"type":"text","id":"s3_target","x":540,"y":348,"fontSize":12,"fontFamily":1,"originalText":"目标达标率","autoResize":true,"text":"目标达标率","strokeColor":"#495057"},
+    {"type":"text","id":"s3_target_val","x":540,"y":365,"fontSize":14,"fontFamily":1,"originalText":"68% (目标 5.0-7.2 mmol/L)","autoResize":true,"text":"68% (目标 5.0-7.2 mmol/L)","strokeColor":"#2f9e44"},
+
+    {"type":"text","id":"s3_low","x":540,"y":390,"fontSize":12,"fontFamily":1,"originalText":"低血糖次数: 1 次","autoResize":true,"text":"低血糖次数: 1 次","strokeColor":"#e67700"},
+    {"type":"text","id":"s3_high","x":540,"y":408,"fontSize":12,"fontFamily":1,"originalText":"高血糖次数: 5 次","autoResize":true,"text":"高血糖次数: 5 次","strokeColor":"#e67700"},
+
+    {"type":"text","id":"s3_export","x":690,"y":420,"fontSize":14,"fontFamily":1,"originalText":"📤 导出报告","autoResize":true,"text":"📤 导出报告","strokeColor":"#1c7ed6"},
+
+    {"type":"rectangle","id":"s3_bottombar","x":530,"y":470,"width":240,"height":20,"backgroundColor":"#e9ecef","fillStyle":"solid","strokeColor":"#ced4da","strokeWidth":1,"roughness":0},
+    {"type":"text","id":"s3_bottomtxt","x":565,"y":471,"fontSize":11,"fontFamily":1,"originalText":"📋 记录    💉 计算器    📊 报告","autoResize":true,"text":"📋 记录    💉 计算器    📊 报告","strokeColor":"#868e96"},
+
+    {"type":"rectangle","id":"sep_4","x":790,"y":85,"width":1,"height":10,"opacity":0},
+
+    {"type":"rectangle","id":"s4_bg","x":793,"y":90,"width":240,"height":400,"roundness":{"type":3},"strokeColor":"#343a40","backgroundColor":"#f8f9fa","fillStyle":"solid","strokeWidth":2,"roughness":0},
+    {"type":"text","id":"s4_label","x":795,"y":92,"fontSize":14,"fontFamily":1,"originalText":"④ 食物搜索/碳水库","autoResize":true,"text":"④ 食物搜索/碳水库","strokeColor":"#868e96"},
+
+    {"type":"rectangle","id":"s4_search","x":805,"y":115,"width":215,"height":40,"backgroundColor":"#ffffff","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#dee2e6","strokeWidth":1},
+    {"type":"text","id":"t_s4_search","x":810,"y":122,"fontSize":13,"fontFamily":1,"originalText":"🔍 搜索食物名称...","autoResize":true,"text":"🔍 搜索食物名称...","strokeColor":"#adb5bd"},
+
+    {"type":"text","id":"s4_cat","x":805,"y":165,"fontSize":12,"fontFamily":1,"originalText":"分类：主食 / 水果 / 蔬菜 / 肉类 / 零食 / 饮品","autoResize":true,"text":"分类：主食 / 水果 / 蔬菜 / 肉类 / 零食 / 饮品","strokeColor":"#495057"},
+
+    {"type":"text","id":"s4_explain","x":805,"y":183,"fontSize":11,"fontFamily":1,"originalText":"点击食物→编辑1份的克数（每个食物基准可调）","autoResize":true,"text":"点击食物→编辑1份的克数（每个食物基准可调）","strokeColor":"#868e96"},
+
+    {"type":"rectangle","id":"s4_item_rice","x":805,"y":200,"width":215,"height":40,"backgroundColor":"#ffffff","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#dee2e6","strokeWidth":1},
+    {"type":"text","id":"t_s4_rice","x":808,"y":204,"fontSize":14,"fontFamily":1,"originalText":"米饭（白）  1碗≈45g碳水","autoResize":true,"text":"米饭（白）  1碗≈45g碳水","strokeColor":"#343a40"},
+    {"type":"text","id":"t_s4_rice_c","x":808,"y":222,"fontSize":10,"fontFamily":1,"originalText":"基准 200g/碗  ➤  调碗大小","autoResize":true,"text":"基准 200g/碗  ➤  调碗大小","strokeColor":"#1c7ed6"},
+
+    {"type":"rectangle","id":"s4_item_noodle","x":805,"y":245,"width":215,"height":40,"backgroundColor":"#ffffff","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#dee2e6","strokeWidth":1},
+    {"type":"text","id":"t_s4_noodle","x":808,"y":249,"fontSize":14,"fontFamily":1,"originalText":"面条（煮）  1碗≈40g碳水","autoResize":true,"text":"面条（煮）  1碗≈40g碳水","strokeColor":"#343a40"},
+    {"type":"text","id":"t_s4_noodle_c","x":808,"y":267,"fontSize":10,"fontFamily":1,"originalText":"基准 220g/碗  ➤  调碗大小","autoResize":true,"text":"基准 220g/碗  ➤  调碗大小","strokeColor":"#1c7ed6"},
+
+    {"type":"rectangle","id":"s4_item_bread","x":805,"y":290,"width":215,"height":40,"backgroundColor":"#ffffff","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#dee2e6","strokeWidth":1},
+    {"type":"text","id":"t_s4_bread","x":808,"y":294,"fontSize":14,"fontFamily":1,"originalText":"馒头  1个≈50g碳水","autoResize":true,"text":"馒头  1个≈50g碳水","strokeColor":"#343a40"},
+    {"type":"text","id":"t_s4_bread_c","x":808,"y":312,"fontSize":10,"fontFamily":1,"originalText":"基准 110g/个  ➤  调个头大小","autoResize":true,"text":"基准 110g/个  ➤  调个头大小","strokeColor":"#1c7ed6"},
+
+    {"type":"rectangle","id":"s4_item_apple","x":805,"y":335,"width":215,"height":40,"backgroundColor":"#ffffff","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#dee2e6","strokeWidth":1},
+    {"type":"text","id":"t_s4_apple","x":808,"y":339,"fontSize":14,"fontFamily":1,"originalText":"苹果  1个≈25g碳水","autoResize":true,"text":"苹果  1个≈25g碳水","strokeColor":"#343a40"},
+    {"type":"text","id":"t_s4_apple_c","x":808,"y":357,"fontSize":10,"fontFamily":1,"originalText":"基准 180g/个  ➤  调果子大小","autoResize":true,"text":"基准 180g/个  ➤  调果子大小","strokeColor":"#1c7ed6"},
+
+    {"type":"text","id":"s4_more","x":808,"y":388,"fontSize":12,"fontFamily":1,"originalText":"... 更多食物滑动可见 ...","autoResize":true,"text":"... 更多食物滑动可见 ...","strokeColor":"#adb5bd"},
+
+    {"type":"rectangle","id":"s4_adjust_demo","x":805,"y":408,"width":215,"height":65,"backgroundColor":"#e9ecef","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#adb5bd","strokeWidth":1,"roughness":0},
+    {"type":"text","id":"t_s4_adjust_title","x":810,"y":411,"fontSize":11,"fontFamily":1,"originalText":"⬆ 点击食物后弹窗编辑 ⬆","autoResize":true,"text":"⬆ 点击食物后弹窗编辑 ⬆","strokeColor":"#495057"},
+    {"type":"text","id":"t_s4_adjust_demo","x":810,"y":428,"fontSize":13,"fontFamily":1,"originalText":"米饭：1份 = 200g → 输入新克数","autoResize":true,"text":"米饭：1份 = 200g → 输入新克数","strokeColor":"#343a40"},
+    {"type":"text","id":"t_s4_adjust_result","x":810,"y":448,"fontSize":11,"fontFamily":1,"originalText":"如改成250g/碗，碳水→250/100×26≈56g","autoResize":true,"text":"如改成250g/碗，碳水→250/100×26≈56g","strokeColor":"#868e96"},
+
+    {"type":"text","id":"s4_add","x":"810","y":"438","fontSize":"13","fontFamily":1,"strokeColor":"#1c7ed6","originalText":"＋ 添加自定义食物","autoResize":true,"text":"＋ 添加自定义食物"},
+
+    {"type":"rectangle","id":"sep_5","x":1053,"y":85,"width":1,"height":10,"opacity":0},
+
+    {"type":"rectangle","id":"s5_bg","x":1056,"y":90,"width":240,"height":400,"roundness":{"type":3},"strokeColor":"#343a40","backgroundColor":"#f8f9fa","fillStyle":"solid","strokeWidth":2,"roughness":0},
+    {"type":"text","id":"s5_label","x":1058,"y":92,"fontSize":14,"fontFamily":1,"originalText":"⑤ 设置页","autoResize":true,"text":"⑤ 设置页","strokeColor":"#868e96"},
+
+    {"type":"rectangle","id":"s5_cfg1","x":1068,"y":115,"width":215,"height":40,"backgroundColor":"#ffffff","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#dee2e6","strokeWidth":1},
+    {"type":"text","id":"t_s5_isf","x":1070,"y":123,"fontSize":13,"fontFamily":1,"originalText":"胰岛素敏感系数 ISF：2.5","autoResize":true,"text":"胰岛素敏感系数 ISF：2.5","strokeColor":"#343a40"},
+
+    {"type":"rectangle","id":"s5_cfg2","x":1068,"y":160,"width":215,"height":40,"backgroundColor":"#ffffff","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#dee2e6","strokeWidth":1},
+    {"type":"text","id":"t_s5_icr","x":1070,"y":168,"fontSize":13,"fontFamily":1,"originalText":"碳水系数 ICR：12.0 g/U","autoResize":true,"text":"碳水系数 ICR：12.0 g/U","strokeColor":"#343a40"},
+
+    {"type":"rectangle","id":"s5_cfg3","x":1068,"y":205,"width":215,"height":40,"backgroundColor":"#ffffff","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#dee2e6","strokeWidth":1},
+    {"type":"text","id":"t_s5_target","x":1070,"y":213,"fontSize":13,"fontFamily":1,"originalText":"目标血糖：5.0 - 7.2 mmol/L","autoResize":true,"text":"目标血糖：5.0 - 7.2 mmol/L","strokeColor":"#343a40"},
+
+    {"type":"rectangle","id":"s5_cfg4","x":1068,"y":250,"width":215,"height":40,"backgroundColor":"#ffffff","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#dee2e6","strokeWidth":1},
+    {"type":"text","id":"t_s5_insulin","x":1070,"y":258,"fontSize":13,"fontFamily":1,"originalText":"胰岛素类型：速效（门冬/赖脯）","autoResize":true,"text":"胰岛素类型：速效（门冬/赖脯）","strokeColor":"#343a40"},
+
+    {"type":"rectangle","id":"s5_cfg5","x":1068,"y":295,"width":215,"height":40,"backgroundColor":"#ffffff","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#dee2e6","strokeWidth":1},
+    {"type":"text","id":"t_s5_max","x":1070,"y":303,"fontSize":13,"fontFamily":1,"originalText":"单次最大剂量：20 U","autoResize":true,"text":"单次最大剂量：20 U","strokeColor":"#343a40"},
+
+    {"type":"rectangle","id":"s5_cfg6","x":1068,"y":340,"width":215,"height":40,"backgroundColor":"#ffffff","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#dee2e6","strokeWidth":1},
+    {"type":"text","id":"t_s5_weight","x":1070,"y":348,"fontSize":13,"fontFamily":1,"originalText":"体重：65 kg（用于估算初始参数）","autoResize":true,"text":"体重：65 kg（用于估算初始参数）","strokeColor":"#343a40"},
+
+    {"type":"rectangle","id":"s5_danger","x":1068,"y":395,"width":215,"height":35,"backgroundColor":"#ffc9c9","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#ff8787"},
+    {"type":"text","id":"t_s5_reset","x":1105,"y":403,"fontSize":13,"fontFamily":1,"originalText":"🗑️ 清除所有数据","autoResize":true,"text":"🗑️ 清除所有数据","strokeColor":"#e03131"},
+
+    {"type":"text","id":"s5_ver","x":1068,"y":445,"fontSize":10,"fontFamily":1,"originalText":"版本 1.0.0   ·   数据仅存储本地","autoResize":true,"text":"版本 1.0.0   ·   数据仅存储本地","strokeColor":"#adb5bd"}
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff"
+  }
+}

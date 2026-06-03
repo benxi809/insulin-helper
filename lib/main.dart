@@ -1,0 +1,99 @@
+import 'package:flutter/material.dart';
+import 'package:insulin_app/app_state.dart';
+import 'package:insulin_app/pages/home_page.dart';
+import 'package:insulin_app/pages/calculator_page.dart';
+import 'package:insulin_app/pages/report_page.dart';
+import 'package:insulin_app/pages/food_picker_page.dart';
+import 'package:insulin_app/pages/settings_page.dart';
+
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  final appState = AppState();
+  appState.init();
+
+  runApp(InsulinApp(appState: appState));
+}
+
+class InsulinApp extends StatelessWidget {
+  final AppState appState;
+
+  const InsulinApp({super.key, required this.appState});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListenableBuilder(
+      listenable: appState,
+      builder: (context, _) {
+        if (!appState.initialized) {
+          return const MaterialApp(
+            home: Scaffold(body: Center(child: CircularProgressIndicator())),
+          );
+        }
+
+        return MaterialApp(
+          title: 'Insulin Helper',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            colorSchemeSeed: Colors.blue,
+            useMaterial3: true,
+            appBarTheme: const AppBarTheme(centerTitle: true),
+          ),
+          home: const MainShell(),
+          routes: {
+            '/foods': (context) => const FoodPickerPage(),
+            '/settings': (context) => const SettingsPage(),
+          },
+        );
+      },
+    );
+  }
+}
+
+/// 主外壳 — 底部导航栏 + 三个Tab页面
+class MainShell extends StatefulWidget {
+  const MainShell({super.key});
+
+  @override
+  State<MainShell> createState() => _MainShellState();
+}
+
+class _MainShellState extends State<MainShell> {
+  int _currentIndex = 1; // 默认从计算器页开始
+
+  final List<Widget> _pages = const [
+    HomePage(),
+    CalculatorPage(),
+    ReportPage(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _pages,
+      ),
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: _currentIndex,
+        onDestinationSelected: (i) => setState(() => _currentIndex = i),
+        destinations: const [
+          NavigationDestination(
+            icon: Icon(Icons.home_outlined),
+            selectedIcon: Icon(Icons.home),
+            label: '记录',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.calculate_outlined),
+            selectedIcon: Icon(Icons.calculate),
+            label: '计算器',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.bar_chart_outlined),
+            selectedIcon: Icon(Icons.bar_chart),
+            label: '报告',
+          ),
+        ],
+      ),
+    );
+  }
+}
