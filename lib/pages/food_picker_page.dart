@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:insulin_app/models/models.dart';
 
-/// 食物选择页 — 中餐碳水库
+/// 食物选择页 — 中餐碳水库 + 拍照识别入口
 class FoodPickerPage extends StatefulWidget {
-  const FoodPickerPage({super.key});
+  final double? initialCarbs;
+  const FoodPickerPage({super.key, this.initialCarbs});
 
   @override
   State<FoodPickerPage> createState() => _FoodPickerPageState();
@@ -100,7 +101,6 @@ class _FoodPickerPageState extends State<FoodPickerPage> {
               ],
             ),
             const SizedBox(height: 12),
-            // 预览碳水值
             StatefulBuilder(
               builder: (ctx, setLocalState) {
                 final grams = double.tryParse(gramsCtrl.text) ?? food.gramsPerUnit;
@@ -152,7 +152,22 @@ class _FoodPickerPageState extends State<FoodPickerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('选择食物')),
+      appBar: AppBar(
+        title: const Text('选择食物'),
+        actions: [
+          // 拍照识别按钮
+          IconButton(
+            icon: const Icon(Icons.camera_alt_outlined),
+            onPressed: () async {
+              final result = await Navigator.pushNamed(context, '/camera_food');
+              if (result != null && result is double) {
+                Navigator.pop(context, result);
+              }
+            },
+            tooltip: '拍照识别',
+          ),
+        ],
+      ),
       body: Column(
         children: [
           // 搜索框
@@ -212,6 +227,26 @@ class _FoodPickerPageState extends State<FoodPickerPage> {
                       );
                     },
                   ),
+          ),
+
+          // 底部拍照快捷按钮
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: SizedBox(
+                width: double.infinity,
+                child: OutlinedButton.icon(
+                  onPressed: () async {
+                    final result = await Navigator.pushNamed(context, '/camera_food');
+                    if (result != null && result is double) {
+                      Navigator.pop(context, result);
+                    }
+                  },
+                  icon: const Icon(Icons.camera_alt),
+                  label: const Text('📸 拍照识别食物'),
+                ),
+              ),
+            ),
           ),
         ],
       ),

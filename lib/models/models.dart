@@ -144,6 +144,7 @@ enum DoseTag {
 }
 
 /// 用户配置
+/// 用户配置（含患者个人信息）
 class UserConfig {
   double targetGlucoseMin; // 目标血糖下限 (mmol/L)
   double targetGlucoseMax; // 目标血糖上限 (mmol/L)
@@ -153,6 +154,22 @@ class UserConfig {
   int iobDurationHours; // IOB 活性时长
   double maxDosePerInjection; // 单次最大剂量上限
 
+  // 患者个人信息
+  String patientName; // 患者姓名
+  int age; // 年龄
+  int diabetesType; // 1=1型, 2=2型
+  DateTime? diagnosisDate; // 诊断日期
+  double? hba1c; // 最近糖化血红蛋白 (%)
+  int? targetHba1c; // 目标糖化血红蛋白 (如7即7%)
+  String medicationRegimen; // 用药方案描述
+  double weight; // 体重 (kg)
+
+  // 提醒设置
+  bool reminderBreakfast; // 早餐前7:00
+  bool reminderLunch; // 午餐前11:30
+  bool reminderDinner; // 晚餐前17:30
+  bool reminderBedtime; // 睡前21:00
+
   UserConfig({
     this.targetGlucoseMin = 5.0,
     this.targetGlucoseMax = 7.2,
@@ -161,6 +178,18 @@ class UserConfig {
     this.insulinType = InsulinType.rapidActing,
     this.iobDurationHours = 4,
     this.maxDosePerInjection = 20.0,
+    this.patientName = '',
+    this.age = 30,
+    this.diabetesType = 1,
+    this.diagnosisDate,
+    this.hba1c,
+    this.medicationRegimen = '每日多次注射（MDI）',
+    this.targetHba1c = 7,
+    this.weight = 65.0,
+    this.reminderBreakfast = true,
+    this.reminderLunch = true,
+    this.reminderDinner = true,
+    this.reminderBedtime = true,
   });
 
   Map<String, dynamic> toMap() => {
@@ -171,6 +200,18 @@ class UserConfig {
         'insulinType': insulinType.index,
         'iobDurationHours': iobDurationHours,
         'maxDosePerInjection': maxDosePerInjection,
+        'patientName': patientName,
+        'age': age,
+        'diabetesType': diabetesType,
+        'diagnosisDate': diagnosisDate?.toIso8601String(),
+        'hba1c': hba1c,
+        'medicationRegimen': medicationRegimen,
+        'targetHba1c': targetHba1c,
+        'weight': weight,
+        'reminderBreakfast': reminderBreakfast ? 1 : 0,
+        'reminderLunch': reminderLunch ? 1 : 0,
+        'reminderDinner': reminderDinner ? 1 : 0,
+        'reminderBedtime': reminderBedtime ? 1 : 0,
       };
 
   factory UserConfig.fromMap(Map<String, dynamic> map) => UserConfig(
@@ -181,6 +222,20 @@ class UserConfig {
         insulinType: InsulinType.values[map['insulinType'] as int? ?? 0],
         iobDurationHours: map['iobDurationHours'] as int? ?? 4,
         maxDosePerInjection: (map['maxDosePerInjection'] as num?)?.toDouble() ?? 20.0,
+        patientName: (map['patientName'] as String?) ?? '',
+        age: (map['age'] as int?) ?? 30,
+        diabetesType: (map['diabetesType'] as int?) ?? 1,
+        diagnosisDate: map['diagnosisDate'] != null
+            ? DateTime.tryParse(map['diagnosisDate'] as String)
+            : null,
+        hba1c: (map['hba1c'] as num?)?.toDouble(),
+        medicationRegimen: (map['medicationRegimen'] as String?) ?? '每日多次注射（MDI）',
+        targetHba1c: (map['targetHba1c'] as int?) ?? 7,
+        weight: (map['weight'] as num?)?.toDouble() ?? 65.0,
+        reminderBreakfast: (map['reminderBreakfast'] as int?) == 1,
+        reminderLunch: (map['reminderLunch'] as int?) == 1,
+        reminderDinner: (map['reminderDinner'] as int?) == 1,
+        reminderBedtime: (map['reminderBedtime'] as int?) == 1,
       );
 }
 

@@ -114,6 +114,13 @@ class _CalculatorPageState extends State<CalculatorPage> {
     });
   }
 
+  void _pickFromCamera() async {
+    final result = await Navigator.pushNamed(context, '/camera_food');
+    if (result != null && result is double) {
+      _carbsCtrl.text = result.toStringAsFixed(0);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -150,6 +157,12 @@ class _CalculatorPageState extends State<CalculatorPage> {
                 onPressed: _pickFromFoodDB,
                 icon: const Icon(Icons.restaurant_menu, size: 16),
                 label: const Text('选食物'),
+              ),
+              const SizedBox(width: 4),
+              TextButton.icon(
+                onPressed: _pickFromCamera,
+                icon: const Icon(Icons.camera_alt, size: 16),
+                label: const Text('拍照'),
               ),
             ],
           ),

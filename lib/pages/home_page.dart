@@ -14,6 +14,7 @@ class _HomePageState extends State<HomePage> {
   final AppDatabase _db = AppDatabase();
   List<GlucoseRecord> _records = [];
   Map<String, dynamic>? _todaySummary;
+  UserConfig _config = UserConfig();
   bool _loading = true;
 
   @override
@@ -27,10 +28,12 @@ class _HomePageState extends State<HomePage> {
     final records = await _db.getGlucoseRecords(limit: 20);
     final today = DateTime.now();
     final summary = await _db.getDailySummary(today);
+    final config = await _db.getConfig();
     if (mounted) {
       setState(() {
         _records = records;
         _todaySummary = summary;
+        _config = config;
         _loading = false;
       });
     }
@@ -122,6 +125,12 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('Insulin Helper'),
         actions: [
+          // 患者信息快速入口
+          IconButton(
+            icon: const Icon(Icons.person),
+            onPressed: () => Navigator.pushNamed(context, '/profile'),
+            tooltip: '患者信息',
+          ),
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () => Navigator.pushNamed(context, '/settings'),
@@ -135,12 +144,16 @@ class _HomePageState extends State<HomePage> {
               child: ListView(
                 padding: const EdgeInsets.all(16),
                 children: [
+                  // 患者信息快捷卡片
+                  if (_config.patientName.isNotEmpty) _buildPatientCard(),
                   // 今日摘要卡片
                   _buildTodayCard(),
                   const SizedBox(height: 16),
                   // 下次测量提醒（如果最近30分钟内无记录）
                   if (_records.isNotEmpty) _buildReminder(),
                   const SizedBox(height: 16),
+                  // 快捷功能
+                  _buildQuickActions(),
                   // 最近记录标题
                   const Text('最近记录',
                       style: TextStyle(fontSize: 14, color: Colors.grey)),
@@ -154,6 +167,27 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: _showAddDialog,
         child: const Icon(Icons.add),
+      ),
+    );
+  }
+
+  Widget _buildPatientCard() {
+    final name = _config.patientName;
+    final typeStr = _config.diabetesType == 1 ? '1型' : '2型';
+    return Card(
+      color: Colors.blue.shade50,
+      child: ListTile(
+        leading: CircleAvatar(
+          backgroundColor: Colors.blue.shade200,
+          child: Text(
+            name.isNotEmpty ? name[0] : '?',
+            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+        ),
+        title: Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
+        subtitle: Text('$typeStr 糖尿病 · ${_config.age}岁 · HbA1c ${_config.hba1c?.toStringAsFixed(1) ?? '--'}%'),
+        trailing: const Icon(Icons.chevron_right, color: Colors.grey),
+        onTap: () => Navigator.pushNamed(context, '/profile'),
       ),
     );
   }
@@ -223,6 +257,37 @@ class _HomePageState extends State<HomePage> {
         leading: const Icon(Icons.access_time, color: Colors.orange),
         title: Text('距上次测量已 $minutesSince 分钟'),
         subtitle: const Text('建议按时测量'),
+        trailing: IconButton(
+          icon: const Icon(Icons.add),
+          onPressed: () {
+            // 触发新增血糖记录
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildQuickActions() {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Row(
+        children: [
+          Expanded(
+            child: ActionChip(
+              avatar: const Icon(Icons.camera_alt, size: 18, color: Colors.green),
+              label: const Text('拍照识食物', style: TextStyle(fontSize: 13)),
+              onPressed: () => Navigator.pushNamed(context, '/camera_food'),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: ActionChip(
+              avatar: const Icon(Icons.restaurant_menu, size: 18, color: Colors.orange),
+              label: const Text('碳水库', style: TextStyle(fontSize: 13)),
+              onPressed: () => Navigator.pushNamed(context, '/foods'),
+            ),
+          ),
+        ],
       ),
     );
   }

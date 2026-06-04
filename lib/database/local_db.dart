@@ -23,8 +23,9 @@ class AppDatabase {
 
     return await openDatabase(
       path,
-      version: 1,
+      version: 2,
       onCreate: _createTables,
+      onUpgrade: _migrateTables,
     );
   }
 
@@ -60,12 +61,43 @@ class AppDatabase {
         icr REAL NOT NULL DEFAULT 12.0,
         insulinType INTEGER NOT NULL DEFAULT 0,
         iobDurationHours INTEGER NOT NULL DEFAULT 4,
-        maxDosePerInjection REAL NOT NULL DEFAULT 20.0
+        maxDosePerInjection REAL NOT NULL DEFAULT 20.0,
+        patientName TEXT NOT NULL DEFAULT '',
+        age INTEGER NOT NULL DEFAULT 30,
+        diabetesType INTEGER NOT NULL DEFAULT 1,
+        diagnosisDate TEXT,
+        hba1c REAL,
+        medicationRegimen TEXT NOT NULL DEFAULT '每日多次注射（MDI）',
+        targetHba1c INTEGER DEFAULT 7,
+        weight REAL NOT NULL DEFAULT 65.0,
+        reminderBreakfast INTEGER NOT NULL DEFAULT 1,
+        reminderLunch INTEGER NOT NULL DEFAULT 1,
+        reminderDinner INTEGER NOT NULL DEFAULT 1,
+        reminderBedtime INTEGER NOT NULL DEFAULT 1
       )
     ''');
 
     // 插入默认配置
     await db.insert('user_config', UserConfig().toMap());
+  }
+
+  /// 数据库迁移
+  Future<void> _migrateTables(Database db, int oldVersion, int newVersion) async {
+    // v1 → v2: 增加用户信息字段
+    if (oldVersion < 2) {
+      await db.execute('ALTER TABLE user_config ADD COLUMN patientName TEXT NOT NULL DEFAULT \'\'');
+      await db.execute('ALTER TABLE user_config ADD COLUMN age INTEGER NOT NULL DEFAULT 30');
+      await db.execute('ALTER TABLE user_config ADD COLUMN diabetesType INTEGER NOT NULL DEFAULT 1');
+      await db.execute('ALTER TABLE user_config ADD COLUMN diagnosisDate TEXT');
+      await db.execute('ALTER TABLE user_config ADD COLUMN hba1c REAL');
+      await db.execute('ALTER TABLE user_config ADD COLUMN medicationRegimen TEXT NOT NULL DEFAULT \'每日多次注射（MDI）\'');
+      await db.execute('ALTER TABLE user_config ADD COLUMN targetHba1c INTEGER DEFAULT 7');
+      await db.execute('ALTER TABLE user_config ADD COLUMN weight REAL NOT NULL DEFAULT 65.0');
+      await db.execute('ALTER TABLE user_config ADD COLUMN reminderBreakfast INTEGER NOT NULL DEFAULT 1');
+      await db.execute('ALTER TABLE user_config ADD COLUMN reminderLunch INTEGER NOT NULL DEFAULT 1');
+      await db.execute('ALTER TABLE user_config ADD COLUMN reminderDinner INTEGER NOT NULL DEFAULT 1');
+      await db.execute('ALTER TABLE user_config ADD COLUMN reminderBedtime INTEGER NOT NULL DEFAULT 1');
+    }
   }
 
   // ========== 血糖记录 CRUD ==========

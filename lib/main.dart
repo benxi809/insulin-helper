@@ -5,19 +5,30 @@ import 'package:insulin_app/pages/calculator_page.dart';
 import 'package:insulin_app/pages/report_page.dart';
 import 'package:insulin_app/pages/food_picker_page.dart';
 import 'package:insulin_app/pages/settings_page.dart';
+import 'package:insulin_app/pages/patient_profile_page.dart';
+import 'package:insulin_app/utils/notification_service.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   final appState = AppState();
   appState.init();
 
-  runApp(InsulinApp(appState: appState));
+  // 初始化通知服务
+  final notifService = NotificationService();
+  notifService.init();
+
+  runApp(InsulinApp(appState: appState, notificationService: notifService));
 }
 
 class InsulinApp extends StatelessWidget {
   final AppState appState;
+  final NotificationService notificationService;
 
-  const InsulinApp({super.key, required this.appState});
+  const InsulinApp({
+    super.key,
+    required this.appState,
+    required this.notificationService,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +53,8 @@ class InsulinApp extends StatelessWidget {
           routes: {
             '/foods': (context) => const FoodPickerPage(),
             '/settings': (context) => const SettingsPage(),
+            '/profile': (context) => const PatientProfilePage(),
+            '/camera_food': (context) => const CameraFoodPage(),
           },
         );
       },

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:insulin_app/database/local_db.dart';
 import 'package:insulin_app/models/models.dart';
+import 'package:insulin_app/utils/notification_service.dart';
 
-/// 设置页
+/// 设置页 — 含提醒设置和患者信息入口
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
 
@@ -12,6 +13,7 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   final AppDatabase _db = AppDatabase();
+  final NotificationService _notif = NotificationService();
   UserConfig _config = UserConfig();
   bool _loading = true;
 
@@ -28,11 +30,24 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Future<void> _saveConfig() async {
     await _db.updateConfig(_config);
+    // 同步更新提醒
+    await _notif.setupReminders(
+      breakfast: _config.reminderBreakfast,
+      lunch: _config.reminderLunch,
+      dinner: _config.reminderDinner,
+      bedtime: _config.reminderBedtime,
+    );
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('设置已保存')),
       );
     }
+  }
+
+  Future<void> _initReminders() async {
+    await _notif.init();
+    await _notif.requestPermissions();
+    await _saveConfig();
   }
 
   void _editField(String label, double currentValue, Function(double) onSave) {
@@ -86,12 +101,12 @@ class _SettingsPageState extends State<SettingsPage> {
     );
 
     if (confirmed == true) {
-      // 简单方式：删除数据库文件，重新创建
       final db = await _db.database;
       await db.delete('glucose_records');
       await db.delete('insulin_doses');
       await db.delete('user_config');
       await db.insert('user_config', UserConfig().toMap());
+      await _notif.cancelAll();
       _loadConfig();
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -110,10 +125,22 @@ class _SettingsPageState extends State<SettingsPage> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
+          // ===== 患者信息入口 =====
+          _buildConfigTile(
+            icon: Icons.person,
+            title: '患者信息',
+            subtitle: '姓名 · 年龄 · 糖尿病类型 · 诊断记录',
+            onTap: () => Navigator.pushNamed(context, '/profile'),
+          ),
+          const SizedBox(height: 12),
+
+          // ===== 胰岛素参数 =====
+          _sectionHeader('胰岛素参数'),
+          const SizedBox(height: 4),
           _buildConfigTile(
             icon: Icons.speed,
             title: '胰岛素敏感系数 ISF',
-            subtitle: '${_config.isf.toStringAsFixed(1)} mmol/L · 每1U胰岛素降低的血糖值',
+            subtitle: '${_config.isf.toStringAsFixed(2)} mmol/L · 每1U胰岛素降低的血糖值',
             onTap: () => _editField('ISF', _config.isf, (v) => setState(() => _config.isf = v)),
           ),
           _buildConfigTile(
@@ -198,13 +225,75 @@ class _SettingsPageState extends State<SettingsPage> {
             subtitle: '${_config.maxDosePerInjection.toStringAsFixed(1)} U',
             onTap: () => _editField('最大剂量', _config.maxDosePerInjection, (v) => setState(() => _config.maxDosePerInjection = v)),
           ),
-          _buildConfigTile(
-            icon: Icons.monitor_weight,
-            title: '体重（估算用）',
-            subtitle: '用于估算初始 ISF/ICR 参数',
-            onTap: () {},
-          ),
+
           const Divider(height: 32),
+
+          // ===== 血糖测量提醒设置 =====
+          _sectionHeader('血糖测量提醒'),
+          const SizedBox(height: 8),
+          Card(
+            child: Column(
+              children: [
+                SwitchListTile(
+                  title: const Text('早餐前 (7:00)', style: TextStyle(fontSize: 14)),
+                  value: _config.reminderBreakfast,
+                  onChanged: (v) {
+                    setState(() => _config.reminderBreakfast = v);
+                    _saveConfig();
+                  },
+                ),
+                const Divider(height: 1, indent: 16, endIndent: 16),
+                SwitchListTile(
+                  title: const Text('午餐前 (11:30)', style: TextStyle(fontSize: 14)),
+                  value: _config.reminderLunch,
+                  onChanged: (v) {
+                    setState(() => _config.reminderLunch = v);
+                    _saveConfig();
+                  },
+                ),
+                const Divider(height: 1, indent: 16, endIndent: 16),
+                SwitchListTile(
+                  title: const Text('晚餐前 (17:30)', style: TextStyle(fontSize: 14)),
+                  value: _config.reminderDinner,
+                  onChanged: (v) {
+                    setState(() => _config.reminderDinner = v);
+                    _saveConfig();
+                  },
+                ),
+                const Divider(height: 1, indent: 16, endIndent: 16),
+                SwitchListTile(
+                  title: const Text('睡前 (21:00)', style: TextStyle(fontSize: 14)),
+                  value: _config.reminderBedtime,
+                  onChanged: (v) {
+                    setState(() => _config.reminderBedtime = v);
+                    _saveConfig();
+                  },
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            '开启后将在指定时间推送本地通知提醒测量血糖',
+            style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+          ),
+
+          const Divider(height: 32),
+
+          // ===== 首页快捷提醒 =====
+          _sectionHeader('首页提醒'),
+          const SizedBox(height: 4),
+          Card(
+            child: SwitchListTile(
+              title: const Text('距离上次测量提醒', style: TextStyle(fontSize: 14)),
+              subtitle: const Text('超过30分钟无记录时在首页显示提醒', style: TextStyle(fontSize: 12)),
+              value: true,
+              onChanged: (_) {},
+            ),
+          ),
+
+          const Divider(height: 32),
+
           // 危险区域
           SizedBox(
             width: double.infinity,
@@ -225,6 +314,18 @@ class _SettingsPageState extends State<SettingsPage> {
           const SizedBox(height: 40),
         ],
       ),
+    );
+  }
+
+  Widget _sectionHeader(String text) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 4),
+      child: Text(text,
+          style: const TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+            color: Colors.blue,
+          )),
     );
   }
 
