@@ -108,10 +108,11 @@ class _CalculatorPageState extends State<CalculatorPage> {
     });
   }
 
-  void _pickFromFoodDB() {
-    Navigator.pushNamed(context, '/foods', arguments: (double carbsGrams) {
-      _carbsCtrl.text = carbsGrams.toStringAsFixed(0);
-    });
+  void _pickFromFoodDB() async {
+    final result = await Navigator.pushNamed(context, '/foods');
+    if (result != null && result is double) {
+      _carbsCtrl.text = (result as double).toStringAsFixed(0);
+    }
   }
 
   void _pickFromCamera() async {
