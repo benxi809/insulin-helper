@@ -6,6 +6,10 @@ import 'package:insulin_app/pages/report_page.dart';
 import 'package:insulin_app/pages/food_picker_page.dart';
 import 'package:insulin_app/pages/settings_page.dart';
 import 'package:insulin_app/pages/patient_profile_page.dart';
+import 'package:insulin_app/pages/camera_food_page.dart';
+import 'package:insulin_app/pages/cgm_dashboard_page.dart';
+import 'package:insulin_app/pages/cgm_settings_page.dart';
+import 'package:insulin_app/pages/insulin_advisor_page.dart';
 import 'package:insulin_app/utils/notification_service.dart';
 
 void main() {
@@ -55,6 +59,7 @@ class InsulinApp extends StatelessWidget {
             '/settings': (context) => const SettingsPage(),
             '/profile': (context) => const PatientProfilePage(),
             '/camera_food': (context) => const CameraFoodPage(),
+            '/cgm_settings': (context) => const CGMSettingsPage(),
           },
         );
       },
@@ -62,7 +67,7 @@ class InsulinApp extends StatelessWidget {
   }
 }
 
-/// 主外壳 — 底部导航栏 + 三个Tab页面
+/// 主外壳 — 底部导航栏 + 5个Tab页面
 class MainShell extends StatefulWidget {
   const MainShell({super.key});
 
@@ -76,6 +81,8 @@ class _MainShellState extends State<MainShell> {
   final List<Widget> _pages = const [
     HomePage(),
     CalculatorPage(),
+    CGMDashboardPage(),    // CGM 实时血糖
+    InsulinAdvisorPage(),  // 智能推荐（基础率+饮食）
     ReportPage(),
   ];
 
@@ -99,6 +106,16 @@ class _MainShellState extends State<MainShell> {
             icon: Icon(Icons.calculate_outlined),
             selectedIcon: Icon(Icons.calculate),
             label: '计算器',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.show_chart_outlined),
+            selectedIcon: Icon(Icons.show_chart),
+            label: 'CGM',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.auto_awesome_outlined),
+            selectedIcon: Icon(Icons.auto_awesome),
+            label: '推荐',
           ),
           NavigationDestination(
             icon: Icon(Icons.bar_chart_outlined),

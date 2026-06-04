@@ -23,7 +23,7 @@ class AppDatabase {
 
     return await openDatabase(
       path,
-      version: 2,
+      version: 3,
       onCreate: _createTables,
       onUpgrade: _migrateTables,
     );
@@ -79,6 +79,35 @@ class AppDatabase {
 
     // 插入默认配置
     await db.insert('user_config', UserConfig().toMap());
+
+    // CGM 血糖记录表
+    await db.execute('''
+      CREATE TABLE cgm_records (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        glucose REAL NOT NULL,
+        timestamp TEXT NOT NULL,
+        source TEXT NOT NULL DEFAULT 'mock',
+        trend TEXT NOT NULL DEFAULT 'stable',
+        trendArrow INTEGER
+      )
+    ''');
+
+    // CGM 设备配置表
+    await db.execute('''
+      CREATE TABLE cgm_config (
+        id INTEGER PRIMARY KEY DEFAULT 1,
+        deviceType TEXT NOT NULL DEFAULT 'none',
+        displayName TEXT NOT NULL DEFAULT '未连接',
+        isConnected INTEGER NOT NULL DEFAULT 0,
+        apiKey TEXT,
+        username TEXT,
+        password TEXT,
+        syncIntervalMinutes INTEGER NOT NULL DEFAULT 5
+      )
+    ''');
+
+    // 插入默认CGM配置
+    await db.insert('cgm_config', CGMDeviceConfig().toMap());
   }
 
   /// 数据库迁移
@@ -97,6 +126,13 @@ class AppDatabase {
       await db.execute('ALTER TABLE user_config ADD COLUMN reminderLunch INTEGER NOT NULL DEFAULT 1');
       await db.execute('ALTER TABLE user_config ADD COLUMN reminderDinner INTEGER NOT NULL DEFAULT 1');
       await db.execute('ALTER TABLE user_config ADD COLUMN reminderBedtime INTEGER NOT NULL DEFAULT 1');
+    }
+
+    // v2 → v3: 增加CGM支持
+    if (oldVersion < 3) {
+      await db.execute('CREATE TABLE IF NOT EXISTS cgm_records (id INTEGER PRIMARY KEY AUTOINCREMENT, glucose REAL NOT NULL, timestamp TEXT NOT NULL, source TEXT NOT NULL DEFAULT \'mock\', trend TEXT NOT NULL DEFAULT \'stable\', trendArrow INTEGER)');
+      await db.execute('CREATE TABLE IF NOT EXISTS cgm_config (id INTEGER PRIMARY KEY DEFAULT 1, deviceType TEXT NOT NULL DEFAULT \'none\', displayName TEXT NOT NULL DEFAULT \'未连接\', isConnected INTEGER NOT NULL DEFAULT 0, apiKey TEXT, username TEXT, password TEXT, syncIntervalMinutes INTEGER NOT NULL DEFAULT 5)');
+      await db.insert('cgm_config', CGMDeviceConfig().toMap());
     }
   }
 
@@ -254,6 +290,93 @@ class AppDatabase {
       'lowCount': lowCount,
       'doseCount': doses.length,
     };
+  }
+
+  // ========== CGM 记录 CRUD ==========
+
+  Future<int> insertCGMRecord(CGMRecord record) async {
+    final db = await database;
+    return await db.insert('cgm_records', record.toMap());
+  }
+
+  Future<void> insertCGMRecordsBatch(List<CGMRecord> records) async {
+    final db = await database;
+    final batch = db.batch();
+    for (final r in records) {
+      batch.insert('cgm_records', r.toMap());
+    }
+    await batch.commit(noResult: true);
+  }
+
+  Future<List<CGMRecord>> getCGMRecords({
+    int limit = 288, // 24小时 * 12次/5min
+    int offset = 0,
+    DateTime? startDate,
+    DateTime? endDate,
+  }) async {
+    final db = await database;
+    String? where;
+    List<dynamic>? whereArgs;
+
+    if (startDate != null && endDate != null) {
+      where = 'timestamp BETWEEN ? AND ?';
+      whereArgs = [startDate.toIso8601String(), endDate.toIso8601String()];
+    } else if (startDate != null) {
+      where = 'timestamp >= ?';
+      whereArgs = [startDate.toIso8601String()];
+    } else if (endDate != null) {
+      where = 'timestamp <= ?';
+      whereArgs = [endDate.toIso8601String()];
+    }
+
+    final maps = await db.query(
+      'cgm_records',
+      where: where,
+      whereArgs: whereArgs,
+      orderBy: 'timestamp DESC',
+      limit: limit,
+      offset: offset,
+    );
+
+    return maps.map((m) => CGMRecord.fromMap(m)).toList();
+  }
+
+  Future<List<CGMRecord>> getCGMRecordsForDay(DateTime date) async {
+    final dayStart = DateTime(date.year, date.month, date.day);
+    final dayEnd = dayStart.add(const Duration(days: 1));
+    return getCGMRecords(startDate: dayStart, endDate: dayEnd);
+  }
+
+  Future<int> deleteOldCGMRecords({int keepDays = 90}) async {
+    final db = await database;
+    final cutoff = DateTime.now().subtract(Duration(days: keepDays));
+    return await db.delete(
+      'cgm_records',
+      where: 'timestamp < ?',
+      whereArgs: [cutoff.toIso8601String()],
+    );
+  }
+
+  // ========== CGM 设备配置 ==========
+
+  Future<CGMDeviceConfig> getCGMConfig() async {
+    final db = await database;
+    final maps = await db.query('cgm_config', where: 'id = 1');
+    if (maps.isEmpty) {
+      final config = CGMDeviceConfig();
+      await db.insert('cgm_config', config.toMap());
+      return config;
+    }
+    return CGMDeviceConfig.fromMap(maps.first);
+  }
+
+  Future<void> updateCGMConfig(CGMDeviceConfig config) async {
+    final db = await database;
+    await db.update(
+      'cgm_config',
+      config.toMap(),
+      where: 'id = 1',
+    );
   }
 
   /// 关闭数据库

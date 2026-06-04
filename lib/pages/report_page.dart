@@ -1,7 +1,9 @@
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:insulin_app/database/local_db.dart';
+import 'package:insulin_app/models/models.dart';
 
-/// 报告页 — 数据图表与导出
+/// 报告页 — 数据图表与导出（含CGM数据）
 class ReportPage extends StatefulWidget {
   const ReportPage({super.key});
 
@@ -21,6 +23,13 @@ class _ReportPageState extends State<ReportPage> {
 
   final Map<String, Map<String, dynamic>> _dailySummaries = {};
 
+  // CGM 数据
+  List<CGMRecord> _cgmRecords = [];
+  double? _cgmAvgGlucose;
+  double? _cgmTIR;
+  int _cgmLowCount = 0;
+  int _cgmHighCount = 0;
+
   @override
   void initState() {
     super.initState();
@@ -35,6 +44,11 @@ class _ReportPageState extends State<ReportPage> {
       final ds = await _db.getDailySummary(day);
       _dailySummaries[_dateKey(day)] = ds;
     }
+
+    // 加载 CGM 数据
+    final weekAgo = DateTime.now().subtract(const Duration(days: 7));
+    _cgmRecords = await _db.getCGMRecords(startDate: weekAgo);
+    _calcCGMStats();
 
     if (mounted) {
       setState(() {
@@ -52,6 +66,24 @@ class _ReportPageState extends State<ReportPage> {
     final end = _recentDays.first;
     final start = _recentDays.last;
     return '${start.month}/${start.day} - ${end.month}/${end.day}';
+  }
+
+  void _calcCGMStats() {
+    if (_cgmRecords.isEmpty) return;
+
+    double sum = 0;
+    _cgmLowCount = 0;
+    _cgmHighCount = 0;
+
+    for (final r in _cgmRecords) {
+      sum += r.glucose;
+      if (r.glucose < 3.9) _cgmLowCount++;
+      if (r.glucose > 10.0) _cgmHighCount++;
+    }
+
+    _cgmAvgGlucose = sum / _cgmRecords.length;
+    final inRange = _cgmRecords.where((r) => r.glucose >= 3.9 && r.glucose <= 10.0).length;
+    _cgmTIR = (inRange / _cgmRecords.length) * 100;
   }
 
   @override
@@ -104,6 +136,14 @@ class _ReportPageState extends State<ReportPage> {
                   const SizedBox(height: 12),
                   _buildTrendChart(),
                   const SizedBox(height: 20),
+                  // CGM 统计（如果有数据）
+                  if (_cgmRecords.isNotEmpty) ...[
+                    const Text('CGM 动态血糖（7天）',
+                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                    const SizedBox(height: 12),
+                    _buildCGMStatsCard(),
+                    const SizedBox(height: 20),
+                  ],
                   _buildStats(),
                   const SizedBox(height: 20),
                   SizedBox(
@@ -204,6 +244,48 @@ class _ReportPageState extends State<ReportPage> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildCGMStatsCard() {
+    final gmi = _cgmAvgGlucose != null ? 12.71 + 4.70587 * _cgmAvgGlucose! : null;
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Expanded(child: _statCGMItem('CGM平均', '${_cgmAvgGlucose?.toStringAsFixed(1) ?? '--'}', 'mmol/L', Colors.blue)),
+                Expanded(child: _statCGMItem('TIR', '${_cgmTIR?.toStringAsFixed(0) ?? '--'}', '%', Colors.green)),
+                Expanded(child: _statCGMItem('GMI', '${gmi?.toStringAsFixed(1) ?? '--'}', '%', Colors.purple)),
+              ],
+            ),
+            const SizedBox(height: 8),
+            const Divider(height: 1),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Text('低血糖 $_cgmLowCount 次', style: TextStyle(fontSize: 12, color: Colors.red.shade600)),
+                const SizedBox(width: 16),
+                Text('高血糖 $_cgmHighCount 次', style: TextStyle(fontSize: 12, color: Colors.orange.shade600)),
+                const Spacer(),
+                Text('${_cgmRecords.length} 个读数', style: const TextStyle(fontSize: 11, color: Colors.grey)),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _statCGMItem(String label, String value, String unit, Color color) {
+    return Column(
+      children: [
+        Text(value, style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: color)),
+        Text('$unit $label', style: const TextStyle(fontSize: 11, color: Colors.grey)),
+      ],
     );
   }
 

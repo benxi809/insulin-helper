@@ -239,6 +239,122 @@ class UserConfig {
       );
 }
 
+/// CGM 血糖记录（来自动态血糖仪）
+class CGMRecord {
+  final int? id;
+  final double glucose; // mmol/L
+  final DateTime timestamp;
+  final String source; // "dexcom", "libre", "mock", "manual"
+  final String trend; // "rapidRise", "rise", "stable", "fall", "rapidFall", "unknown"
+  final int? trendArrow; // 箭头方向: 0=→, 1=↑, 2=↑↑, 3=↓, 4=↓↓, 5=⇅
+
+  CGMRecord({
+    this.id,
+    required this.glucose,
+    required this.timestamp,
+    this.source = 'mock',
+    this.trend = 'stable',
+    this.trendArrow,
+  });
+
+  Map<String, dynamic> toMap() => {
+    'id': id,
+    'glucose': glucose,
+    'timestamp': timestamp.toIso8601String(),
+    'source': source,
+    'trend': trend,
+    'trendArrow': trendArrow,
+  };
+
+  factory CGMRecord.fromMap(Map<String, dynamic> map) => CGMRecord(
+    id: map['id'] as int?,
+    glucose: (map['glucose'] as num).toDouble(),
+    timestamp: DateTime.parse(map['timestamp'] as String),
+    source: map['source'] as String? ?? 'mock',
+    trend: map['trend'] as String? ?? 'stable',
+    trendArrow: map['trendArrow'] as int?,
+  );
+}
+
+/// CGM 设备配置
+class CGMDeviceConfig {
+  String deviceType; // "dexcom", "libre", "mock", "none"
+  String displayName; // 显示名称
+  bool isConnected;
+  String? apiKey; // API密钥（Dexcom Share 账号等）
+  String? username; // 账号
+  String? password; // 密码（本地存储）
+  int syncIntervalMinutes;
+
+  CGMDeviceConfig({
+    this.deviceType = 'none',
+    this.displayName = '未连接',
+    this.isConnected = false,
+    this.apiKey,
+    this.username,
+    this.password,
+    this.syncIntervalMinutes = 5,
+  });
+
+  Map<String, dynamic> toMap() => {
+    'id': 1,
+    'deviceType': deviceType,
+    'displayName': displayName,
+    'isConnected': isConnected ? 1 : 0,
+    'apiKey': apiKey,
+    'username': username,
+    'password': password,
+    'syncIntervalMinutes': syncIntervalMinutes,
+  };
+
+  factory CGMDeviceConfig.fromMap(Map<String, dynamic> map) => CGMDeviceConfig(
+    deviceType: map['deviceType'] as String? ?? 'none',
+    displayName: map['displayName'] as String? ?? '未连接',
+    isConnected: (map['isConnected'] as int?) == 1,
+    apiKey: map['apiKey'] as String?,
+    username: map['username'] as String?,
+    password: map['password'] as String?,
+    syncIntervalMinutes: map['syncIntervalMinutes'] as int? ?? 5,
+  );
+}
+
+/// CGM趋势箭头辅助方法
+extension CGMRecordExtension on CGMRecord {
+  String get trendIcon {
+    switch (trendArrow ?? _arrowFromTrend) {
+      case 0: return '→';
+      case 1: return '↑';
+      case 2: return '↑↑';
+      case 3: return '↓';
+      case 4: return '↓↓';
+      case 5: return '⇅';
+      default: return '→';
+    }
+  }
+
+  int get _arrowFromTrend {
+    switch (trend) {
+      case 'rapidRise': return 2;
+      case 'rise': return 1;
+      case 'stable': return 0;
+      case 'fall': return 3;
+      case 'rapidFall': return 4;
+      default: return 5;
+    }
+  }
+
+  String get trendDescription {
+    switch (trend) {
+      case 'rapidRise': return '快速上升 (>2 mmol/L/15min)';
+      case 'rise': return '缓慢上升';
+      case 'stable': return '稳定';
+      case 'fall': return '缓慢下降';
+      case 'rapidFall': return '快速下降 (>2 mmol/L/15min)';
+      default: return '波动';
+    }
+  }
+}
+
 /// 食物条目（碳水库用）
 class FoodItem {
   final String name;
