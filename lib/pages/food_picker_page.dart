@@ -62,21 +62,26 @@ class _FoodPickerPageState extends State<FoodPickerPage> {
 
     showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (ctx) => Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(food.name, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 8),
-            Text(
-              '每100g含 ${food.carbsPer100g.toStringAsFixed(1)}g 碳水',
-              style: const TextStyle(color: Colors.grey),
-            ),
+        padding: EdgeInsets.only(
+          left: 24, right: 24, top: 20,
+          bottom: MediaQuery.of(ctx).viewInsets.bottom + 20,
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(food.name, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              const SizedBox(height: 8),
+              Text(
+                '每100g含 ${food.carbsPer100g.toStringAsFixed(1)}g 碳水',
+                style: const TextStyle(color: Colors.grey),
+              ),
             const SizedBox(height: 20),
             Row(
               children: [
@@ -139,6 +144,7 @@ class _FoodPickerPageState extends State<FoodPickerPage> {
               ),
             ),
           ],
+        ),
         ),
       ),
     );
