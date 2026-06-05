@@ -38,26 +38,20 @@ jobs:
       - name: Run tests
         run: flutter test
 
-      - name: Build debug APK
+      - name: Build APK
         run: |
-          flutter build apk --debug 2>&1 | tee /tmp/flutter-build.log
-          echo "=== Build exit code: $? ==="
+          flutter build apk --debug 2>&1
+          echo "=== list output files ==="
+          find build/app/outputs -name "*.apk" -type f 2>/dev/null || echo "no apk files found"
+          ls -la build/app/outputs/flutter-apk/ 2>/dev/null || echo "no flutter-apk dir"
 
-      - name: Build release APK (unsigned)
-        run: flutter build apk --release --no-sound-null-safety
-        continue-on-error: true
-
-      - name: Upload debug APK
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: insulin-app-debug
-          path: build/app/outputs/flutter-apk/app-debug.apk
-          if-no-files-found: warn
-
-      - name: Upload release APK (unsigned)
-        uses: actions/upload-artifact@v4
-        with:
-          name: insulin-app-release-unsigned
-          path: build/app/outputs/flutter-apk/app-release.apk
-          if-no-files-found: warn
+          name: insulin-app
+          path: |
+            build/app/outputs/flutter-apk/*.apk
+            !build/app/outputs/flutter-apk/*-unsigned.apk
+          if-no-files-found: error
+          compression-level: 0
 
