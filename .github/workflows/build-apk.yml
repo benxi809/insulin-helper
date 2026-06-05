@@ -39,7 +39,9 @@ jobs:
         run: flutter test
 
       - name: Build debug APK
-        run: flutter build apk --debug
+        run: |
+          flutter build apk --debug 2>&1 | tee /tmp/flutter-build.log
+          echo "=== Build exit code: $? ==="
 
       - name: Build release APK (unsigned)
         run: flutter build apk --release --no-sound-null-safety
