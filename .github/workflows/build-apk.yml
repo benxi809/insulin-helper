@@ -60,3 +60,4 @@ jobs:
           name: insulin-app-release-unsigned
           path: build/app/outputs/flutter-apk/app-release.apk
           if-no-files-found: warn
+
