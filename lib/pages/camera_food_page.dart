@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:insulin_app/utils/food_recognizer.dart';
+import 'package:insulin_app/utils/ai_glasses_connector.dart';
+import 'package:insulin_app/database/local_db.dart';
 
 /// 食物拍照识别页面
 class CameraFoodPage extends StatefulWidget {
@@ -19,6 +21,11 @@ class _CameraFoodPageState extends State<CameraFoodPage> {
   bool _analyzing = false;
   FoodRecognitionResult? _result;
   String? _error;
+  bool _glassesFromCamera = false; // 是否来自眼镜拍照
+
+  // AI 眼镜状态
+  AIGlassesConfig _glassesConfig = AIGlassesConfig();
+  bool _loadingGlasses = false;
 
   // 用户可配置的API密钥（可以通过设置页传入，这里作为fallback）
   String? _apiKey;
@@ -29,6 +36,94 @@ class _CameraFoodPageState extends State<CameraFoodPage> {
     super.initState();
     // 从环境变量或共享配置读取
     _apiKeyCtrl.text = '';
+    _loadGlassesConfig();
+  }
+
+  Future<void> _loadGlassesConfig() async {
+    try {
+      _glassesConfig = await AppDatabase().getAIGlassesConfig();
+      if (mounted) setState(() {});
+    } catch (_) {}
+  }
+
+  /// 从AI眼镜拍照
+  Future<void> _captureFromGlasses() async {
+    if (!_glassesConfig.isConnected) {
+      setState(() => _error = 'AI眼镜未连接，请先在设置中连接');
+      return;
+    }
+
+    setState(() {
+      _loadingGlasses = true;
+      _error = null;
+    });
+
+    final brand = AIGlassesBrandExtension.fromShortName(_glassesConfig.deviceType);
+    final connector = AIGlassesConnectorFactory.create(brand);
+    final result = await connector.takePhoto();
+
+    if (result.success && result.imageBytes != null) {
+      // 模拟模式下，直接触发识别（因为没有真实图片）
+      if (brand == AIGlassesBrand.mock) {
+        setState(() {
+          _loadingGlasses = false;
+          _glassesFromCamera = true;
+          _result = FoodRecognitionResult(
+            foodName: '模拟识别：炒青菜',
+            estimatedCarbsGrams: 85.0,
+            confidence: 0.95,
+            description: '通过AI眼镜拍摄（模拟数据）',
+          );
+        });
+      } else {
+        // 真实眼镜：保存临时文件再进行识别
+        final tempDir = Directory.systemTemp;
+        final tempFile = File('${tempDir.path}/glasses_photo_${DateTime.now().millisecondsSinceEpoch}.jpg');
+        await tempFile.writeAsBytes(result.imageBytes!);
+        setState(() {
+          _imageFile = XFile(tempFile.path);
+          _loadingGlasses = false;
+          _glassesFromCamera = true;
+        });
+      }
+    } else {
+      setState(() {
+        _loadingGlasses = false;
+        _error = result.error ?? '眼镜拍照失败';
+      });
+    }
+  }
+
+  /// AI 眼镜拍照按钮
+  Widget _buildGlassesButton() {
+    return SizedBox(
+      width: double.infinity,
+      child: OutlinedButton.icon(
+        onPressed: _loadingGlasses ? null : _captureFromGlasses,
+        icon: _loadingGlasses
+            ? const SizedBox(
+                width: 16, height: 16,
+                child: CircularProgressIndicator(strokeWidth: 2))
+            : Icon(
+                Icons.smartphone_outlined,
+                color: _glassesConfig.isConnected ? Colors.green : null,
+              ),
+        label: Text(
+          _loadingGlasses
+              ? '正在拍照...'
+              : _glassesConfig.isConnected
+                  ? '从AI眼镜拍照'
+                  : 'AI眼镜（未连接）',
+        ),
+        style: OutlinedButton.styleFrom(
+          minimumSize: const Size(0, 48),
+          foregroundColor: _glassesConfig.isConnected ? Colors.green : null,
+          side: BorderSide(
+            color: _glassesConfig.isConnected ? Colors.green : Colors.grey.shade300,
+          ),
+        ),
+      ),
+    );
   }
 
   @override
@@ -309,10 +404,16 @@ class _CameraFoodPageState extends State<CameraFoodPage> {
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(16),
-              child: Row(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Expanded(
-                    child: OutlinedButton.icon(
+                  // 从AI眼镜拍照
+                  _buildGlassesButton(),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: OutlinedButton.icon(
                       onPressed: _analyzing ? null : () => _pickImage(ImageSource.gallery),
                       icon: const Icon(Icons.photo_library),
                       label: const Text('相册'),

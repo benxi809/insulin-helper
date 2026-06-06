@@ -9,6 +9,7 @@ import 'package:insulin_app/pages/patient_profile_page.dart';
 import 'package:insulin_app/pages/camera_food_page.dart';
 import 'package:insulin_app/pages/cgm_dashboard_page.dart';
 import 'package:insulin_app/pages/cgm_settings_page.dart';
+import 'package:insulin_app/pages/ai_glasses_settings_page.dart';
 import 'package:insulin_app/pages/insulin_advisor_page.dart';
 import 'package:insulin_app/utils/notification_service.dart';
 
@@ -60,6 +61,7 @@ class InsulinApp extends StatelessWidget {
             '/profile': (context) => const PatientProfilePage(),
             '/camera_food': (context) => const CameraFoodPage(),
             '/cgm_settings': (context) => const CGMSettingsPage(),
+            '/ai_glasses_settings': (context) => const AIGlassesSettingsPage(),
           },
         );
       },

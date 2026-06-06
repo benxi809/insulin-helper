@@ -1,6 +1,7 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:insulin_app/models/models.dart';
+import 'package:insulin_app/utils/ai_glasses_connector.dart';
 
 /// 本地数据库
 /// 存储血糖记录、胰岛素注射记录、用户配置
@@ -23,7 +24,7 @@ class AppDatabase {
 
     return await openDatabase(
       path,
-      version: 3,
+      version: 4,
       onCreate: _createTables,
       onUpgrade: _migrateTables,
     );
@@ -108,6 +109,22 @@ class AppDatabase {
 
     // 插入默认CGM配置
     await db.insert('cgm_config', CGMDeviceConfig().toMap());
+
+    // AI 眼镜配置表
+    await db.execute('''
+      CREATE TABLE ai_glasses_config (
+        id INTEGER PRIMARY KEY DEFAULT 1,
+        deviceType TEXT NOT NULL DEFAULT 'none',
+        displayName TEXT NOT NULL DEFAULT '未连接',
+        isConnected INTEGER NOT NULL DEFAULT 0,
+        ipAddress TEXT,
+        port INTEGER NOT NULL DEFAULT 8080,
+        apiKey TEXT
+      )
+    ''');
+
+    // 插入默认AI眼镜配置
+    await db.insert('ai_glasses_config', AIGlassesConfig().toMap());
   }
 
   /// 数据库迁移
@@ -133,6 +150,12 @@ class AppDatabase {
       await db.execute('CREATE TABLE IF NOT EXISTS cgm_records (id INTEGER PRIMARY KEY AUTOINCREMENT, glucose REAL NOT NULL, timestamp TEXT NOT NULL, source TEXT NOT NULL DEFAULT \'mock\', trend TEXT NOT NULL DEFAULT \'stable\', trendArrow INTEGER)');
       await db.execute('CREATE TABLE IF NOT EXISTS cgm_config (id INTEGER PRIMARY KEY DEFAULT 1, deviceType TEXT NOT NULL DEFAULT \'none\', displayName TEXT NOT NULL DEFAULT \'未连接\', isConnected INTEGER NOT NULL DEFAULT 0, apiKey TEXT, username TEXT, password TEXT, syncIntervalMinutes INTEGER NOT NULL DEFAULT 5)');
       await db.insert('cgm_config', CGMDeviceConfig().toMap());
+    }
+
+    // v3 → v4: 增加 AI 眼镜配置支持
+    if (oldVersion < 4) {
+      await db.execute('CREATE TABLE IF NOT EXISTS ai_glasses_config (id INTEGER PRIMARY KEY DEFAULT 1, deviceType TEXT NOT NULL DEFAULT \'none\', displayName TEXT NOT NULL DEFAULT \'未连接\', isConnected INTEGER NOT NULL DEFAULT 0, ipAddress TEXT, port INTEGER NOT NULL DEFAULT 8080, apiKey TEXT)');
+      await db.insert('ai_glasses_config', AIGlassesConfig().toMap());
     }
   }
 
@@ -374,6 +397,28 @@ class AppDatabase {
     final db = await database;
     await db.update(
       'cgm_config',
+      config.toMap(),
+      where: 'id = 1',
+    );
+  }
+
+  // ========== AI 眼镜配置 CRUD ==========
+
+  Future<AIGlassesConfig> getAIGlassesConfig() async {
+    final db = await database;
+    final maps = await db.query('ai_glasses_config', where: 'id = 1');
+    if (maps.isEmpty) {
+      final config = AIGlassesConfig();
+      await db.insert('ai_glasses_config', config.toMap());
+      return config;
+    }
+    return AIGlassesConfig.fromMap(maps.first);
+  }
+
+  Future<void> updateAIGlassesConfig(AIGlassesConfig config) async {
+    final db = await database;
+    await db.update(
+      'ai_glasses_config',
       config.toMap(),
       where: 'id = 1',
     );

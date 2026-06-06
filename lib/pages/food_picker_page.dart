@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:insulin_app/models/models.dart';
+import 'package:insulin_app/database/local_db.dart';
+import 'package:insulin_app/utils/ai_glasses_connector.dart';
 
 /// 已选食物条目
 class _SelectedFood {
@@ -26,6 +28,7 @@ class _FoodPickerPageState extends State<FoodPickerPage> {
   List<FoodItem> _filtered = [];
   String _selectedCategory = '全部';
   final _searchCtrl = TextEditingController();
+  bool _glassesConnected = false;
 
   // 多选：用 Set 记录已选食物名称（按名称去重）
   final Set<String> _selectedNames = {};
@@ -43,6 +46,11 @@ class _FoodPickerPageState extends State<FoodPickerPage> {
     final List<dynamic> list = json.decode(jsonStr);
     _foods = list.map((j) => FoodItem.fromJson(j)).toList();
     _filtered = List.from(_foods);
+    // 加载眼镜连接状态
+    try {
+      final config = await AppDatabase().getAIGlassesConfig();
+      _glassesConnected = config.isConnected;
+    } catch (_) {}
     setState(() {});
   }
 
@@ -200,6 +208,36 @@ class _FoodPickerPageState extends State<FoodPickerPage> {
       appBar: AppBar(
         title: const Text('选择食物'),
         actions: [
+          // AI 眼镜按钮
+          Stack(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.smartphone_outlined),
+                onPressed: () async {
+                  await Navigator.pushNamed(context, '/ai_glasses_settings');
+                  // 返回后刷新状态
+                  try {
+                    final config = await AppDatabase().getAIGlassesConfig();
+                    if (mounted) setState(() => _glassesConnected = config.isConnected);
+                  } catch (_) {}
+                },
+                tooltip: 'AI眼镜设置',
+              ),
+              if (_glassesConnected)
+                Positioned(
+                  right: 6,
+                  top: 6,
+                  child: Container(
+                    width: 10,
+                    height: 10,
+                    decoration: const BoxDecoration(
+                      color: Colors.green,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                ),
+            ],
+          ),
           // 拍照识别按钮
           IconButton(
             icon: const Icon(Icons.camera_alt_outlined),
