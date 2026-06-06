@@ -19,7 +19,7 @@ class CGMDashboardPage extends StatefulWidget {
 class _CGMDashboardPageState extends State<CGMDashboardPage>
     with AutomaticKeepAliveClientMixin {
   final AppDatabase _db = AppDatabase();
-  final NumberFormat _timeFormat = DateFormat('HH:mm');
+  final DateFormat _timeFormat = DateFormat('HH:mm');
 
   // CGM 连接器
   CGMConnector? _connector;
