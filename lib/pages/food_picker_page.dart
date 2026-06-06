@@ -387,16 +387,15 @@ class _FoodPickerPageState extends State<FoodPickerPage> {
               children: _selectedFoods.map((s) {
                 return Padding(
                   padding: const EdgeInsets.only(right: 6),
-                  child: ActionChip(
+                  child: InputChip(
                     avatar: Icon(Icons.check, size: 14, color: Colors.green),
                     label: Text(
                       '${s.food.name} ${s.carbs.toStringAsFixed(0)}g',
                       style: const TextStyle(fontSize: 12),
                     ),
                     onPressed: () => _editSelectedFood(s),
-                    deleteIcon: const Icon(Icons.close, size: 14),
-                    deleteIconColor: Colors.red.shade400,
                     onDeleted: () => _toggleFood(s.food),
+                    deleteIconColor: Colors.red.shade400,
                     backgroundColor: Colors.white,
                     side: BorderSide(color: Colors.green.shade200),
                   ),
