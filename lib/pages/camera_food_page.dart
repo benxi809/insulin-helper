@@ -414,38 +414,40 @@ class _CameraFoodPageState extends State<CameraFoodPage> {
                     children: [
                       Expanded(
                         child: OutlinedButton.icon(
-                      onPressed: _analyzing ? null : () => _pickImage(ImageSource.gallery),
-                      icon: const Icon(Icons.photo_library),
-                      label: const Text('相册'),
-                      style: OutlinedButton.styleFrom(
-                        minimumSize: const Size(0, 48),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: FilledButton.icon(
-                      onPressed: _analyzing ? null : () => _pickImage(ImageSource.camera),
-                      icon: const Icon(Icons.camera_alt),
-                      label: const Text('拍照'),
-                      style: FilledButton.styleFrom(
-                        minimumSize: const Size(0, 48),
-                      ),
-                    ),
-                  ),
-                  if (_imageFile != null) ...[
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: FilledButton.tonalIcon(
-                        onPressed: _analyzing ? null : _analyze,
-                        icon: const Icon(Icons.search),
-                        label: const Text('识别'),
-                        style: FilledButton.styleFrom(
-                          minimumSize: const Size(0, 48),
+                          onPressed: _analyzing ? null : () => _pickImage(ImageSource.gallery),
+                          icon: const Icon(Icons.photo_library),
+                          label: const Text('相册'),
+                          style: OutlinedButton.styleFrom(
+                            minimumSize: const Size(0, 48),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: FilledButton.icon(
+                          onPressed: _analyzing ? null : () => _pickImage(ImageSource.camera),
+                          icon: const Icon(Icons.camera_alt),
+                          label: const Text('拍照'),
+                          style: FilledButton.styleFrom(
+                            minimumSize: const Size(0, 48),
+                          ),
+                        ),
+                      ),
+                      if (_imageFile != null) ...[
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: FilledButton.tonalIcon(
+                            onPressed: _analyzing ? null : _analyze,
+                            icon: const Icon(Icons.search),
+                            label: const Text('识别'),
+                            style: FilledButton.styleFrom(
+                              minimumSize: const Size(0, 48),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
                 ],
               ),
             ),
