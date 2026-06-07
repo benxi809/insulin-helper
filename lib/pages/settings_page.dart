@@ -134,6 +134,23 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           const SizedBox(height: 12),
 
+          // ===== 设备连接 =====
+          _sectionHeader('设备连接'),
+          const SizedBox(height: 4),
+          _buildConfigTile(
+            icon: Icons.show_chart,
+            title: 'CGM 动态血糖仪',
+            subtitle: '德康 · 雅培 · 动态血糖监测',
+            onTap: () => Navigator.pushNamed(context, '/cgm_settings'),
+          ),
+          _buildConfigTile(
+            icon: Icons.smartphone_outlined,
+            title: 'AI 智能眼镜',
+            subtitle: '拍照识别食物 · 雷鸟 · INMO',
+            onTap: () => Navigator.pushNamed(context, '/ai_glasses_settings'),
+          ),
+          const SizedBox(height: 12),
+
           // ===== 胰岛素参数 =====
           _sectionHeader('胰岛素参数'),
           const SizedBox(height: 4),
