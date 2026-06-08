@@ -1,5 +1,5 @@
-name: insulin_app
-description: "胰岛素剂量计算小助手 - 为糖尿病患者安全计算胰岛素用量"
+name: glucare_app
+description: "GluCare - 您的智能血糖管理助手"
 publish_to: 'none'
 version: 1.0.0+1
 

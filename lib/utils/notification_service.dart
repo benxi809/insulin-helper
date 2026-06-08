@@ -1,6 +1,7 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz_data;
+import 'dart:convert';
 
 /// 本地通知服务 — 血糖测量提醒
 class NotificationService {
@@ -165,6 +166,114 @@ class NotificationService {
         title: '🩸 测量血糖',
         body: '睡前该测血糖了！',
       );
+    }
+  }
+
+  // ========== 用药提醒 ==========
+
+  /// 用药提醒频道ID
+  static const String _medicationChannelId = 'medication_reminder';
+
+  /// 用药提醒通知ID起始值（1000+ 防止与血糖提醒冲突）
+  static const int _medicationIdBase = 1000;
+
+  /// 为单个药品的某个时间点设置每日用药提醒
+  Future<void> scheduleMedicationReminder({
+    required int medicationId,
+    required int reminderIndex,
+    required int hour,
+    required int minute,
+    required String medicineName,
+    required String doseText,
+  }) async {
+    final now = DateTime.now();
+    final location = tz.local;
+
+    var scheduledDate = tz.TZDateTime(
+      location,
+      now.year,
+      now.month,
+      now.day,
+      hour,
+      minute,
+    );
+
+    // 如果时间已过，推到明天
+    if (scheduledDate.isBefore(DateTime.now())) {
+      scheduledDate = scheduledDate.add(const Duration(days: 1));
+    }
+
+    final androidDetails = AndroidNotificationDetails(
+      _medicationChannelId,
+      '用药提醒',
+      channelDescription: '提醒您按时用药',
+      importance: Importance.high,
+      priority: Priority.high,
+      icon: '@mipmap/ic_launcher',
+    );
+
+    const iosDetails = DarwinNotificationDetails();
+    final details = NotificationDetails(
+      android: androidDetails,
+      iOS: iosDetails,
+    );
+
+    final notificationId = _medicationIdBase + medicationId * 10 + reminderIndex;
+
+    await _plugin.zonedSchedule(
+      notificationId,
+      '💊 该用药了：$medicineName',
+      '剂量：$doseText',
+      scheduledDate,
+      details,
+      androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+      matchDateTimeComponents: DateTimeComponents.time,
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
+    );
+  }
+
+  /// 根据所有生效的药品方案，批量设置用药提醒
+  /// [medications] 药品列表（仅传入 isActive=true 的即可）
+  /// 注意：会取消旧的药品相关提醒（ID 1000-9999）
+  Future<void> setupAllMedicationReminders(List<Map<String, dynamic>> medications) async {
+    // 先取消所有旧的用药提醒
+    for (int i = 0; i < 9000; i++) {
+      await _plugin.cancel(_medicationIdBase + i);
+    }
+
+    for (final med in medications) {
+      final id = med['id'] as int;
+      final name = med['name'] as String? ?? '';
+      final dose = (med['dose'] as num?)?.toDouble() ?? 0;
+      final unit = med['unit'] as String? ?? 'U';
+      final doseTimesJson = med['doseTimesJson'] as String? ?? '[]';
+      final doseText = '$dose$unit';
+
+      // 解析时间点
+      final List<dynamic> times;
+      try {
+        times = const JsonDecoder().convert(doseTimesJson) as List<dynamic>;
+      } catch (_) {
+        continue;
+      }
+
+      for (int i = 0; i < times.length; i++) {
+        final timeStr = times[i] as String;
+        final parts = timeStr.split(':');
+        if (parts.length != 2) continue;
+        final hour = int.tryParse(parts[0]) ?? 0;
+        final minute = int.tryParse(parts[1]) ?? 0;
+
+        await scheduleMedicationReminder(
+          medicationId: id,
+          reminderIndex: i,
+          hour: hour,
+          minute: minute,
+          medicineName: name,
+          doseText: doseText,
+        );
+      }
     }
   }
 }

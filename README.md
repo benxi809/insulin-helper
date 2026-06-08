@@ -1,4 +1,4 @@
-# insulin_app
+# GluCare
 
 A new Flutter project.
 

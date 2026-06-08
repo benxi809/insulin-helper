@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:insulin_app/database/local_db.dart';
-import 'package:insulin_app/models/models.dart';
-import 'package:insulin_app/calculators/basal_estimator.dart';
+import 'package:glucare_app/database/local_db.dart';
+import 'package:glucare_app/models/models.dart';
+import 'package:glucare_app/calculators/basal_estimator.dart';
 
 /// 基础率估算 + 饮食推荐页面
 class InsulinAdvisorPage extends StatefulWidget {
