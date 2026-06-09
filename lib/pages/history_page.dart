@@ -1,16 +1,8 @@
-/// 历史查询页面
-///
-/// 参考设计图：20历史查询、历史查询标准界面
-/// 功能：
-/// - 按类型筛选（全部、大剂量、基础率、报警）
-/// - 按日期分组
-/// - 查看详情
-
+/// 历史记录页面 — 血糖记录查询
 import 'package:flutter/material.dart';
+import 'package:insulin_app/models/models.dart';
+import 'package:insulin_app/state/app_state.dart';
 import 'package:insulin_app/theme/app_colors.dart';
-import 'package:insulin_app/theme/app_spacing.dart';
-import 'package:insulin_app/theme/app_typography.dart';
-import 'package:insulin_app/widgets/widgets.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key});
@@ -19,130 +11,29 @@ class HistoryPage extends StatefulWidget {
   State<HistoryPage> createState() => _HistoryPageState();
 }
 
-class _HistoryPageState extends State<HistoryPage> {String _selectedFilter = '全部';
-  final List<String> _filters = ['全部', '大剂量', '基础率', '报警'];
+class _HistoryPageState extends State<HistoryPage> {
+  final AppState _appState = AppState();
+  List<GlucoseRecord> _records = [];
+  bool _loading = true;
 
   @override
-  Widget build(BuildContext context) {
-    final deliveries = _pumpService.deliveryHistory;
-    final alerts = _pumpService.alerts;
-
-    // 合并并按时间排序
-    final allItems = _buildHistoryItems(deliveries, alerts);
-
-    return AppScaffold(
-      title: '历史查询',
-      showBack: true,
-      body: Column(
-        children: [
-          const SizedBox(height: AppSpacing.sm),
-
-          // ── 筛选标签 ──
-          SizedBox(
-            height: 40,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-              children: _filters.map((f) {
-                final selected = f == _selectedFilter;
-                return Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: ChoiceChip(
-                    label: Text(f, style: const TextStyle(fontSize: 13)),
-                    selected: selected,
-                    onSelected: (v) => setState(() => _selectedFilter = f),
-                  ),
-                );
-              }).toList(),
-            ),
-          ),
-
-          const SizedBox(height: AppSpacing.sm),
-
-          // ── 列表 ──
-          if (allItems.isEmpty)
-            const Expanded(
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.history, size: 48, color: AppColors.textTertiary),
-                    SizedBox(height: 12),
-                    Text('暂无历史记录', style: TextStyle(fontSize: 15, color: AppColors.textSecondary)),
-                  ],
-                ),
-              ),
-            )
-          else
-            Expanded(
-              child: ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-                itemCount: allItems.length,
-                itemBuilder: (context, index) {
-                  final item = allItems[index];
-                  return _buildHistoryCard(item);
-                },
-              ),
-            ),
-        ],
-      ),
-    );
+  void initState() {
+    super.initState();
+    _loadRecords();
   }
 
-  List<HistoryItem> _buildHistoryItems(
-      List<DeliveryRecord> deliveries, List<PumpAlert> alerts) {
-    final items = <HistoryItem>[];
-
-    for (final d in deliveries) {
-      final match = _selectedFilter == '全部' ||
-          (_selectedFilter == '大剂量' && d.type == 'bolus') ||
-          (_selectedFilter == '基础率' && (d.type == 'basal' || d.type == 'temp_basal'));
-      if (match) {
-        items.add(HistoryItem(
-          timestamp: d.timestamp,
-          title: d.type == 'bolus' ? '大剂量输注' : d.type == 'temp_basal' ? '临时基础率' : '基础输注',
-          subtitle: '${d.dose.toStringAsFixed(1)} U${d.note != null ? ' · ${d.note}' : ''}',
-          icon: d.type == 'bolus' ? Icons.medical_services : Icons.speed,
-          iconColor: d.type == 'bolus' ? AppColors.bolusDose : AppColors.primary,
-        ));
-      }
-    }
-
-    for (final a in alerts) {
-      final match = _selectedFilter == '全部' || _selectedFilter == '报警';
-      if (match) {
-        items.add(HistoryItem(
-          timestamp: a.timestamp,
-          title: a.title,
-          subtitle: a.message,
-          icon: a.level == 2 ? Icons.error : Icons.warning_amber_rounded,
-          iconColor: a.level == 2 ? AppColors.danger : AppColors.warning,
-        ));
-      }
-    }
-
-    // 按时间倒序
-    items.sort((a, b) => b.timestamp.compareTo(a.timestamp));
-    return items;
+  Future<void> _loadRecords() async {
+    setState(() => _loading = true);
+    _records = await _appState.db.getGlucoseRecords(limit: 100);
+    if (mounted) setState(() => _loading = false);
   }
 
-  Widget _buildHistoryCard(HistoryItem item) {
-    return Card(
-      margin: const EdgeInsets.only(bottom: 6),
-      child: ListTile(
-        leading: CircleAvatar(
-          radius: 18,
-          backgroundColor: item.iconColor.withValues(alpha: 0.15),
-          child: Icon(item.icon, color: item.iconColor, size: 20),
-        ),
-        title: Text(item.title, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
-        subtitle: Text(
-          '${_formatTime(item.timestamp)}  ${item.subtitle}',
-          style: const TextStyle(fontSize: 12),
-        ),
-        trailing: const Icon(Icons.chevron_right, size: 18, color: AppColors.textTertiary),
-      ),
-    );
+  Color _glucoseColor(double g) {
+    if (g < 3.9) return AppColors.danger;
+    if (g < 5.0) return AppColors.warning;
+    if (g <= 7.2) return AppColors.success;
+    if (g <= 10.0) return AppColors.warning;
+    return AppColors.danger;
   }
 
   String _formatTime(DateTime dt) {
@@ -153,20 +44,75 @@ class _HistoryPageState extends State<HistoryPage> {String _selectedFilter = '�
     }
     return '${dt.month}/${dt.day} ${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(2, '0')}';
   }
-}
 
-class HistoryItem {
-  final DateTime timestamp;
-  final String title;
-  final String subtitle;
-  final IconData icon;
-  final Color iconColor;
-
-  HistoryItem({
-    required this.timestamp,
-    required this.title,
-    required this.subtitle,
-    required this.icon,
-    required this.iconColor,
-  });
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('历史记录'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh),
+            onPressed: _loadRecords,
+          ),
+        ],
+      ),
+      body: _loading
+          ? const Center(child: CircularProgressIndicator())
+          : _records.isEmpty
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.history, size: 48, color: AppColors.textTertiary),
+                      const SizedBox(height: 12),
+                      const Text('暂无记录', style: TextStyle(fontSize: 15, color: AppColors.textSecondary)),
+                    ],
+                  ),
+                )
+              : ListView.builder(
+                  padding: const EdgeInsets.all(16),
+                  itemCount: _records.length,
+                  itemBuilder: (context, index) {
+                    final r = _records[index];
+                    final gColor = _glucoseColor(r.glucose);
+                    return Card(
+                      margin: const EdgeInsets.only(bottom: 6),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          radius: 16,
+                          backgroundColor: gColor.withValues(alpha: 0.15),
+                          child: Text(
+                            r.glucose.toStringAsFixed(1),
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: gColor,
+                            ),
+                          ),
+                        ),
+                        title: Text(
+                          _formatTime(r.timestamp),
+                          style: const TextStyle(fontSize: 14),
+                        ),
+                        subtitle: Text(
+                          r.note ?? '',
+                          style: const TextStyle(fontSize: 12),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        trailing: Text(
+                          '${r.glucose.toStringAsFixed(1)} mmol/L',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: gColor,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+    );
+  }
 }

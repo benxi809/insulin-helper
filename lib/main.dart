@@ -1,48 +1,44 @@
+/// GluCare 入口
 import 'package:flutter/material.dart';
-import 'package:insulin_app/app_state.dart';
+import 'package:insulin_app/services/notification_service.dart';
+import 'package:insulin_app/state/app_state.dart';
+import 'package:insulin_app/theme/app_colors.dart';
+import 'package:insulin_app/routes.dart';
 import 'package:insulin_app/pages/home_page.dart';
-import 'package:insulin_app/pages/calculator_page.dart';
-import 'package:insulin_app/pages/report_page.dart';
-import 'package:insulin_app/pages/food_picker_page.dart';
+import 'package:insulin_app/pages/dose_calculator_page.dart';
+import 'package:insulin_app/pages/blood_glucose_page.dart';
+import 'package:insulin_app/pages/food_search_page.dart';
 import 'package:insulin_app/pages/settings_page.dart';
+import 'package:insulin_app/pages/report_page.dart';
+import 'package:insulin_app/pages/cgm_dashboard_page.dart';
+import 'package:insulin_app/pages/recommendation_page.dart';
 import 'package:insulin_app/pages/patient_profile_page.dart';
 import 'package:insulin_app/pages/camera_food_page.dart';
-import 'package:insulin_app/pages/cgm_dashboard_page.dart';
-import 'package:insulin_app/pages/cgm_settings_page.dart';
-import 'package:insulin_app/pages/ai_glasses_settings_page.dart';
-import 'package:insulin_app/pages/insulin_advisor_page.dart';
-import 'package:insulin_app/utils/notification_service.dart';
 
-// 胰岛素泵控制页面
-import 'package:insulin_app/pages/basal_rate_page.dart';
-import 'package:insulin_app/pages/therapy_params_page.dart';
-import 'package:insulin_app/pages/history_page.dart';
-
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final appState = AppState();
-  appState.init();
 
-  // 初始化泵服务pumpService.init();
+  final appState = AppState();
+  await appState.init();
 
   // 初始化通知服务
   final notifService = NotificationService();
-  notifService.init();
+  await notifService.init();
 
-  runApp(InsulinApp(
+  runApp(GluCareApp(
     appState: appState,
     notificationService: notifService,
-    pumpService: pumpService,
   ));
 }
 
-class InsulinApp extends StatelessWidget {
+class GluCareApp extends StatelessWidget {
   final AppState appState;
-  final NotificationService notificationService;const InsulinApp({
+  final NotificationService notificationService;
+
+  const GluCareApp({
     super.key,
     required this.appState,
     required this.notificationService,
-    required this.pumpService,
   });
 
   @override
@@ -50,31 +46,27 @@ class InsulinApp extends StatelessWidget {
     return ListenableBuilder(
       listenable: appState,
       builder: (context, _) {
-        if (!appState.initialized) {
-          return const MaterialApp(
-            home: Scaffold(body: Center(child: CircularProgressIndicator())),
-          );
-        }
-
         return MaterialApp(
-          title: 'Insulin Helper',
+          title: 'GluCare',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            colorSchemeSeed: Colors.blue,
             useMaterial3: true,
-            appBarTheme: const AppBarTheme(centerTitle: true),
+            colorSchemeSeed: AppColors.primary,
+            brightness: Brightness.light,
+            scaffoldBackgroundColor: AppColors.background,
+            fontFamily: 'PingFang SC',
           ),
-          home: const MainShell(),
+          home: const BottomNavShell(),
           routes: {
-            // 原有路由
-            '/foods': (context) => const FoodPickerPage(),
-            '/settings': (context) => const SettingsPage(),
-            '/profile': (context) => const PatientProfilePage(),
-            '/camera_food': (context) => const CameraFoodPage(),
-            '/cgm_settings': (context) => const CGMSettingsPage(),
-            '/ai_glasses_settings': (context) => const AIGlassesSettingsPage(),
-
-            // 胰岛素泵控制页面路由
+            '/blood_glucose': (_) => const BloodGlucosePage(),
+            '/dose_calculator': (_) => const DoseCalculatorPage(),
+            '/food_search': (_) => const FoodSearchPage(),
+            '/settings': (_) => const SettingsPage(),
+            '/report': (_) => const ReportPage(),
+            '/cgm_dashboard': (_) => const CgmDashboardPage(),
+            '/recommendation': (_) => const RecommendationPage(),
+            '/patient_profile': (_) => const PatientProfilePage(),
+            '/camera_food': (_) => const CameraFoodPage(),
           },
         );
       },
@@ -82,22 +74,22 @@ class InsulinApp extends StatelessWidget {
   }
 }
 
-/// 主外壳 — 底部导航栏 + 5个Tab页面
-class MainShell extends StatefulWidget {
-  const MainShell({super.key});
+/// 底部导航壳
+class BottomNavShell extends StatefulWidget {
+  const BottomNavShell({super.key});
 
   @override
-  State<MainShell> createState() => _MainShellState();
+  State<BottomNavShell> createState() => _BottomNavShellState();
 }
 
-class _MainShellState extends State<MainShell> {
-  int _currentIndex = 1; // 默认从计算器页开始
+class _BottomNavShellState extends State<BottomNavShell> {
+  int _currentIndex = 0;
 
   final List<Widget> _pages = const [
     HomePage(),
-    CalculatorPage(),
-    CGMDashboardPage(),    // CGM 实时血糖
-    InsulinAdvisorPage(),  // 智能推荐（基础率+饮食）
+    DoseCalculatorPage(),
+    CgmDashboardPage(),
+    RecommendationPage(),
     ReportPage(),
   ];
 
@@ -112,31 +104,11 @@ class _MainShellState extends State<MainShell> {
         selectedIndex: _currentIndex,
         onDestinationSelected: (i) => setState(() => _currentIndex = i),
         destinations: const [
-          NavigationDestination(
-            icon: Icon(Icons.home_outlined),
-            selectedIcon: Icon(Icons.home),
-            label: '记录',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.calculate_outlined),
-            selectedIcon: Icon(Icons.calculate),
-            label: '计算器',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.show_chart_outlined),
-            selectedIcon: Icon(Icons.show_chart),
-            label: 'CGM',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.auto_awesome_outlined),
-            selectedIcon: Icon(Icons.auto_awesome),
-            label: '推荐',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.bar_chart_outlined),
-            selectedIcon: Icon(Icons.bar_chart),
-            label: '报告',
-          ),
+          NavigationDestination(icon: Icon(Icons.home_outlined), label: '首页'),
+          NavigationDestination(icon: Icon(Icons.calculate_outlined), label: '计算器'),
+          NavigationDestination(icon: Icon(Icons.monitor_heart_outlined), label: 'CGM'),
+          NavigationDestination(icon: Icon(Icons.recommend_outlined), label: '推荐'),
+          NavigationDestination(icon: Icon(Icons.bar_chart_outlined), label: '报告'),
         ],
       ),
     );
