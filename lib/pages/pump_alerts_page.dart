@@ -7,11 +7,11 @@
 /// - 分级报警显示（1级=黄色, 2级=红色）
 
 import 'package:flutter/material.dart';
-import 'package:glucare_app/services/alert_system.dart';
-import 'package:glucare_app/theme/app_colors.dart';
-import 'package:glucare_app/theme/app_spacing.dart';
-import 'package:glucare_app/theme/app_typography.dart';
-import 'package:glucare_app/widgets/widgets.dart';
+import 'package:insulin_app/services/alert_system.dart';
+import 'package:insulin_app/theme/app_colors.dart';
+import 'package:insulin_app/theme/app_spacing.dart';
+import 'package:insulin_app/theme/app_typography.dart';
+import 'package:insulin_app/widgets/widgets.dart';
 
 class PumpAlertsPage extends StatefulWidget {
   const PumpAlertsPage({super.key});

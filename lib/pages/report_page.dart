@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:glucare_app/database/local_db.dart';
-import 'package:glucare_app/models/models.dart';
+import 'package:insulin_app/database/local_db.dart';
+import 'package:insulin_app/models/models.dart';
 
 /// 报告页 — 数据图表与导出（含CGM数据）
 class ReportPage extends StatefulWidget {

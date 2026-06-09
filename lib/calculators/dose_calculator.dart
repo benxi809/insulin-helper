@@ -1,4 +1,4 @@
-import 'package:glucare_app/models/models.dart';
+import 'package:insulin_app/models/models.dart';
 
 /// 剂量计算结果
 class DoseResult {

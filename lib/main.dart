@@ -1,31 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:glucare_app/app_state.dart';
-import 'package:glucare_app/pages/home_page.dart';
-import 'package:glucare_app/pages/calculator_page.dart';
-import 'package:glucare_app/pages/report_page.dart';
-import 'package:glucare_app/pages/food_picker_page.dart';
-import 'package:glucare_app/pages/settings_page.dart';
-import 'package:glucare_app/pages/patient_profile_page.dart';
-import 'package:glucare_app/pages/camera_food_page.dart';
-import 'package:glucare_app/pages/cgm_dashboard_page.dart';
-import 'package:glucare_app/pages/cgm_settings_page.dart';
-import 'package:glucare_app/pages/ai_glasses_settings_page.dart';
-import 'package:glucare_app/pages/insulin_advisor_page.dart';
-import 'package:glucare_app/utils/notification_service.dart';
-import 'package:glucare_app/services/pump_service.dart';
+import 'package:insulin_app/app_state.dart';
+import 'package:insulin_app/pages/home_page.dart';
+import 'package:insulin_app/pages/calculator_page.dart';
+import 'package:insulin_app/pages/report_page.dart';
+import 'package:insulin_app/pages/food_picker_page.dart';
+import 'package:insulin_app/pages/settings_page.dart';
+import 'package:insulin_app/pages/patient_profile_page.dart';
+import 'package:insulin_app/pages/camera_food_page.dart';
+import 'package:insulin_app/pages/cgm_dashboard_page.dart';
+import 'package:insulin_app/pages/cgm_settings_page.dart';
+import 'package:insulin_app/pages/ai_glasses_settings_page.dart';
+import 'package:insulin_app/pages/insulin_advisor_page.dart';
+import 'package:insulin_app/utils/notification_service.dart';
+import 'package:insulin_app/services/pump_service.dart';
 
 // 胰岛素泵控制页面
-import 'package:glucare_app/pages/pump_running_page.dart';
-import 'package:glucare_app/pages/pump_settings_page.dart';
-import 'package:glucare_app/pages/pump_connect_page.dart';
-import 'package:glucare_app/pages/pump_scan_page.dart';
-import 'package:glucare_app/pages/pump_verify_page.dart';
-import 'package:glucare_app/pages/pump_bolus_page.dart';
-import 'package:glucare_app/pages/pump_temp_basal_page.dart';
-import 'package:glucare_app/pages/basal_rate_page.dart';
-import 'package:glucare_app/pages/therapy_params_page.dart';
-import 'package:glucare_app/pages/pump_alerts_page.dart';
-import 'package:glucare_app/pages/history_page.dart';
+import 'package:insulin_app/pages/pump_running_page.dart';
+import 'package:insulin_app/pages/pump_settings_page.dart';
+import 'package:insulin_app/pages/pump_connect_page.dart';
+import 'package:insulin_app/pages/pump_scan_page.dart';
+import 'package:insulin_app/pages/pump_verify_page.dart';
+import 'package:insulin_app/pages/pump_bolus_page.dart';
+import 'package:insulin_app/pages/pump_temp_basal_page.dart';
+import 'package:insulin_app/pages/basal_rate_page.dart';
+import 'package:insulin_app/pages/therapy_params_page.dart';
+import 'package:insulin_app/pages/pump_alerts_page.dart';
+import 'package:insulin_app/pages/history_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

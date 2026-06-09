@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:glucare_app/database/local_db.dart';
-import 'package:glucare_app/models/models.dart';
+import 'package:insulin_app/database/local_db.dart';
+import 'package:insulin_app/models/models.dart';
 
 /// 患者信息页面 — 查看和编辑患者治疗相关信息
 class PatientProfilePage extends StatefulWidget {

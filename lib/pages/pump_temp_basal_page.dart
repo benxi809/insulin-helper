@@ -4,10 +4,10 @@
 /// 功能：设置临时基础率（剂量+时长）
 
 import 'package:flutter/material.dart';
-import 'package:glucare_app/services/pump_service.dart';
-import 'package:glucare_app/theme/app_colors.dart';
-import 'package:glucare_app/theme/app_spacing.dart';
-import 'package:glucare_app/widgets/widgets.dart';
+import 'package:insulin_app/services/pump_service.dart';
+import 'package:insulin_app/theme/app_colors.dart';
+import 'package:insulin_app/theme/app_spacing.dart';
+import 'package:insulin_app/widgets/widgets.dart';
 
 class TempBasalPage extends StatefulWidget {
   const TempBasalPage({super.key});

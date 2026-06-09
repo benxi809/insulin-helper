@@ -1,5 +1,5 @@
 import 'dart:math' as math;
-import 'package:glucare_app/models/models.dart';
+import 'package:insulin_app/models/models.dart';
 
 /// 基础率估算结果
 class BasalProfile {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:glucare_app/database/local_db.dart';
-import 'package:glucare_app/models/models.dart';
-import 'package:glucare_app/utils/cgm_connector.dart';
+import 'package:insulin_app/database/local_db.dart';
+import 'package:insulin_app/models/models.dart';
+import 'package:insulin_app/utils/cgm_connector.dart';
 
 /// CGM 设备设置页面
 /// 选择品牌、输入账号密码、连接管理

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:glucare_app/models/models.dart';
+import 'package:insulin_app/models/models.dart';
 
 /// 中餐碳水库服务
 /// 从本地 JSON 加载食物数据，提供搜索和份量调整功能

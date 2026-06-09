@@ -11,7 +11,7 @@
 /// 实际部署时替换为 BLE 通信实现。
 
 import 'dart:async';
-import 'package:glucare_app/models/pump_models.dart';
+import 'package:insulin_app/models/pump_models.dart';
 
 /// 泵通信服务回调
 typedef PumpStatusCallback = void Function(PumpStatus status);

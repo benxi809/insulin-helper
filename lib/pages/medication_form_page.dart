@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:glucare_app/models/models.dart';
+import 'package:insulin_app/models/models.dart';
 
 /// 新增/编辑药品表单页面
 class MedicationFormPage extends StatefulWidget {

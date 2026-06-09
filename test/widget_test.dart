@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:glucare_app/calculators/dose_calculator.dart';
-import 'package:glucare_app/models/models.dart';
+import 'package:insulin_app/calculators/dose_calculator.dart';
+import 'package:insulin_app/models/models.dart';
 
 void main() {
   test('DoseCalculator calculates correctly with typical values', () {

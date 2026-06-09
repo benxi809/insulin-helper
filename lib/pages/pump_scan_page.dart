@@ -4,9 +4,9 @@
 /// 功能：模拟扫码配对流程
 
 import 'package:flutter/material.dart';
-import 'package:glucare_app/theme/app_colors.dart';
-import 'package:glucare_app/theme/app_spacing.dart';
-import 'package:glucare_app/widgets/widgets.dart';
+import 'package:insulin_app/theme/app_colors.dart';
+import 'package:insulin_app/theme/app_spacing.dart';
+import 'package:insulin_app/widgets/widgets.dart';
 
 class PumpScanPage extends StatefulWidget {
   const PumpScanPage({super.key});

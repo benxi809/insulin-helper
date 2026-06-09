@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:glucare_app/utils/meal_planner.dart';
-import 'package:glucare_app/utils/report_generator.dart';
+import 'package:insulin_app/utils/meal_planner.dart';
+import 'package:insulin_app/utils/report_generator.dart';
 
 /// 每周食谱推荐页面
 class MealPlanPage extends StatefulWidget {

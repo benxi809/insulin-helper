@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:glucare_app/calculators/dose_calculator.dart';
-import 'package:glucare_app/calculators/iob_tracker.dart';
-import 'package:glucare_app/calculators/safety_checks.dart';
-import 'package:glucare_app/database/local_db.dart';
-import 'package:glucare_app/models/models.dart';
+import 'package:insulin_app/calculators/dose_calculator.dart';
+import 'package:insulin_app/calculators/iob_tracker.dart';
+import 'package:insulin_app/calculators/safety_checks.dart';
+import 'package:insulin_app/database/local_db.dart';
+import 'package:insulin_app/models/models.dart';
 
 /// 计算器页 — 核心剂量计算
 class CalculatorPage extends StatefulWidget {
