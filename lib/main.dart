@@ -23,9 +23,7 @@ void main() {
   final appState = AppState();
   appState.init();
 
-  // 初始化泵服务
-  final pumpService = PumpService();
-  pumpService.init();
+  // 初始化泵服务pumpService.init();
 
   // 初始化通知服务
   final notifService = NotificationService();
@@ -40,10 +38,7 @@ void main() {
 
 class InsulinApp extends StatelessWidget {
   final AppState appState;
-  final NotificationService notificationService;
-  final PumpService pumpService;
-
-  const InsulinApp({
+  final NotificationService notificationService;const InsulinApp({
     super.key,
     required this.appState,
     required this.notificationService,

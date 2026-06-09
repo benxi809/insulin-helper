@@ -20,9 +20,7 @@ class BasalRatePage extends StatefulWidget {
   State<BasalRatePage> createState() => _BasalRatePageState();
 }
 
-class _BasalRatePageState extends State<BasalRatePage> {
-  final PumpService _pumpService = PumpService();
-  late BasalRateProfile _profile;
+class _BasalRatePageState extends State<BasalRatePage> {late BasalRateProfile _profile;
   bool _loading = true;
   bool _editMode = false;
   final TextEditingController _nameCtrl = TextEditingController();

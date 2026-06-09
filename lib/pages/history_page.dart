@@ -19,10 +19,7 @@ class HistoryPage extends StatefulWidget {
   State<HistoryPage> createState() => _HistoryPageState();
 }
 
-class _HistoryPageState extends State<HistoryPage> {
-  final PumpService _pumpService = PumpService();
-
-  String _selectedFilter = '全部';
+class _HistoryPageState extends State<HistoryPage> {String _selectedFilter = '全部';
   final List<String> _filters = ['全部', '大剂量', '基础率', '报警'];
 
   @override

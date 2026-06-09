@@ -23,32 +23,19 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  final PumpService _pumpService = PumpService();
-  final AlertSystem _alertSystem = AlertSystem();
+class _HomePageState extends State<HomePage> {final AlertSystem _alertSystem = AlertSystem();
   final AppDatabase _db = AppDatabase();
 
     UserConfig _config = UserConfig();
   List<GlucoseRecord> _recentGlucose = [];
-  bool _loading = true;
-  StreamSubscription<PumpStatus>? _statusSub;
-
-  @override
+  bool _loading = true;@override
   void initState() {
     super.initState();
-    _loadData();
-    _pumpService.addStatusListener(_onPumpStatusChanged);
-  }
+    _loadData();}
 
   @override
-  void dispose() {
-    _pumpService.removeStatusListener(_onPumpStatusChanged);
-    _statusSub?.cancel();
+  void dispose() {_statusSub?.cancel();
     super.dispose();
-  }
-
-  void _onPumpStatusChanged(PumpStatus status) {
-    if (mounted) setState(() => _pumpStatus = status);
   }
 
   Future<void> _loadData() async {
@@ -324,20 +311,17 @@ class _HomePageState extends State<HomePage> {
         Row(
           children: [
             Expanded(child: _actionButton('大剂量', Icons.medical_services, AppColors.primary, () {
-              Navigator.pushNamed(context, '/pump_bolus');
-            })),
+              })),
             const SizedBox(width: 8),
             Expanded(child: _actionButton('临时基础率', Icons.timer_outlined, AppColors.warning, () {
-              Navigator.pushNamed(context, '/pump_temp_basal');
-            })),
+              })),
           ],
         ),
         const SizedBox(height: 8),
         Row(
           children: [
             Expanded(child: _actionButton('基础率设置', Icons.speed, AppColors.info, () {
-              Navigator.pushNamed(context, '/pump_basal');
-            })),
+              })),
             const SizedBox(width: 8),
             Expanded(
               child: _pumpStatus.mode == PumpMode.paused
@@ -388,13 +372,11 @@ class _HomePageState extends State<HomePage> {
       ),
     );
     if (confirmed == true) {
-      await _pumpService.pause();
-    }
+      await}
   }
 
   Future<void> _resumePump() async {
-    await _pumpService.resume();
-  }
+    await}
 
   /// 信息概览面板
   Widget _buildInfoPanel() {
