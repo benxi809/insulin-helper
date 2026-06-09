@@ -24,7 +24,7 @@ class AppState extends ChangeNotifier {
       if (medications.isNotEmpty) {
         final notif = NotificationService();
         await notif.setupAllMedicationReminders(
-          medications.map((m) => m.toMap()).toList(),
+          medications.cast<Map<String, dynamic>>().toList(),
         );
       }
     } catch (_) {
