@@ -8,9 +8,7 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:insulin_app/models/pump_models.dart';
 import 'package:insulin_app/models/models.dart';
-import 'package:insulin_app/services/pump_service.dart';
 import 'package:insulin_app/services/alert_system.dart';
 import 'package:insulin_app/database/local_db.dart';
 import 'package:insulin_app/theme/app_colors.dart';

@@ -12,19 +12,10 @@ import 'package:insulin_app/pages/cgm_settings_page.dart';
 import 'package:insulin_app/pages/ai_glasses_settings_page.dart';
 import 'package:insulin_app/pages/insulin_advisor_page.dart';
 import 'package:insulin_app/utils/notification_service.dart';
-import 'package:insulin_app/services/pump_service.dart';
 
 // 胰岛素泵控制页面
-import 'package:insulin_app/pages/pump_running_page.dart';
-import 'package:insulin_app/pages/pump_settings_page.dart';
-import 'package:insulin_app/pages/pump_connect_page.dart';
-import 'package:insulin_app/pages/pump_scan_page.dart';
-import 'package:insulin_app/pages/pump_verify_page.dart';
-import 'package:insulin_app/pages/pump_bolus_page.dart';
-import 'package:insulin_app/pages/pump_temp_basal_page.dart';
 import 'package:insulin_app/pages/basal_rate_page.dart';
 import 'package:insulin_app/pages/therapy_params_page.dart';
-import 'package:insulin_app/pages/pump_alerts_page.dart';
 import 'package:insulin_app/pages/history_page.dart';
 
 void main() {
@@ -89,17 +80,6 @@ class InsulinApp extends StatelessWidget {
             '/ai_glasses_settings': (context) => const AIGlassesSettingsPage(),
 
             // 胰岛素泵控制页面路由
-            '/pump_running': (context) => const PumpRunningPage(),
-            '/pump_settings': (context) => const PumpSettingsPage(),
-            '/pump_connect': (context) => const PumpConnectPage(),
-            '/pump_scan': (context) => const PumpScanPage(),
-            '/pump_verify': (context) => const PumpVerifyPage(),
-            '/pump_bolus': (context) => const BolusPage(),
-            '/pump_temp_basal': (context) => const TempBasalPage(),
-            '/pump_basal': (context) => const BasalRatePage(),
-            '/pump_therapy_params': (context) => const TherapyParamsPage(),
-            '/pump_alerts': (context) => const PumpAlertsPage(),
-            '/pump_history': (context) => const HistoryPage(),
           },
         );
       },
