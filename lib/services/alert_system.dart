@@ -13,7 +13,6 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:insulin_app/models/pump_models.dart';
 
 /// 报警级别
 enum AlertSeverity {

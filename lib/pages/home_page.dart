@@ -28,8 +28,7 @@ class _HomePageState extends State<HomePage> {
   final AlertSystem _alertSystem = AlertSystem();
   final AppDatabase _db = AppDatabase();
 
-  PumpStatus _pumpStatus = PumpStatus();
-  UserConfig _config = UserConfig();
+    UserConfig _config = UserConfig();
   List<GlucoseRecord> _recentGlucose = [];
   bool _loading = true;
   StreamSubscription<PumpStatus>? _statusSub;

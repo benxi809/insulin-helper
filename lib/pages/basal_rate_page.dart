@@ -8,8 +8,6 @@
 /// - 日总量统计
 
 import 'package:flutter/material.dart';
-import 'package:insulin_app/models/pump_models.dart';
-import 'package:insulin_app/services/pump_service.dart';
 import 'package:insulin_app/theme/app_colors.dart';
 import 'package:insulin_app/theme/app_spacing.dart';
 import 'package:insulin_app/theme/app_typography.dart';
