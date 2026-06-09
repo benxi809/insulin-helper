@@ -302,7 +302,7 @@ class PumpService {
 
   /// 检查药量状态
   Future<PumpAlert?> checkReservoir() async {
-    if (_status.reservoirRemaining <= 20 && _status.reservervoirRemaining > 0) {
+    if (_status.reservoirRemaining <= 20 && _status.reservoirRemaining > 0) {
       final alert = PumpAlert(
         id: DateTime.now().millisecondsSinceEpoch,
         title: '药物即将用尽',

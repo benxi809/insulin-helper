@@ -23,6 +23,7 @@ class PumpRunningPage extends StatefulWidget {
 }
 
 class _PumpRunningPageState extends State<PumpRunningPage> {
+  bool _isPaused = false;
   final PumpService _pumpService = PumpService();
   PumpStatus _status = PumpStatus();
 
@@ -93,7 +94,7 @@ class _PumpRunningPageState extends State<PumpRunningPage> {
       label = '临时基础率 剩余${_status.tempBasalRemainingMinutes}分钟';
       valueColor = AppColors.warning;
       gStatus = GlucoseStatus.high;
-    } else if (isPaused) {
+    } else if (_isPaused) {
       mainValue = '--';
       unit = '';
       label = '输注已暂停';

@@ -107,7 +107,7 @@ class _HistoryPageState extends State<HistoryPage> {
           timestamp: d.timestamp,
           title: d.type == 'bolus' ? '大剂量输注' : d.type == 'temp_basal' ? '临时基础率' : '基础输注',
           subtitle: '${d.dose.toStringAsFixed(1)} U${d.note != null ? ' · ${d.note}' : ''}',
-          icon: d.type == 'bolus' ? Icons.injection : Icons.speed,
+          icon: d.type == 'bolus' ? Icons.medical_services : Icons.speed,
           iconColor: d.type == 'bolus' ? AppColors.bolusDose : AppColors.primary,
         ));
       }

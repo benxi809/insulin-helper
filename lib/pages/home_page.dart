@@ -326,7 +326,7 @@ class _HomePageState extends State<HomePage> {
         const SizedBox(height: 4),
         Row(
           children: [
-            Expanded(child: _actionButton('大剂量', Icons.injection, AppColors.primary, () {
+            Expanded(child: _actionButton('大剂量', Icons.medical_services, AppColors.primary, () {
               Navigator.pushNamed(context, '/pump_bolus');
             })),
             const SizedBox(width: 8),
@@ -459,7 +459,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Expanded(child: _statTile('基础输注', '8.5 U', Icons.speed, AppColors.primary)),
             Container(width: 1, height: 40, color: AppColors.divider),
-            Expanded(child: _statTile('大剂量', '4.0 U', Icons.injection, AppColors.bolusDose)),
+            Expanded(child: _statTile('大剂量', '4.0 U', Icons.medical_services, AppColors.bolusDose)),
             Container(width: 1, height: 40, color: AppColors.divider),
             Expanded(child: _statTile('总量', '12.5 U', Icons.inventory_2, AppColors.success)),
           ],

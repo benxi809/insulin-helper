@@ -77,7 +77,7 @@ class PumpSettingsPage extends StatelessWidget {
               onTap: () => Navigator.pushNamed(context, '/pump_temp_basal'),
             ),
             SettingsListTile(
-              icon: Icons.injection,
+              icon: Icons.medical_services,
               title: '大剂量模板',
               subtitle: '快速 · 扩展 · 复合',
               onTap: () => Navigator.pushNamed(context, '/pump_bolus_templates'),

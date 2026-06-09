@@ -430,4 +430,33 @@ class AppDatabase {
     await db.close();
     _database = null;
   }
+
+
+  /// 确保今天有血糖日志记录
+  Future<void> ensureTodayLogs() async {
+    final today = DateTime.now();
+    final todayStr = '${today.year}-${today.month.toString().padLeft(2, '0')}-${today.day.toString().padLeft(2, '0')}';
+    final db = await database;
+    final result = await db.query('glucose_logs',
+      where: "date(timestamp) = ?",
+      whereArgs: [todayStr],
+    );
+    if (result.isEmpty) {
+      await db.insert('glucose_logs', {
+        'glucose': 0.0,
+        'timestamp': today.toIso8601String(),
+        'notes': '自动记录',
+      });
+    }
+  }
+
+  /// 获取用药列表
+  Future<List<Map<String, dynamic>>> getMedications({bool activeOnly = false}) async {
+    final db = await database;
+    if (activeOnly) {
+      return await db.query('medications', where: 'is_active = 1');
+    }
+    return await db.query('medications');
+  }
+
 }

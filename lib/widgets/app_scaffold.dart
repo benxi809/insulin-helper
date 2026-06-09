@@ -163,7 +163,7 @@ class AppScaffold extends StatelessWidget {
                   right: AppSpacing.lg,
                   bottom: AppSpacing.md,
                 ),
-                child: bottomBar,
+                child: bottomBar ?? const SizedBox.shrink(),
               ),
             ],
           ],

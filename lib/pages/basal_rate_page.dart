@@ -67,7 +67,7 @@ class _BasalRatePageState extends State<BasalRatePage> {
         name: _profile.name,
         segments: [
           ..._profile.segments,
-          BasalRateSegment(startHour: lastHour.clamp(0, 23), rate: 0.8),
+          BasalRateSegment(startHour: (lastHour.clamp(0, 23)).toDouble(), rate: 0.8),
         ],
       );
     });

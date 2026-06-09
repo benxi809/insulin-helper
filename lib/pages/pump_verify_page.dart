@@ -128,7 +128,7 @@ class _PumpVerifyPageState extends State<PumpVerifyPage> {
     await Future.delayed(const Duration(seconds: 2));
 
     if (mounted) {
-      final connected = _pumpService.connectionState == PumpConnectionState.connected;
+      final connected = _pumpService.connectionState == _PumpConnectionState.connected;
       setState(() {
         _verifying = false;
         _verified = connected;

@@ -157,7 +157,7 @@ class _BolusPageState extends State<BolusPage> {
     switch (type) {
       case BolusType.standard: return Icons.bolt;
       case BolusType.extended: return Icons.timer;
-      case BolusType.combo: return Icons.blend;
+      case BolusType.combo: return Icons.science;
     }
   }
 
