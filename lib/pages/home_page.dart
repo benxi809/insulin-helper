@@ -98,11 +98,9 @@ class _HomePageState extends State<HomePage> {final AlertSystem _alertSystem = A
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications_outlined),
-            onPressed: () => Navigator.pushNamed(context, '/pump_alerts'),
           ),
           IconButton(
             icon: const Icon(Icons.settings),
-            onPressed: () => Navigator.pushNamed(context, '/pump_settings'),
           ),
         ],
       ),
