@@ -52,11 +52,14 @@ class GlucoseRecord {
   final DateTime timestamp;
   final GlucoseTag tag;
 
+  final String? note; // 备注
+
   GlucoseRecord({
     this.id,
     required this.glucose,
     required this.timestamp,
     this.tag = GlucoseTag.other,
+    this.note,
   });
 
   Map<String, dynamic> toMap() => {
@@ -64,6 +67,7 @@ class GlucoseRecord {
         'glucose': glucose,
         'timestamp': timestamp.toIso8601String(),
         'tag': tag.index,
+        'note': note,
       };
 
   factory GlucoseRecord.fromMap(Map<String, dynamic> map) => GlucoseRecord(
@@ -71,6 +75,7 @@ class GlucoseRecord {
         glucose: (map['glucose'] as num).toDouble(),
         timestamp: DateTime.parse(map['timestamp'] as String),
         tag: GlucoseTag.values[map['tag'] as int],
+        note: map['note'] as String?,
       );
 }
 
@@ -163,6 +168,10 @@ class UserConfig {
   int? targetHba1c; // 目标糖化血红蛋白 (如7即7%)
   String medicationRegimen; // 用药方案描述
   double weight; // 体重 (kg)
+
+  // 目标血糖便捷访问
+  double get fastingTarget => targetGlucoseMin;
+  double get postprandialTarget => targetGlucoseMax;
 
   // 提醒设置
   bool reminderBreakfast; // 早餐前7:00

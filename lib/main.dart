@@ -1,19 +1,18 @@
 /// GluCare 入口
 import 'package:flutter/material.dart';
-import 'package:insulin_app/services/notification_service.dart';
-import 'package:insulin_app/state/app_state.dart';
+import 'package:insulin_app/app_state.dart';
+import 'package:insulin_app/utils/notification_service.dart';
 import 'package:insulin_app/theme/app_colors.dart';
-import 'package:insulin_app/routes.dart';
 import 'package:insulin_app/pages/home_page.dart';
-import 'package:insulin_app/pages/dose_calculator_page.dart';
-import 'package:insulin_app/pages/blood_glucose_page.dart';
-import 'package:insulin_app/pages/food_search_page.dart';
+import 'package:insulin_app/pages/calculator_page.dart';
+import 'package:insulin_app/pages/cgm_dashboard_page.dart';
 import 'package:insulin_app/pages/settings_page.dart';
 import 'package:insulin_app/pages/report_page.dart';
-import 'package:insulin_app/pages/cgm_dashboard_page.dart';
-import 'package:insulin_app/pages/recommendation_page.dart';
+import 'package:insulin_app/pages/insulin_advisor_page.dart';
 import 'package:insulin_app/pages/patient_profile_page.dart';
 import 'package:insulin_app/pages/camera_food_page.dart';
+import 'package:insulin_app/pages/food_picker_page.dart';
+import 'package:insulin_app/pages/history_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -58,15 +57,15 @@ class GluCareApp extends StatelessWidget {
           ),
           home: const BottomNavShell(),
           routes: {
-            '/blood_glucose': (_) => const BloodGlucosePage(),
-            '/dose_calculator': (_) => const DoseCalculatorPage(),
-            '/food_search': (_) => const FoodSearchPage(),
             '/settings': (_) => const SettingsPage(),
             '/report': (_) => const ReportPage(),
-            '/cgm_dashboard': (_) => const CgmDashboardPage(),
-            '/recommendation': (_) => const RecommendationPage(),
+            '/cgm_dashboard': (_) => const CGMDashboardPage(),
+            '/calculator': (_) => const CalculatorPage(),
+            '/recommendation': (_) => const InsulinAdvisorPage(),
             '/patient_profile': (_) => const PatientProfilePage(),
             '/camera_food': (_) => const CameraFoodPage(),
+            '/food_picker': (_) => const FoodPickerPage(),
+            '/history': (_) => const HistoryPage(),
           },
         );
       },
@@ -87,9 +86,9 @@ class _BottomNavShellState extends State<BottomNavShell> {
 
   final List<Widget> _pages = const [
     HomePage(),
-    DoseCalculatorPage(),
-    CgmDashboardPage(),
-    RecommendationPage(),
+    CalculatorPage(),
+    CGMDashboardPage(),
+    InsulinAdvisorPage(),
     ReportPage(),
   ];
 
