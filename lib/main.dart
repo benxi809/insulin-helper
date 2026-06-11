@@ -50,9 +50,20 @@ class GluCareApp extends StatelessWidget {
               brightness: Brightness.light,
               scaffoldBackgroundColor: AppColors.background,
             ),
-            home: const Scaffold(
+            home: Scaffold(
               body: Center(
-                child: CircularProgressIndicator(),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Image.asset(
+                      'assets/images/logo_splash.png',
+                      width: 160,
+                      height: 214,
+                    ),
+                    const SizedBox(height: 32),
+                    const CircularProgressIndicator(),
+                  ],
+                ),
               ),
             ),
           );
