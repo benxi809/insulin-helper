@@ -1,7 +1,6 @@
 /// GluCare 入口
 import 'package:flutter/material.dart';
 import 'package:glucare_app/app_state.dart';
-import 'package:glucare_app/utils/notification_service.dart';
 import 'package:glucare_app/theme/app_colors.dart';
 import 'package:glucare_app/pages/home_page.dart';
 import 'package:glucare_app/pages/calculator_page.dart';
@@ -13,21 +12,18 @@ import 'package:glucare_app/pages/patient_profile_page.dart';
 import 'package:glucare_app/pages/camera_food_page.dart';
 import 'package:glucare_app/pages/food_picker_page.dart';
 import 'package:glucare_app/pages/history_page.dart';
+import 'package:glucare_app/utils/notification_service.dart';
 
-void main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
   final appState = AppState();
-  await appState.init();
-
-  // 初始化通知服务
   final notifService = NotificationService();
-  await notifService.init();
 
-  runApp(GluCareApp(
-    appState: appState,
-    notificationService: notifService,
-  ));
+  // 先启动初始化
+  appState.init();
+  notifService.init();
+
+  runApp(GluCareApp(appState: appState, notificationService: notifService));
 }
 
 class GluCareApp extends StatelessWidget {
@@ -45,6 +41,23 @@ class GluCareApp extends StatelessWidget {
     return ListenableBuilder(
       listenable: appState,
       builder: (context, _) {
+        if (!appState.initialized) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              useMaterial3: true,
+              colorSchemeSeed: AppColors.primary,
+              brightness: Brightness.light,
+              scaffoldBackgroundColor: AppColors.background,
+            ),
+            home: const Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
+          );
+        }
+
         return MaterialApp(
           title: 'GluCare',
           debugShowCheckedModeBanner: false,

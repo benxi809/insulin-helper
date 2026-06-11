@@ -238,7 +238,9 @@ class NotificationService {
   /// 注意：会取消旧的药品相关提醒（ID 1000-9999）
   Future<void> setupAllMedicationReminders(List<Map<String, dynamic>> medications) async {
     // 先取消所有旧的用药提醒
-    for (int i = 0; i < 9000; i++) {
+    await _plugin.cancelAll();
+    // 取消指定ID范围内的提醒（使用 cancelAll 更高效）
+    for (int i = 0; i < 10; i++) {
       await _plugin.cancel(_medicationIdBase + i);
     }
 
