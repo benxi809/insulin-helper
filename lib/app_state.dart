@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:insulin_app/utils/food_database.dart';
-import 'package:insulin_app/database/local_db.dart';
-import 'package:insulin_app/utils/notification_service.dart';
+import 'package:glucare_app/utils/food_database.dart';
+import 'package:glucare_app/database/local_db.dart';
+import 'package:glucare_app/utils/notification_service.dart';
 
 /// 全局 app 状态
 class AppState extends ChangeNotifier {

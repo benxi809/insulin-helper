@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:insulin_app/utils/food_recognizer.dart';
-import 'package:insulin_app/utils/ai_glasses_connector.dart';
-import 'package:insulin_app/database/local_db.dart';
+import 'package:glucare_app/utils/food_recognizer.dart';
+import 'package:glucare_app/utils/ai_glasses_connector.dart';
+import 'package:glucare_app/database/local_db.dart';
 
 /// 食物拍照识别页面
 class CameraFoodPage extends StatefulWidget {

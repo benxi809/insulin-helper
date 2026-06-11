@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:insulin_app/app_state.dart';
-import 'package:insulin_app/database/local_db.dart';
-import 'package:insulin_app/models/models.dart';
-import 'package:insulin_app/pages/medication_form_page.dart';
-import 'package:insulin_app/utils/notification_service.dart';
+import 'package:glucare_app/app_state.dart';
+import 'package:glucare_app/database/local_db.dart';
+import 'package:glucare_app/models/models.dart';
+import 'package:glucare_app/pages/medication_form_page.dart';
+import 'package:glucare_app/utils/notification_service.dart';
 
 /// 用药管理页面 — 药品列表 + 今日打卡
 class MedicationPage extends StatefulWidget {

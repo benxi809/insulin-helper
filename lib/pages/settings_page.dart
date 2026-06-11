@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:insulin_app/database/local_db.dart';
-import 'package:insulin_app/models/models.dart';
-import 'package:insulin_app/utils/notification_service.dart';
+import 'package:glucare_app/database/local_db.dart';
+import 'package:glucare_app/models/models.dart';
+import 'package:glucare_app/utils/notification_service.dart';
 
 /// 设置页 — 含提醒设置和患者信息入口
 class SettingsPage extends StatefulWidget {

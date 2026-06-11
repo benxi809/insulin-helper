@@ -1,5 +1,5 @@
-import 'package:insulin_app/database/local_db.dart';
-import 'package:insulin_app/models/models.dart';
+import 'package:glucare_app/database/local_db.dart';
+import 'package:glucare_app/models/models.dart';
 
 /// 报告生成器 — 病情总结、用药调整建议
 class ReportGenerator {

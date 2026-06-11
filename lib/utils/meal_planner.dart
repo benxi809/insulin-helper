@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'package:insulin_app/database/local_db.dart';
+import 'package:glucare_app/database/local_db.dart';
 
 /// 餐型标签
 enum MealType { breakfast, lunch, dinner, snack }

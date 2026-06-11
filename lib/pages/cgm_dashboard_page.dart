@@ -3,9 +3,9 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
-import 'package:insulin_app/database/local_db.dart';
-import 'package:insulin_app/models/models.dart';
-import 'package:insulin_app/utils/cgm_connector.dart';
+import 'package:glucare_app/database/local_db.dart';
+import 'package:glucare_app/models/models.dart';
+import 'package:glucare_app/utils/cgm_connector.dart';
 
 /// CGM 实时仪表盘页面
 /// 显示当前血糖、趋势、24小时曲线、TIR、AGP

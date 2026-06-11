@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:insulin_app/utils/report_generator.dart';
+import 'package:glucare_app/utils/report_generator.dart';
 
 /// 病情总结页面 — 病情报告 + 调整建议 + 发送医生
 class HealthReportPage extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:insulin_app/database/local_db.dart';
-import 'package:insulin_app/utils/ai_glasses_connector.dart';
+import 'package:glucare_app/database/local_db.dart';
+import 'package:glucare_app/utils/ai_glasses_connector.dart';
 
 /// AI 眼镜设置页面
 /// 选择品牌、输入IP和端口、连接管理、拍照测试

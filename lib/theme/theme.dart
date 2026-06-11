@@ -2,7 +2,7 @@
 ///
 /// 使用方式：
 /// ```dart
-/// import 'package:insulin_app/theme/app_theme.dart';
+/// import 'package:glucare_app/theme/app_theme.dart';
 ///
 /// // 访问颜色
 /// AppColors.primary

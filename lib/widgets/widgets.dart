@@ -2,7 +2,7 @@
 ///
 /// 使用方式：
 /// ```dart
-/// import 'package:insulin_app/widgets/widgets.dart';
+/// import 'package:glucare_app/widgets/widgets.dart';
 /// ```
 export 'app_scaffold.dart';
 export 'primary_button.dart';

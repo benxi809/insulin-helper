@@ -1,4 +1,4 @@
-import 'package:insulin_app/models/models.dart';
+import 'package:glucare_app/models/models.dart';
 
 /// 活性胰岛素 (IOB) 追踪器
 /// 基于胰岛素药代动力学，采用线性衰减模型

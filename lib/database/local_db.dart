@@ -1,7 +1,7 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import 'package:insulin_app/models/models.dart';
-import 'package:insulin_app/utils/ai_glasses_connector.dart';
+import 'package:glucare_app/models/models.dart';
+import 'package:glucare_app/utils/ai_glasses_connector.dart';
 
 /// 本地数据库
 /// 存储血糖记录、胰岛素注射记录、用户配置
@@ -20,7 +20,7 @@ class AppDatabase {
 
   Future<Database> _initDatabase() async {
     final dbPath = await getDatabasesPath();
-    final path = join(dbPath, 'insulin_app.db');
+    final path = join(dbPath, 'glucare_app.db');
 
     return await openDatabase(
       path,

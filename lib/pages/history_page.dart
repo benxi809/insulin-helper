@@ -1,8 +1,8 @@
 /// 历史记录页面 — 血糖记录查询
 import 'package:flutter/material.dart';
-import 'package:insulin_app/models/models.dart';
-import 'package:insulin_app/app_state.dart';
-import 'package:insulin_app/theme/app_colors.dart';
+import 'package:glucare_app/models/models.dart';
+import 'package:glucare_app/app_state.dart';
+import 'package:glucare_app/theme/app_colors.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key});

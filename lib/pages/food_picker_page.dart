@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:insulin_app/models/models.dart';
-import 'package:insulin_app/database/local_db.dart';
-import 'package:insulin_app/utils/ai_glasses_connector.dart';
+import 'package:glucare_app/models/models.dart';
+import 'package:glucare_app/database/local_db.dart';
+import 'package:glucare_app/utils/ai_glasses_connector.dart';
 
 /// 已选食物条目
 class _SelectedFood {

@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 import 'package:http/http.dart' as http;
-import 'package:insulin_app/models/models.dart';
+import 'package:glucare_app/models/models.dart';
 
 /// CGM 血糖趋势
 enum CGMTrend {
