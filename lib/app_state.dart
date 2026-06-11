@@ -15,21 +15,28 @@ class AppState extends ChangeNotifier {
   Future<void> init() async {
     if (_initialized) return;
 
-    // 加载食物数据（最快）
-    await foodDb.load();
+    try {
+      // 加载食物数据（最快）
+      await foodDb.load();
 
-    // 初始化数据库（触发迁移）
-    await db.database;
+      // 初始化数据库（触发迁移）
+      await db.database;
 
-    // 自动创建今日用药打卡记录
-    await db.ensureTodayLogs();
+      // 自动创建今日用药打卡记录
+      await db.ensureTodayLogs();
 
-    // 标记初始化完成，先显示主界面
-    _initialized = true;
-    notifyListeners();
+      // 标记初始化完成
+      _initialized = true;
+      notifyListeners();
 
-    // 用药提醒等后台任务延迟执行，不阻塞启动
-    _scheduleMedicationReminders();
+      // 用药提醒等后台任务延迟执行，不阻塞启动
+      _scheduleMedicationReminders();
+    } catch (e) {
+      // 即使初始化失败，也让用户能看到界面
+      debugPrint('AppState.init error: $e');
+      _initialized = true;
+      notifyListeners();
+    }
   }
 
   Future<void> _scheduleMedicationReminders() async {
