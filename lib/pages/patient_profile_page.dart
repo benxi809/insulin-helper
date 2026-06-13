@@ -50,24 +50,29 @@ class _PatientProfilePageState extends State<PatientProfilePage> {
   }
 
   Future<void> _loadConfig() async {
-    _config = await _db.getConfig();
-    if (mounted) {
-      setState(() {
-        _nameCtrl.text = _config.patientName;
-        _ageCtrl.text = _config.age.toString();
-        _weightCtrl.text = _config.weight.toStringAsFixed(1);
-        _hba1cCtrl.text = _config.hba1c?.toStringAsFixed(1) ?? '';
-        _regimenCtrl.text = _config.medicationRegimen;
-        _targetGlucoseMinCtrl.text = _config.targetGlucoseMin.toStringAsFixed(1);
-        _targetGlucoseMaxCtrl.text = _config.targetGlucoseMax.toStringAsFixed(1);
-        _isfCtrl.text = _config.isf.toStringAsFixed(2);
-        _icrCtrl.text = _config.icr.toStringAsFixed(1);
-        _maxDoseCtrl.text = _config.maxDosePerInjection.toStringAsFixed(1);
-        _targetHba1cCtrl.text = _config.targetHba1c?.toString() ?? '7';
-        _diagnosisDate = _config.diagnosisDate;
-        _diabetesType = _config.diabetesType;
-        _loading = false;
-      });
+    try {
+      _config = await _db.getConfig();
+      if (mounted) {
+        setState(() {
+          _nameCtrl.text = _config.patientName;
+          _ageCtrl.text = _config.age.toString();
+          _weightCtrl.text = _config.weight.toStringAsFixed(1);
+          _hba1cCtrl.text = _config.hba1c?.toStringAsFixed(1) ?? '';
+          _regimenCtrl.text = _config.medicationRegimen;
+          _targetGlucoseMinCtrl.text = _config.targetGlucoseMin.toStringAsFixed(1);
+          _targetGlucoseMaxCtrl.text = _config.targetGlucoseMax.toStringAsFixed(1);
+          _isfCtrl.text = _config.isf.toStringAsFixed(2);
+          _icrCtrl.text = _config.icr.toStringAsFixed(1);
+          _maxDoseCtrl.text = _config.maxDosePerInjection.toStringAsFixed(1);
+          _targetHba1cCtrl.text = _config.targetHba1c?.toString() ?? '7';
+          _diagnosisDate = _config.diagnosisDate;
+          _diabetesType = _config.diabetesType;
+          _loading = false;
+        });
+      }
+    } catch (e) {
+      debugPrint('PatientProfilePage._loadConfig error: $e');
+      if (mounted) setState(() => _loading = false);
     }
   }
 
@@ -180,6 +185,97 @@ class _PatientProfilePageState extends State<PatientProfilePage> {
           _buildDatePicker(),
           const SizedBox(height: 10),
           _buildTextField('用药方案', _regimenCtrl, hint: '如：每日多次注射（MDI）'),
+          const SizedBox(height: 20),
+
+          // ===== 口服药物 =====
+          _sectionHeader('口服药物'),
+          const SizedBox(height: 8),
+          ..._config.oralMedications.asMap().entries.map((entry) {
+            final i = entry.key;
+            final med = entry.value;
+            return Card(
+              key: ValueKey('oral_med_$i'),
+              margin: const EdgeInsets.only(bottom: 6),
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        const Icon(Icons.medication, size: 18, color: Colors.blue),
+                        const SizedBox(width: 6),
+                        Expanded(
+                          child: TextField(
+                            controller: TextEditingController(text: med.name),
+                            decoration: const InputDecoration(
+                              labelText: '药物名称',
+                              border: OutlineInputBorder(),
+                              isDense: true,
+                              contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                            ),
+                            style: const TextStyle(fontSize: 14),
+                            onChanged: (v) => med.name = v,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        IconButton(
+                          icon: const Icon(Icons.delete, color: Colors.red, size: 20),
+                          onPressed: () {
+                            setState(() {
+                              _config.oralMedications.removeAt(i);
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextField(
+                            controller: TextEditingController(text: med.dosage),
+                            decoration: const InputDecoration(
+                              labelText: '剂量（如 500mg）',
+                              border: OutlineInputBorder(),
+                              isDense: true,
+                              contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                            ),
+                            style: const TextStyle(fontSize: 14),
+                            onChanged: (v) => med.dosage = v,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: TextField(
+                            controller: TextEditingController(text: med.frequency),
+                            decoration: const InputDecoration(
+                              labelText: '频次（如 每日两次）',
+                              border: OutlineInputBorder(),
+                              isDense: true,
+                              contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                            ),
+                            style: const TextStyle(fontSize: 14),
+                            onChanged: (v) => med.frequency = v,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }),
+          const SizedBox(height: 8),
+          TextButton.icon(
+            onPressed: () {
+              setState(() {
+                _config.oralMedications.add(OralMedication());
+              });
+            },
+            icon: const Icon(Icons.add, size: 18),
+            label: const Text('添加口服药'),
+          ),
           const SizedBox(height: 20),
 
           // ===== 血糖控制目标 =====

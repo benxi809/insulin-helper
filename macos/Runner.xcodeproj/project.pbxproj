@@ -1,501 +1,705 @@
-     1|     1|// !$*UTF8*$!
-     2|     2|{
-     3|     3|	archiveVersion = 1;
-     4|     4|	classes = {
-     5|     5|	};
-     6|     6|	objectVersion = 54;
-     7|     7|	objects = {
-     8|     8|
-     9|     9|/* Begin PBXAggregateTarget section */
-    10|    10|		33CC111A2044C6BA0003C045 /* Flutter Assemble */ = {
-    11|    11|			isa = PBXAggregateTarget;
-    12|    12|			buildConfigurationList = 33CC111B2044C6BA0003C045 /* Build configuration list for PBXAggregateTarget "Flutter Assemble" */;
-    13|    13|			buildPhases = (
-    14|    14|				33CC111E2044C6BF0003C045 /* ShellScript */,
-    15|    15|			);
-    16|    16|			dependencies = (
-    17|    17|			);
-    18|    18|			name = "Flutter Assemble";
-    19|    19|			productName = FLX;
-    20|    20|		};
-    21|    21|/* End PBXAggregateTarget section */
-    22|    22|
-    23|    23|/* Begin PBXBuildFile section */
-    24|    24|		331C80D8294CF71000263BE5 /* RunnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C80D7294CF71000263BE5 /* RunnerTests.swift */; };
-    25|    25|		335BBD1B22A9A15E00E9071D /* GeneratedPluginRegistrant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335BBD1A22A9A15E00E9071D /* GeneratedPluginRegistrant.swift */; };
-    26|    26|		33CC10F12044A3C60003C045 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CC10F02044A3C60003C045 /* AppDelegate.swift */; };
-    27|    27|		33CC10F32044A3C60003C045 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33CC10F22044A3C60003C045 /* Assets.xcassets */; };
-    28|    28|		33CC10F62044A3C60003C045 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33CC10F42044A3C60003C045 /* MainMenu.xib */; };
-    29|    29|		33CC11132044BFA00003C045 /* MainFlutterWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CC11122044BFA00003C045 /* MainFlutterWindow.swift */; };
-    30|    30|/* End PBXBuildFile section */
-    31|    31|
-    32|    32|/* Begin PBXContainerItemProxy section */
-    33|    33|		331C80D9294CF71000263BE5 /* PBXContainerItemProxy */ = {
-    34|    34|			isa = PBXContainerItemProxy;
-    35|    35|			containerPortal = 33CC10E52044A3C60003C045 /* Project object */;
-    36|    36|			proxyType = 1;
-    37|    37|			remoteGlobalIDString = 33CC10EC2044A3C60003C045;
-    38|    38|			remoteInfo = Runner;
-    39|    39|		};
-    40|    40|		33CC111F2044C79F0003C045 /* PBXContainerItemProxy */ = {
-    41|    41|			isa = PBXContainerItemProxy;
-    42|    42|			containerPortal = 33CC10E52044A3C60003C045 /* Project object */;
-    43|    43|			proxyType = 1;
-    44|    44|			remoteGlobalIDString = 33CC111A2044C6BA0003C045;
-    45|    45|			remoteInfo = FLX;
-    46|    46|		};
-    47|    47|/* End PBXContainerItemProxy section */
-    48|    48|
-    49|    49|/* Begin PBXCopyFilesBuildPhase section */
-    50|    50|		33CC110E2044A8840003C045 /* Bundle Framework */ = {
-    51|    51|			isa = PBXCopyFilesBuildPhase;
-    52|    52|			buildActionMask = 2147483647;
-    53|    53|			dstPath = "";
-    54|    54|			dstSubfolderSpec = 10;
-    55|    55|			files = (
-    56|    56|			);
-    57|    57|			name = "Bundle Framework";
-    58|    58|			runOnlyForDeploymentPostprocessing = 0;
-    59|    59|		};
-    60|    60|/* End PBXCopyFilesBuildPhase section */
-    61|    61|
-    62|    62|/* Begin PBXFileReference section */
-    63|    63|		331C80D5294CF71000263BE5 /* RunnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-    64|    64|		331C80D7294CF71000263BE5 /* RunnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerTests.swift; sourceTree = "<group>"; };
-    65|    65|		333000ED22D3DE5D00554162 /* Warnings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Warnings.xcconfig; sourceTree = "<group>"; };
-    66|    66|		335BBD1A22A9A15E00E9071D /* GeneratedPluginRegistrant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedPluginRegistrant.swift; sourceTree = "<group>"; };
-    67|    67|		33CC10ED2044A3C60003C045 /* glucare_app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "glucare_app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-    68|    68|		33CC10F02044A3C60003C045 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-    69|    69|		33CC10F22044A3C60003C045 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Runner/Assets.xcassets; sourceTree = "<group>"; };
-    70|    70|		33CC10F52044A3C60003C045 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-    71|    71|		33CC10F72044A3C60003C045 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Runner/Info.plist; sourceTree = "<group>"; };
-    72|    72|		33CC11122044BFA00003C045 /* MainFlutterWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFlutterWindow.swift; sourceTree = "<group>"; };
-    73|    73|		33CEB47222A05771004F2AC0 /* Flutter-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Flutter-Debug.xcconfig"; sourceTree = "<group>"; };
-    74|    74|		33CEB47422A05771004F2AC0 /* Flutter-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Flutter-Release.xcconfig"; sourceTree = "<group>"; };
-    75|    75|		33CEB47722A0578A004F2AC0 /* Flutter-Generated.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Flutter-Generated.xcconfig"; path = "ephemeral/Flutter-Generated.xcconfig"; sourceTree = "<group>"; };
-    76|    76|		33E51913231747F40026EE4D /* DebugProfile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DebugProfile.entitlements; sourceTree = "<group>"; };
-    77|    77|		33E51914231749380026EE4D /* Release.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Release.entitlements; sourceTree = "<group>"; };
-    78|    78|		33E5194F232828860026EE4D /* AppInfo.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppInfo.xcconfig; sourceTree = "<group>"; };
-    79|    79|		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
-    80|    80|		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
-    81|    81|/* End PBXFileReference section */
-    82|    82|
-    83|    83|/* Begin PBXFrameworksBuildPhase section */
-    84|    84|		331C80D2294CF70F00263BE5 /* Frameworks */ = {
-    85|    85|			isa = PBXFrameworksBuildPhase;
-    86|    86|			buildActionMask = 2147483647;
-    87|    87|			files = (
-    88|    88|			);
-    89|    89|			runOnlyForDeploymentPostprocessing = 0;
-    90|    90|		};
-    91|    91|		33CC10EA2044A3C60003C045 /* Frameworks */ = {
-    92|    92|			isa = PBXFrameworksBuildPhase;
-    93|    93|			buildActionMask = 2147483647;
-    94|    94|			files = (
-    95|    95|			);
-    96|    96|			runOnlyForDeploymentPostprocessing = 0;
-    97|    97|		};
-    98|    98|/* End PBXFrameworksBuildPhase section */
-    99|    99|
-   100|   100|/* Begin PBXGroup section */
-   101|   101|		331C80D6294CF71000263BE5 /* RunnerTests */ = {
-   102|   102|			isa = PBXGroup;
-   103|   103|			children = (
-   104|   104|				331C80D7294CF71000263BE5 /* RunnerTests.swift */,
-   105|   105|			);
-   106|   106|			path = RunnerTests;
-   107|   107|			sourceTree = "<group>";
-   108|   108|		};
-   109|   109|		33BA886A226E78AF003329D5 /* Configs */ = {
-   110|   110|			isa = PBXGroup;
-   111|   111|			children = (
-   112|   112|				33E5194F232828860026EE4D /* AppInfo.xcconfig */,
-   113|   113|				9740EEB21CF90195004384FC /* Debug.xcconfig */,
-   114|   114|				7AFA3C8E1D35360C0083082E /* Release.xcconfig */,
-   115|   115|				333000ED22D3DE5D00554162 /* Warnings.xcconfig */,
-   116|   116|			);
-   117|   117|			path = Configs;
-   118|   118|			sourceTree = "<group>";
-   119|   119|		};
-   120|   120|		33CC10E42044A3C60003C045 = {
-   121|   121|			isa = PBXGroup;
-   122|   122|			children = (
-   123|   123|				33FAB671232836740065AC1E /* Runner */,
-   124|   124|				33CEB47122A05771004F2AC0 /* Flutter */,
-   125|   125|				331C80D6294CF71000263BE5 /* RunnerTests */,
-   126|   126|				33CC10EE2044A3C60003C045 /* Products */,
-   127|   127|				D73912EC22F37F3D000D13A0 /* Frameworks */,
-   128|   128|			);
-   129|   129|			sourceTree = "<group>";
-   130|   130|		};
-   131|   131|		33CC10EE2044A3C60003C045 /* Products */ = {
-   132|   132|			isa = PBXGroup;
-   133|   133|			children = (
-   134|   134|				33CC10ED2044A3C60003C045 /* glucare_app.app */,
-   135|   135|				331C80D5294CF71000263BE5 /* RunnerTests.xctest */,
-   136|   136|			);
-   137|   137|			name = Products;
-   138|   138|			sourceTree = "<group>";
-   139|   139|		};
-   140|   140|		33CC11242044D66E0003C045 /* Resources */ = {
-   141|   141|			isa = PBXGroup;
-   142|   142|			children = (
-   143|   143|				33CC10F22044A3C60003C045 /* Assets.xcassets */,
-   144|   144|				33CC10F42044A3C60003C045 /* MainMenu.xib */,
-   145|   145|				33CC10F72044A3C60003C045 /* Info.plist */,
-   146|   146|			);
-   147|   147|			name = Resources;
-   148|   148|			path = ..;
-   149|   149|			sourceTree = "<group>";
-   150|   150|		};
-   151|   151|		33CEB47122A05771004F2AC0 /* Flutter */ = {
-   152|   152|			isa = PBXGroup;
-   153|   153|			children = (
-   154|   154|				335BBD1A22A9A15E00E9071D /* GeneratedPluginRegistrant.swift */,
-   155|   155|				33CEB47222A05771004F2AC0 /* Flutter-Debug.xcconfig */,
-   156|   156|				33CEB47422A05771004F2AC0 /* Flutter-Release.xcconfig */,
-   157|   157|				33CEB47722A0578A004F2AC0 /* Flutter-Generated.xcconfig */,
-   158|   158|			);
-   159|   159|			path = Flutter;
-   160|   160|			sourceTree = "<group>";
-   161|   161|		};
-   162|   162|		33FAB671232836740065AC1E /* Runner */ = {
-   163|   163|			isa = PBXGroup;
-   164|   164|			children = (
-   165|   165|				33CC10F02044A3C60003C045 /* AppDelegate.swift */,
-   166|   166|				33CC11122044BFA00003C045 /* MainFlutterWindow.swift */,
-   167|   167|				33E51913231747F40026EE4D /* DebugProfile.entitlements */,
-   168|   168|				33E51914231749380026EE4D /* Release.entitlements */,
-   169|   169|				33CC11242044D66E0003C045 /* Resources */,
-   170|   170|				33BA886A226E78AF003329D5 /* Configs */,
-   171|   171|			);
-   172|   172|			path = Runner;
-   173|   173|			sourceTree = "<group>";
-   174|   174|		};
-   175|   175|		D73912EC22F37F3D000D13A0 /* Frameworks */ = {
-   176|   176|			isa = PBXGroup;
-   177|   177|			children = (
-   178|   178|			);
-   179|   179|			name = Frameworks;
-   180|   180|			sourceTree = "<group>";
-   181|   181|		};
-   182|   182|/* End PBXGroup section */
-   183|   183|
-   184|   184|/* Begin PBXNativeTarget section */
-   185|   185|		331C80D4294CF70F00263BE5 /* RunnerTests */ = {
-   186|   186|			isa = PBXNativeTarget;
-   187|   187|			buildConfigurationList = 331C80DE294CF71000263BE5 /* Build configuration list for PBXNativeTarget "RunnerTests" */;
-   188|   188|			buildPhases = (
-   189|   189|				331C80D1294CF70F00263BE5 /* Sources */,
-   190|   190|				331C80D2294CF70F00263BE5 /* Frameworks */,
-   191|   191|				331C80D3294CF70F00263BE5 /* Resources */,
-   192|   192|			);
-   193|   193|			buildRules = (
-   194|   194|			);
-   195|   195|			dependencies = (
-   196|   196|				331C80DA294CF71000263BE5 /* PBXTargetDependency */,
-   197|   197|			);
-   198|   198|			name = RunnerTests;
-   199|   199|			productName = RunnerTests;
-   200|   200|			productReference = 331C80D5294CF71000263BE5 /* RunnerTests.xctest */;
-   201|   201|			productType = "com.apple.product-type.bundle.unit-test";
-   202|   202|		};
-   203|   203|		33CC10EC2044A3C60003C045 /* Runner */ = {
-   204|   204|			isa = PBXNativeTarget;
-   205|   205|			buildConfigurationList = 33CC10FB2044A3C60003C045 /* Build configuration list for PBXNativeTarget "Runner" */;
-   206|   206|			buildPhases = (
-   207|   207|				33CC10E92044A3C60003C045 /* Sources */,
-   208|   208|				33CC10EA2044A3C60003C045 /* Frameworks */,
-   209|   209|				33CC10EB2044A3C60003C045 /* Resources */,
-   210|   210|				33CC110E2044A8840003C045 /* Bundle Framework */,
-   211|   211|				3399D490228B24CF009A79C7 /* ShellScript */,
-   212|   212|			);
-   213|   213|			buildRules = (
-   214|   214|			);
-   215|   215|			dependencies = (
-   216|   216|				33CC11202044C79F0003C045 /* PBXTargetDependency */,
-   217|   217|			);
-   218|   218|			name = Runner;
-   219|   219|			productName = Runner;
-   220|   220|			productReference = 33CC10ED2044A3C60003C045 /* glucare_app.app */;
-   221|   221|			productType = "com.apple.product-type.application";
-   222|   222|		};
-   223|   223|/* End PBXNativeTarget section */
-   224|   224|
-   225|   225|/* Begin PBXProject section */
-   226|   226|		33CC10E52044A3C60003C045 /* Project object */ = {
-   227|   227|			isa = PBXProject;
-   228|   228|			attributes = {
-   229|   229|				BuildIndependentTargetsInParallel = YES;
-   230|   230|				LastSwiftUpdateCheck = 0920;
-   231|   231|				LastUpgradeCheck = 1510;
-   232|   232|				ORGANIZATIONNAME = "";
-   233|   233|				TargetAttributes = {
-   234|   234|					331C80D4294CF70F00263BE5 = {
-   235|   235|						CreatedOnToolsVersion = 14.0;
-   236|   236|						TestTargetID = 33CC10EC2044A3C60003C045;
-   237|   237|					};
-   238|   238|					33CC10EC2044A3C60003C045 = {
-   239|   239|						CreatedOnToolsVersion = 9.2;
-   240|   240|						LastSwiftMigration = 1100;
-   241|   241|						ProvisioningStyle = Automatic;
-   242|   242|						SystemCapabilities = {
-   243|   243|							com.apple.Sandbox = {
-   244|   244|								enabled = 1;
-   245|   245|							};
-   246|   246|						};
-   247|   247|					};
-   248|   248|					33CC111A2044C6BA0003C045 = {
-   249|   249|						CreatedOnToolsVersion = 9.2;
-   250|   250|						ProvisioningStyle = Manual;
-   251|   251|					};
-   252|   252|				};
-   253|   253|			};
-   254|   254|			buildConfigurationList = 33CC10E82044A3C60003C045 /* Build configuration list for PBXProject "Runner" */;
-   255|   255|			compatibilityVersion = "Xcode 9.3";
-   256|   256|			developmentRegion = en;
-   257|   257|			hasScannedForEncodings = 0;
-   258|   258|			knownRegions = (
-   259|   259|				en,
-   260|   260|				Base,
-   261|   261|			);
-   262|   262|			mainGroup = 33CC10E42044A3C60003C045;
-   263|   263|			productRefGroup = 33CC10EE2044A3C60003C045 /* Products */;
-   264|   264|			projectDirPath = "";
-   265|   265|			projectRoot = "";
-   266|   266|			targets = (
-   267|   267|				33CC10EC2044A3C60003C045 /* Runner */,
-   268|   268|				331C80D4294CF70F00263BE5 /* RunnerTests */,
-   269|   269|				33CC111A2044C6BA0003C045 /* Flutter Assemble */,
-   270|   270|			);
-   271|   271|		};
-   272|   272|/* End PBXProject section */
-   273|   273|
-   274|   274|/* Begin PBXResourcesBuildPhase section */
-   275|   275|		331C80D3294CF70F00263BE5 /* Resources */ = {
-   276|   276|			isa = PBXResourcesBuildPhase;
-   277|   277|			buildActionMask = 2147483647;
-   278|   278|			files = (
-   279|   279|			);
-   280|   280|			runOnlyForDeploymentPostprocessing = 0;
-   281|   281|		};
-   282|   282|		33CC10EB2044A3C60003C045 /* Resources */ = {
-   283|   283|			isa = PBXResourcesBuildPhase;
-   284|   284|			buildActionMask = 2147483647;
-   285|   285|			files = (
-   286|   286|				33CC10F32044A3C60003C045 /* Assets.xcassets in Resources */,
-   287|   287|				33CC10F62044A3C60003C045 /* MainMenu.xib in Resources */,
-   288|   288|			);
-   289|   289|			runOnlyForDeploymentPostprocessing = 0;
-   290|   290|		};
-   291|   291|/* End PBXResourcesBuildPhase section */
-   292|   292|
-   293|   293|/* Begin PBXShellScriptBuildPhase section */
-   294|   294|		3399D490228B24CF009A79C7 /* ShellScript */ = {
-   295|   295|			isa = PBXShellScriptBuildPhase;
-   296|   296|			alwaysOutOfDate = 1;
-   297|   297|			buildActionMask = 2147483647;
-   298|   298|			files = (
-   299|   299|			);
-   300|   300|			inputFileListPaths = (
-   301|   301|			);
-   302|   302|			inputPaths = (
-   303|   303|			);
-   304|   304|			outputFileListPaths = (
-   305|   305|			);
-   306|   306|			outputPaths = (
-   307|   307|			);
-   308|   308|			runOnlyForDeploymentPostprocessing = 0;
-   309|   309|			shellPath = /bin/sh;
-   310|   310|			shellScript = "echo \"$PRODUCT_NAME.app\" > \"$PROJECT_DIR\"/Flutter/ephemeral/.app_filename && \"$FLUTTER_ROOT\"/packages/flutter_tools/bin/macos_assemble.sh embed\n";
-   311|   311|		};
-   312|   312|		33CC111E2044C6BF0003C045 /* ShellScript */ = {
-   313|   313|			isa = PBXShellScriptBuildPhase;
-   314|   314|			buildActionMask = 2147483647;
-   315|   315|			files = (
-   316|   316|			);
-   317|   317|			inputFileListPaths = (
-   318|   318|				Flutter/ephemeral/FlutterInputs.xcfilelist,
-   319|   319|			);
-   320|   320|			inputPaths = (
-   321|   321|				Flutter/ephemeral/tripwire,
-   322|   322|			);
-   323|   323|			outputFileListPaths = (
-   324|   324|				Flutter/ephemeral/FlutterOutputs.xcfilelist,
-   325|   325|			);
-   326|   326|			outputPaths = (
-   327|   327|			);
-   328|   328|			runOnlyForDeploymentPostprocessing = 0;
-   329|   329|			shellPath = /bin/sh;
-   330|   330|			shellScript = "\"$FLUTTER_ROOT\"/packages/flutter_tools/bin/macos_assemble.sh && touch Flutter/ephemeral/tripwire";
-   331|   331|		};
-   332|   332|/* End PBXShellScriptBuildPhase section */
-   333|   333|
-   334|   334|/* Begin PBXSourcesBuildPhase section */
-   335|   335|		331C80D1294CF70F00263BE5 /* Sources */ = {
-   336|   336|			isa = PBXSourcesBuildPhase;
-   337|   337|			buildActionMask = 2147483647;
-   338|   338|			files = (
-   339|   339|				331C80D8294CF71000263BE5 /* RunnerTests.swift in Sources */,
-   340|   340|			);
-   341|   341|			runOnlyForDeploymentPostprocessing = 0;
-   342|   342|		};
-   343|   343|		33CC10E92044A3C60003C045 /* Sources */ = {
-   344|   344|			isa = PBXSourcesBuildPhase;
-   345|   345|			buildActionMask = 2147483647;
-   346|   346|			files = (
-   347|   347|				33CC11132044BFA00003C045 /* MainFlutterWindow.swift in Sources */,
-   348|   348|				33CC10F12044A3C60003C045 /* AppDelegate.swift in Sources */,
-   349|   349|				335BBD1B22A9A15E00E9071D /* GeneratedPluginRegistrant.swift in Sources */,
-   350|   350|			);
-   351|   351|			runOnlyForDeploymentPostprocessing = 0;
-   352|   352|		};
-   353|   353|/* End PBXSourcesBuildPhase section */
-   354|   354|
-   355|   355|/* Begin PBXTargetDependency section */
-   356|   356|		331C80DA294CF71000263BE5 /* PBXTargetDependency */ = {
-   357|   357|			isa = PBXTargetDependency;
-   358|   358|			target = 33CC10EC2044A3C60003C045 /* Runner */;
-   359|   359|			targetProxy = 331C80D9294CF71000263BE5 /* PBXContainerItemProxy */;
-   360|   360|		};
-   361|   361|		33CC11202044C79F0003C045 /* PBXTargetDependency */ = {
-   362|   362|			isa = PBXTargetDependency;
-   363|   363|			target = 33CC111A2044C6BA0003C045 /* Flutter Assemble */;
-   364|   364|			targetProxy = 33CC111F2044C79F0003C045 /* PBXContainerItemProxy */;
-   365|   365|		};
-   366|   366|/* End PBXTargetDependency section */
-   367|   367|
-   368|   368|/* Begin PBXVariantGroup section */
-   369|   369|		33CC10F42044A3C60003C045 /* MainMenu.xib */ = {
-   370|   370|			isa = PBXVariantGroup;
-   371|   371|			children = (
-   372|   372|				33CC10F52044A3C60003C045 /* Base */,
-   373|   373|			);
-   374|   374|			name = MainMenu.xib;
-   375|   375|			path = Runner;
-   376|   376|			sourceTree = "<group>";
-   377|   377|		};
-   378|   378|/* End PBXVariantGroup section */
-   379|   379|
-   380|   380|/* Begin XCBuildConfiguration section */
-   381|   381|		331C80DB294CF71000263BE5 /* Debug */ = {
-   382|   382|			isa = XCBuildConfiguration;
-   383|   383|			buildSettings = {
-   384|   384|				BUNDLE_LOADER = "$(TEST_HOST)";
-   385|   385|				CURRENT_PROJECT_VERSION = 1;
-   386|   386|				GENERATE_INFOPLIST_FILE = YES;
-   387|   387|				MARKETING_VERSION = 1.0;
-   388|   388|				PRODUCT_BUNDLE_IDENTIFIER = com.glucare.insulinApp.RunnerTests;
-   389|   389|				PRODUCT_NAME = "$(TARGET_NAME)";
-   390|   390|				SWIFT_VERSION = 5.0;
-   391|   391|				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/glucare_app.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/glucare_app";
-   392|   392|			};
-   393|   393|			name = Debug;
-   394|   394|		};
-   395|   395|		331C80DC294CF71000263BE5 /* Release */ = {
-   396|   396|			isa = XCBuildConfiguration;
-   397|   397|			buildSettings = {
-   398|   398|				BUNDLE_LOADER = "$(TEST_HOST)";
-   399|   399|				CURRENT_PROJECT_VERSION = 1;
-   400|   400|				GENERATE_INFOPLIST_FILE = YES;
-   401|   401|				MARKETING_VERSION = 1.0;
-   402|   402|				PRODUCT_BUNDLE_IDENTIFIER = com.glucare.insulinApp.RunnerTests;
-   403|   403|				PRODUCT_NAME = "$(TARGET_NAME)";
-   404|   404|				SWIFT_VERSION = 5.0;
-   405|   405|				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/glucare_app.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/glucare_app";
-   406|   406|			};
-   407|   407|			name = Release;
-   408|   408|		};
-   409|   409|		331C80DD294CF71000263BE5 /* Profile */ = {
-   410|   410|			isa = XCBuildConfiguration;
-   411|   411|			buildSettings = {
-   412|   412|				BUNDLE_LOADER = "$(TEST_HOST)";
-   413|   413|				CURRENT_PROJECT_VERSION = 1;
-   414|   414|				GENERATE_INFOPLIST_FILE = YES;
-   415|   415|				MARKETING_VERSION = 1.0;
-   416|   416|				PRODUCT_BUNDLE_IDENTIFIER = com.glucare.insulinApp.RunnerTests;
-   417|   417|				PRODUCT_NAME = "$(TARGET_NAME)";
-   418|   418|				SWIFT_VERSION = 5.0;
-   419|   419|				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/glucare_app.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/glucare_app";
-   420|   420|			};
-   421|   421|			name = Profile;
-   422|   422|		};
-   423|   423|		338D0CE9231458BD00FA5F75 /* Profile */ = {
-   424|   424|			isa = XCBuildConfiguration;
-   425|   425|			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
-   426|   426|			buildSettings = {
-   427|   427|				ALWAYS_SEARCH_USER_PATHS = NO;
-   428|   428|				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-   429|   429|				CLANG_ANALYZER_NONNULL = YES;
-   430|   430|				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-   431|   431|				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-   432|   432|				CLANG_CXX_LIBRARY = "libc++";
-   433|   433|				CLANG_ENABLE_MODULES = YES;
-   434|   434|				CLANG_ENABLE_OBJC_ARC = YES;
-   435|   435|				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-   436|   436|				CLANG_WARN_BOOL_CONVERSION = YES;
-   437|   437|				CLANG_WARN_CONSTANT_CONVERSION = YES;
-   438|   438|				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-   439|   439|				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-   440|   440|				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-   441|   441|				CLANG_WARN_EMPTY_BODY = YES;
-   442|   442|				CLANG_WARN_ENUM_CONVERSION = YES;
-   443|   443|				CLANG_WARN_INFINITE_RECURSION = YES;
-   444|   444|				CLANG_WARN_INT_CONVERSION = YES;
-   445|   445|				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-   446|   446|				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-   447|   447|				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-   448|   448|				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-   449|   449|				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-   450|   450|				CODE_SIGN_IDENTITY = "-";
-   451|   451|				COPY_PHASE_STRIP = NO;
-   452|   452|				DEAD_CODE_STRIPPING = YES;
-   453|   453|				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-   454|   454|				ENABLE_NS_ASSERTIONS = NO;
-   455|   455|				ENABLE_STRICT_OBJC_MSGSEND = YES;
-   456|   456|				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-   457|   457|				GCC_C_LANGUAGE_STANDARD = gnu11;
-   458|   458|				GCC_NO_COMMON_BLOCKS = YES;
-   459|   459|				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-   460|   460|				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-   461|   461|				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-   462|   462|				GCC_WARN_UNUSED_FUNCTION = YES;
-   463|   463|				GCC_WARN_UNUSED_VARIABLE = YES;
-   464|   464|				MACOSX_DEPLOYMENT_TARGET = 10.14;
-   465|   465|				MTL_ENABLE_DEBUG_INFO = NO;
-   466|   466|				SDKROOT = macosx;
-   467|   467|				SWIFT_COMPILATION_MODE = wholemodule;
-   468|   468|				SWIFT_OPTIMIZATION_LEVEL = "-O";
-   469|   469|			};
-   470|   470|			name = Profile;
-   471|   471|		};
-   472|   472|		338D0CEA231458BD00FA5F75 /* Profile */ = {
-   473|   473|			isa = XCBuildConfiguration;
-   474|   474|			baseConfigurationReference = 33E5194F232828860026EE4D /* AppInfo.xcconfig */;
-   475|   475|			buildSettings = {
-   476|   476|				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-   477|   477|				CLANG_ENABLE_MODULES = YES;
-   478|   478|				CODE_SIGN_ENTITLEMENTS = Runner/DebugProfile.entitlements;
-   479|   479|				CODE_SIGN_STYLE = Automatic;
-   480|   480|				COMBINE_HIDPI_IMAGES = YES;
-   481|   481|				INFOPLIST_FILE = Runner/Info.plist;
-   482|   482|				LD_RUNPATH_SEARCH_PATHS = (
-   483|   483|					"$(inherited)",
-   484|   484|					"@executable_path/../Frameworks",
-   485|   485|				);
-   486|   486|				PROVISIONING_PROFILE_SPECIFIER = "";
-   487|   487|				SWIFT_VERSION = 5.0;
-   488|   488|			};
-   489|   489|			name = Profile;
-   490|   490|		};
-   491|   491|		338D0CEB231458BD00FA5F75 /* Profile */ = {
-   492|   492|			isa = XCBuildConfiguration;
-   493|   493|			buildSettings = {
-   494|   494|				CODE_SIGN_STYLE = Manual;
-   495|   495|				PRODUCT_NAME = "$(TARGET_NAME)";
-   496|   496|			};
-   497|   497|			name = Profile;
-   498|   498|		};
-   499|   499|		33CC10F92044A3C60003C045 /* Debug */ = {
-   500|   500|			isa = XCBuildConfiguration;
-   501|
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 54;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		33CC111A2044C6BA0003C045 /* Flutter Assemble */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 33CC111B2044C6BA0003C045 /* Build configuration list for PBXAggregateTarget "Flutter Assemble" */;
+			buildPhases = (
+				33CC111E2044C6BF0003C045 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = "Flutter Assemble";
+			productName = FLX;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		331C80D8294CF71000263BE5 /* RunnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C80D7294CF71000263BE5 /* RunnerTests.swift */; };
+		335BBD1B22A9A15E00E9071D /* GeneratedPluginRegistrant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335BBD1A22A9A15E00E9071D /* GeneratedPluginRegistrant.swift */; };
+		33CC10F12044A3C60003C045 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CC10F02044A3C60003C045 /* AppDelegate.swift */; };
+		33CC10F32044A3C60003C045 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33CC10F22044A3C60003C045 /* Assets.xcassets */; };
+		33CC10F62044A3C60003C045 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33CC10F42044A3C60003C045 /* MainMenu.xib */; };
+		33CC11132044BFA00003C045 /* MainFlutterWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CC11122044BFA00003C045 /* MainFlutterWindow.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		331C80D9294CF71000263BE5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 33CC10E52044A3C60003C045 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 33CC10EC2044A3C60003C045;
+			remoteInfo = Runner;
+		};
+		33CC111F2044C79F0003C045 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 33CC10E52044A3C60003C045 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 33CC111A2044C6BA0003C045;
+			remoteInfo = FLX;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		33CC110E2044A8840003C045 /* Bundle Framework */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Bundle Framework";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		331C80D5294CF71000263BE5 /* RunnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		331C80D7294CF71000263BE5 /* RunnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerTests.swift; sourceTree = "<group>"; };
+		333000ED22D3DE5D00554162 /* Warnings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Warnings.xcconfig; sourceTree = "<group>"; };
+		335BBD1A22A9A15E00E9071D /* GeneratedPluginRegistrant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedPluginRegistrant.swift; sourceTree = "<group>"; };
+		33CC10ED2044A3C60003C045 /* insulin_app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "insulin_app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		33CC10F02044A3C60003C045 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		33CC10F22044A3C60003C045 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Runner/Assets.xcassets; sourceTree = "<group>"; };
+		33CC10F52044A3C60003C045 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		33CC10F72044A3C60003C045 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Runner/Info.plist; sourceTree = "<group>"; };
+		33CC11122044BFA00003C045 /* MainFlutterWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFlutterWindow.swift; sourceTree = "<group>"; };
+		33CEB47222A05771004F2AC0 /* Flutter-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Flutter-Debug.xcconfig"; sourceTree = "<group>"; };
+		33CEB47422A05771004F2AC0 /* Flutter-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Flutter-Release.xcconfig"; sourceTree = "<group>"; };
+		33CEB47722A0578A004F2AC0 /* Flutter-Generated.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Flutter-Generated.xcconfig"; path = "ephemeral/Flutter-Generated.xcconfig"; sourceTree = "<group>"; };
+		33E51913231747F40026EE4D /* DebugProfile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DebugProfile.entitlements; sourceTree = "<group>"; };
+		33E51914231749380026EE4D /* Release.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Release.entitlements; sourceTree = "<group>"; };
+		33E5194F232828860026EE4D /* AppInfo.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppInfo.xcconfig; sourceTree = "<group>"; };
+		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		331C80D2294CF70F00263BE5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		33CC10EA2044A3C60003C045 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		331C80D6294CF71000263BE5 /* RunnerTests */ = {
+			isa = PBXGroup;
+			children = (
+				331C80D7294CF71000263BE5 /* RunnerTests.swift */,
+			);
+			path = RunnerTests;
+			sourceTree = "<group>";
+		};
+		33BA886A226E78AF003329D5 /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				33E5194F232828860026EE4D /* AppInfo.xcconfig */,
+				9740EEB21CF90195004384FC /* Debug.xcconfig */,
+				7AFA3C8E1D35360C0083082E /* Release.xcconfig */,
+				333000ED22D3DE5D00554162 /* Warnings.xcconfig */,
+			);
+			path = Configs;
+			sourceTree = "<group>";
+		};
+		33CC10E42044A3C60003C045 = {
+			isa = PBXGroup;
+			children = (
+				33FAB671232836740065AC1E /* Runner */,
+				33CEB47122A05771004F2AC0 /* Flutter */,
+				331C80D6294CF71000263BE5 /* RunnerTests */,
+				33CC10EE2044A3C60003C045 /* Products */,
+				D73912EC22F37F3D000D13A0 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		33CC10EE2044A3C60003C045 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				33CC10ED2044A3C60003C045 /* insulin_app.app */,
+				331C80D5294CF71000263BE5 /* RunnerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		33CC11242044D66E0003C045 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				33CC10F22044A3C60003C045 /* Assets.xcassets */,
+				33CC10F42044A3C60003C045 /* MainMenu.xib */,
+				33CC10F72044A3C60003C045 /* Info.plist */,
+			);
+			name = Resources;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		33CEB47122A05771004F2AC0 /* Flutter */ = {
+			isa = PBXGroup;
+			children = (
+				335BBD1A22A9A15E00E9071D /* GeneratedPluginRegistrant.swift */,
+				33CEB47222A05771004F2AC0 /* Flutter-Debug.xcconfig */,
+				33CEB47422A05771004F2AC0 /* Flutter-Release.xcconfig */,
+				33CEB47722A0578A004F2AC0 /* Flutter-Generated.xcconfig */,
+			);
+			path = Flutter;
+			sourceTree = "<group>";
+		};
+		33FAB671232836740065AC1E /* Runner */ = {
+			isa = PBXGroup;
+			children = (
+				33CC10F02044A3C60003C045 /* AppDelegate.swift */,
+				33CC11122044BFA00003C045 /* MainFlutterWindow.swift */,
+				33E51913231747F40026EE4D /* DebugProfile.entitlements */,
+				33E51914231749380026EE4D /* Release.entitlements */,
+				33CC11242044D66E0003C045 /* Resources */,
+				33BA886A226E78AF003329D5 /* Configs */,
+			);
+			path = Runner;
+			sourceTree = "<group>";
+		};
+		D73912EC22F37F3D000D13A0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		331C80D4294CF70F00263BE5 /* RunnerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 331C80DE294CF71000263BE5 /* Build configuration list for PBXNativeTarget "RunnerTests" */;
+			buildPhases = (
+				331C80D1294CF70F00263BE5 /* Sources */,
+				331C80D2294CF70F00263BE5 /* Frameworks */,
+				331C80D3294CF70F00263BE5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				331C80DA294CF71000263BE5 /* PBXTargetDependency */,
+			);
+			name = RunnerTests;
+			productName = RunnerTests;
+			productReference = 331C80D5294CF71000263BE5 /* RunnerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		33CC10EC2044A3C60003C045 /* Runner */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 33CC10FB2044A3C60003C045 /* Build configuration list for PBXNativeTarget "Runner" */;
+			buildPhases = (
+				33CC10E92044A3C60003C045 /* Sources */,
+				33CC10EA2044A3C60003C045 /* Frameworks */,
+				33CC10EB2044A3C60003C045 /* Resources */,
+				33CC110E2044A8840003C045 /* Bundle Framework */,
+				3399D490228B24CF009A79C7 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				33CC11202044C79F0003C045 /* PBXTargetDependency */,
+			);
+			name = Runner;
+			productName = Runner;
+			productReference = 33CC10ED2044A3C60003C045 /* insulin_app.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		33CC10E52044A3C60003C045 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 1510;
+				ORGANIZATIONNAME = "";
+				TargetAttributes = {
+					331C80D4294CF70F00263BE5 = {
+						CreatedOnToolsVersion = 14.0;
+						TestTargetID = 33CC10EC2044A3C60003C045;
+					};
+					33CC10EC2044A3C60003C045 = {
+						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 1100;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
+					};
+					33CC111A2044C6BA0003C045 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Manual;
+					};
+				};
+			};
+			buildConfigurationList = 33CC10E82044A3C60003C045 /* Build configuration list for PBXProject "Runner" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 33CC10E42044A3C60003C045;
+			productRefGroup = 33CC10EE2044A3C60003C045 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				33CC10EC2044A3C60003C045 /* Runner */,
+				331C80D4294CF70F00263BE5 /* RunnerTests */,
+				33CC111A2044C6BA0003C045 /* Flutter Assemble */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		331C80D3294CF70F00263BE5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		33CC10EB2044A3C60003C045 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				33CC10F32044A3C60003C045 /* Assets.xcassets in Resources */,
+				33CC10F62044A3C60003C045 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3399D490228B24CF009A79C7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"$PRODUCT_NAME.app\" > \"$PROJECT_DIR\"/Flutter/ephemeral/.app_filename && \"$FLUTTER_ROOT\"/packages/flutter_tools/bin/macos_assemble.sh embed\n";
+		};
+		33CC111E2044C6BF0003C045 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				Flutter/ephemeral/FlutterInputs.xcfilelist,
+			);
+			inputPaths = (
+				Flutter/ephemeral/tripwire,
+			);
+			outputFileListPaths = (
+				Flutter/ephemeral/FlutterOutputs.xcfilelist,
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$FLUTTER_ROOT\"/packages/flutter_tools/bin/macos_assemble.sh && touch Flutter/ephemeral/tripwire";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		331C80D1294CF70F00263BE5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				331C80D8294CF71000263BE5 /* RunnerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		33CC10E92044A3C60003C045 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				33CC11132044BFA00003C045 /* MainFlutterWindow.swift in Sources */,
+				33CC10F12044A3C60003C045 /* AppDelegate.swift in Sources */,
+				335BBD1B22A9A15E00E9071D /* GeneratedPluginRegistrant.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		331C80DA294CF71000263BE5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 33CC10EC2044A3C60003C045 /* Runner */;
+			targetProxy = 331C80D9294CF71000263BE5 /* PBXContainerItemProxy */;
+		};
+		33CC11202044C79F0003C045 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 33CC111A2044C6BA0003C045 /* Flutter Assemble */;
+			targetProxy = 33CC111F2044C79F0003C045 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		33CC10F42044A3C60003C045 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				33CC10F52044A3C60003C045 /* Base */,
+			);
+			name = MainMenu.xib;
+			path = Runner;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		331C80DB294CF71000263BE5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.insulin.insulinApp.RunnerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/insulin_app.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/insulin_app";
+			};
+			name = Debug;
+		};
+		331C80DC294CF71000263BE5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.insulin.insulinApp.RunnerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/insulin_app.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/insulin_app";
+			};
+			name = Release;
+		};
+		331C80DD294CF71000263BE5 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.insulin.insulinApp.RunnerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/insulin_app.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/insulin_app";
+			};
+			name = Profile;
+		};
+		338D0CE9231458BD00FA5F75 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Profile;
+		};
+		338D0CEA231458BD00FA5F75 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 33E5194F232828860026EE4D /* AppInfo.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/DebugProfile.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Runner/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Profile;
+		};
+		338D0CEB231458BD00FA5F75 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Manual;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Profile;
+		};
+		33CC10F92044A3C60003C045 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9740EEB21CF90195004384FC /* Debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		33CC10FA2044A3C60003C045 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		33CC10FC2044A3C60003C045 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 33E5194F232828860026EE4D /* AppInfo.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/DebugProfile.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Runner/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		33CC10FD2044A3C60003C045 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 33E5194F232828860026EE4D /* AppInfo.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/Release.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Runner/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		33CC111C2044C6BA0003C045 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Manual;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		33CC111D2044C6BA0003C045 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		331C80DE294CF71000263BE5 /* Build configuration list for PBXNativeTarget "RunnerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				331C80DB294CF71000263BE5 /* Debug */,
+				331C80DC294CF71000263BE5 /* Release */,
+				331C80DD294CF71000263BE5 /* Profile */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		33CC10E82044A3C60003C045 /* Build configuration list for PBXProject "Runner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				33CC10F92044A3C60003C045 /* Debug */,
+				33CC10FA2044A3C60003C045 /* Release */,
+				338D0CE9231458BD00FA5F75 /* Profile */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		33CC10FB2044A3C60003C045 /* Build configuration list for PBXNativeTarget "Runner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				33CC10FC2044A3C60003C045 /* Debug */,
+				33CC10FD2044A3C60003C045 /* Release */,
+				338D0CEA231458BD00FA5F75 /* Profile */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		33CC111B2044C6BA0003C045 /* Build configuration list for PBXAggregateTarget "Flutter Assemble" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				33CC111C2044C6BA0003C045 /* Debug */,
+				33CC111D2044C6BA0003C045 /* Release */,
+				338D0CEB231458BD00FA5F75 /* Profile */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 33CC10E52044A3C60003C045 /* Project object */;
+}

@@ -53,11 +53,15 @@ class _CGMDashboardPageState extends State<CGMDashboardPage>
   }
 
   Future<void> _loadConfig() async {
-    _cgmConfig = await _db.getCGMConfig();
-    if (_cgmConfig.deviceType != 'none' && _cgmConfig.isConnected) {
-      await _initConnector();
+    try {
+      _cgmConfig = await _db.getCGMConfig();
+      if (_cgmConfig.deviceType != 'none' && _cgmConfig.isConnected) {
+        await _initConnector();
+      }
+      await _loadHistory();
+    } catch (e) {
+      debugPrint('CGMDashboardPage._loadConfig error: $e');
     }
-    await _loadHistory();
   }
 
   Future<void> _initConnector() async {

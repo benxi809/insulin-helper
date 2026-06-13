@@ -133,6 +133,23 @@ class _CalculatorPageState extends State<CalculatorPage> {
           if (_safetyResult != null) _buildSafetyBar(),
           const SizedBox(height: 16),
 
+          // 胰岛素类型显示
+          Card(
+            color: Colors.blue.shade50,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+              child: Row(
+                children: [
+                  const Icon(Icons.biotech, size: 18, color: Colors.blue),
+                  const SizedBox(width: 8),
+                  Text('胰岛素类型：${_config.insulinType.displayName}',
+                      style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: Colors.blue)),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+
           // 血糖输入
           const Text('当前血糖 (mmol/L)', style: TextStyle(fontSize: 13, color: Colors.grey)),
           const SizedBox(height: 6),

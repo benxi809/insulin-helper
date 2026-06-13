@@ -39,22 +39,27 @@ class _ReportPageState extends State<ReportPage> {
   Future<void> _loadData() async {
     setState(() => _loading = true);
 
-    final todaySummary = await _db.getDailySummary(DateTime.now());
-    for (final day in _recentDays) {
-      final ds = await _db.getDailySummary(day);
-      _dailySummaries[_dateKey(day)] = ds;
-    }
+    try {
+      final todaySummary = await _db.getDailySummary(DateTime.now());
+      for (final day in _recentDays) {
+        final ds = await _db.getDailySummary(day);
+        _dailySummaries[_dateKey(day)] = ds;
+      }
 
-    // 加载 CGM 数据
-    final weekAgo = DateTime.now().subtract(const Duration(days: 7));
-    _cgmRecords = await _db.getCGMRecords(startDate: weekAgo);
-    _calcCGMStats();
+      // 加载 CGM 数据
+      final weekAgo = DateTime.now().subtract(const Duration(days: 7));
+      _cgmRecords = await _db.getCGMRecords(startDate: weekAgo);
+      _calcCGMStats();
 
-    if (mounted) {
-      setState(() {
-        _summary = todaySummary;
-        _loading = false;
-      });
+      if (mounted) {
+        setState(() {
+          _summary = todaySummary;
+          _loading = false;
+        });
+      }
+    } catch (e) {
+      debugPrint('ReportPage._loadData error: $e');
+      if (mounted) setState(() => _loading = false);
     }
   }
 

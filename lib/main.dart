@@ -12,6 +12,8 @@ import 'package:glucare_app/pages/patient_profile_page.dart';
 import 'package:glucare_app/pages/camera_food_page.dart';
 import 'package:glucare_app/pages/food_picker_page.dart';
 import 'package:glucare_app/pages/history_page.dart';
+import 'package:glucare_app/pages/cgm_settings_page.dart';
+import 'package:glucare_app/pages/ai_glasses_settings_page.dart';
 import 'package:glucare_app/utils/notification_service.dart';
 
 void main() {
@@ -19,7 +21,7 @@ void main() {
   final appState = AppState();
   final notifService = NotificationService();
 
-  // 先启动初始化
+  // 启动初始化（不阻塞）
   appState.init();
   notifService.init();
 
@@ -90,6 +92,8 @@ class GluCareApp extends StatelessWidget {
             '/camera_food': (_) => const CameraFoodPage(),
             '/food_picker': (_) => const FoodPickerPage(),
             '/history': (_) => const HistoryPage(),
+            '/cgm_settings': (_) => const CGMSettingsPage(),
+            '/ai_glasses_settings': (_) => const AIGlassesSettingsPage(),
           },
         );
       },

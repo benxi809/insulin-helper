@@ -32,17 +32,12 @@ class _CGMSettingsPageState extends State<CGMSettingsPage> {
   }
 
   Future<CGMDeviceConfig> _loadConfig() async {
-    try {
-      _config = await _db.getCGMConfig();
-      _selectedBrand = CGMDeviceBrandExtension.fromShortName(_config.deviceType);
-      _usernameCtrl.text = _config.username ?? '';
-      _passwordCtrl.text = _config.password ?? '';
-      _apiKeyCtrl.text = _config.apiKey ?? '';
-    } catch (e) {
-      // 加载失败时使用默认值
-      debugPrint('CGM config load error: $e');
-    }
-    if (mounted) setState(() => _loading = false);
+    _config = await _db.getCGMConfig();
+    _selectedBrand = CGMDeviceBrandExtension.fromShortName(_config.deviceType);
+    _usernameCtrl.text = _config.username ?? '';
+    _passwordCtrl.text = _config.password ?? '';
+    _apiKeyCtrl.text = _config.apiKey ?? '';
+    _loading = false;
     return _config;
   }
 
@@ -199,9 +194,9 @@ class _CGMSettingsPageState extends State<CGMSettingsPage> {
           ],
 
           // 通用 API Key 字段
-          TextField(
-            controller: _apiKeyCtrl,
-            decoration: const InputDecoration(
+          const TextField(
+            enabled: false,
+            decoration: InputDecoration(
               labelText: 'API Key (可选)',
               hintText: '用于扩展功能',
               border: OutlineInputBorder(),

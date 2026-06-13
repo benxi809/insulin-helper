@@ -1,9 +1,10 @@
 /// 首页 — 血糖概览
 import 'package:flutter/material.dart';
-import 'package:glucare_app/models/models.dart';
 import 'package:glucare_app/app_state.dart';
 import 'package:glucare_app/theme/app_colors.dart';
 import 'package:glucare_app/widgets/widgets.dart';
+import 'package:glucare_app/models/models.dart';
+import 'package:glucare_app/database/local_db.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,7 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final AppState _appState = AppState();
   UserConfig _config = UserConfig();
   List<GlucoseRecord> _recentGlucose = [];
   bool _loading = true;
@@ -26,8 +26,12 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _loadData() async {
     setState(() => _loading = true);
-    _config = await _appState.db.getConfig();
-    _recentGlucose = await _appState.db.getGlucoseRecords(limit: 5);
+    try {
+      _config = await AppDatabase().getConfig();
+      _recentGlucose = await AppDatabase().getGlucoseRecords(limit: 5);
+    } catch (e) {
+      debugPrint('HomePage._loadData error: $e');
+    }
     if (mounted) setState(() => _loading = false);
   }
 
@@ -133,8 +137,8 @@ class _HomePageState extends State<HomePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              _statItem(Icons.access_time, '空腹', _config.fastingTarget.toStringAsFixed(1)),
-              _statItem(Icons.restaurant, '餐后', _config.postprandialTarget.toStringAsFixed(1)),
+              _statItem(Icons.access_time, '空腹', _config.targetGlucoseMin.toStringAsFixed(1)),
+              _statItem(Icons.restaurant, '餐后', _config.targetGlucoseMax.toStringAsFixed(1)),
               _statItem(Icons.timeline, '每日记录', '${_recentGlucose.length}'),
             ],
           ),
@@ -165,11 +169,11 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 12),
             Row(
               children: [
-                Expanded(child: _actionChip(context, Icons.add, '记录血糖', () => Navigator.pushNamed(context, '/blood_glucose'))),
+                Expanded(child: _actionChip(context, Icons.add, '记录血糖', () => Navigator.pushNamed(context, '/camera_food'))),
                 const SizedBox(width: 8),
-                Expanded(child: _actionChip(context, Icons.calculate, '剂量计算', () => Navigator.pushNamed(context, '/dose_calculator'))),
+                Expanded(child: _actionChip(context, Icons.calculate, '剂量计算', () => Navigator.pushNamed(context, '/calculator'))),
                 const SizedBox(width: 8),
-                Expanded(child: _actionChip(context, Icons.search, '食物搜索', () => Navigator.pushNamed(context, '/food_search'))),
+                Expanded(child: _actionChip(context, Icons.search, '食物搜索', () => Navigator.pushNamed(context, '/food_picker'))),
               ],
             ),
           ],

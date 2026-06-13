@@ -1,100 +1,99 @@
-     1|<?xml version="1.0" encoding="UTF-8"?>
-     2|<Scheme
-     3|   LastUpgradeVersion = "1510"
-     4|   version = "1.3">
-     5|   <BuildAction
-     6|      parallelizeBuildables = "YES"
-     7|      buildImplicitDependencies = "YES">
-     8|      <BuildActionEntries>
-     9|         <BuildActionEntry
-    10|            buildForTesting = "YES"
-    11|            buildForRunning = "YES"
-    12|            buildForProfiling = "YES"
-    13|            buildForArchiving = "YES"
-    14|            buildForAnalyzing = "YES">
-    15|            <BuildableReference
-    16|               BuildableIdentifier = "primary"
-    17|               BlueprintIdentifier = "33CC10EC2044A3C60003C045"
-    18|               BuildableName = "glucare_app.app"
-    19|               BlueprintName = "Runner"
-    20|               ReferencedContainer = "container:Runner.xcodeproj">
-    21|            </BuildableReference>
-    22|         </BuildActionEntry>
-    23|      </BuildActionEntries>
-    24|   </BuildAction>
-    25|   <TestAction
-    26|      buildConfiguration = "Debug"
-    27|      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-    28|      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-    29|      shouldUseLaunchSchemeArgsEnv = "YES">
-    30|      <MacroExpansion>
-    31|         <BuildableReference
-    32|            BuildableIdentifier = "primary"
-    33|            BlueprintIdentifier = "33CC10EC2044A3C60003C045"
-    34|            BuildableName = "glucare_app.app"
-    35|            BlueprintName = "Runner"
-    36|            ReferencedContainer = "container:Runner.xcodeproj">
-    37|         </BuildableReference>
-    38|      </MacroExpansion>
-    39|      <Testables>
-    40|         <TestableReference
-    41|            skipped = "NO"
-    42|            parallelizable = "YES">
-    43|            <BuildableReference
-    44|               BuildableIdentifier = "primary"
-    45|               BlueprintIdentifier = "331C80D4294CF70F00263BE5"
-    46|               BuildableName = "RunnerTests.xctest"
-    47|               BlueprintName = "RunnerTests"
-    48|               ReferencedContainer = "container:Runner.xcodeproj">
-    49|            </BuildableReference>
-    50|         </TestableReference>
-    51|      </Testables>
-    52|   </TestAction>
-    53|   <LaunchAction
-    54|      buildConfiguration = "Debug"
-    55|      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-    56|      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-    57|      launchStyle = "0"
-    58|      useCustomWorkingDirectory = "NO"
-    59|      ignoresPersistentStateOnLaunch = "NO"
-    60|      debugDocumentVersioning = "YES"
-    61|      debugServiceExtension = "internal"
-    62|      enableGPUValidationMode = "1"
-    63|      allowLocationSimulation = "YES">
-    64|      <BuildableProductRunnable
-    65|         runnableDebuggingMode = "0">
-    66|         <BuildableReference
-    67|            BuildableIdentifier = "primary"
-    68|            BlueprintIdentifier = "33CC10EC2044A3C60003C045"
-    69|            BuildableName = "glucare_app.app"
-    70|            BlueprintName = "Runner"
-    71|            ReferencedContainer = "container:Runner.xcodeproj">
-    72|         </BuildableReference>
-    73|      </BuildableProductRunnable>
-    74|   </LaunchAction>
-    75|   <ProfileAction
-    76|      buildConfiguration = "Profile"
-    77|      shouldUseLaunchSchemeArgsEnv = "YES"
-    78|      savedToolIdentifier = ""
-    79|      useCustomWorkingDirectory = "NO"
-    80|      debugDocumentVersioning = "YES">
-    81|      <BuildableProductRunnable
-    82|         runnableDebuggingMode = "0">
-    83|         <BuildableReference
-    84|            BuildableIdentifier = "primary"
-    85|            BlueprintIdentifier = "33CC10EC2044A3C60003C045"
-    86|            BuildableName = "glucare_app.app"
-    87|            BlueprintName = "Runner"
-    88|            ReferencedContainer = "container:Runner.xcodeproj">
-    89|         </BuildableReference>
-    90|      </BuildableProductRunnable>
-    91|   </ProfileAction>
-    92|   <AnalyzeAction
-    93|      buildConfiguration = "Debug">
-    94|   </AnalyzeAction>
-    95|   <ArchiveAction
-    96|      buildConfiguration = "Release"
-    97|      revealArchiveInOrganizer = "YES">
-    98|   </ArchiveAction>
-    99|</Scheme>
-   100|
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   LastUpgradeVersion = "1510"
+   version = "1.3">
+   <BuildAction
+      parallelizeBuildables = "YES"
+      buildImplicitDependencies = "YES">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "33CC10EC2044A3C60003C045"
+               BuildableName = "insulin_app.app"
+               BlueprintName = "Runner"
+               ReferencedContainer = "container:Runner.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "33CC10EC2044A3C60003C045"
+            BuildableName = "insulin_app.app"
+            BlueprintName = "Runner"
+            ReferencedContainer = "container:Runner.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+      <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "331C80D4294CF70F00263BE5"
+               BuildableName = "RunnerTests.xctest"
+               BlueprintName = "RunnerTests"
+               ReferencedContainer = "container:Runner.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
+   </TestAction>
+   <LaunchAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      launchStyle = "0"
+      useCustomWorkingDirectory = "NO"
+      ignoresPersistentStateOnLaunch = "NO"
+      debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
+      enableGPUValidationMode = "1"
+      allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "33CC10EC2044A3C60003C045"
+            BuildableName = "insulin_app.app"
+            BlueprintName = "Runner"
+            ReferencedContainer = "container:Runner.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </LaunchAction>
+   <ProfileAction
+      buildConfiguration = "Profile"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      savedToolIdentifier = ""
+      useCustomWorkingDirectory = "NO"
+      debugDocumentVersioning = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "33CC10EC2044A3C60003C045"
+            BuildableName = "insulin_app.app"
+            BlueprintName = "Runner"
+            ReferencedContainer = "container:Runner.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </ProfileAction>
+   <AnalyzeAction
+      buildConfiguration = "Debug">
+   </AnalyzeAction>
+   <ArchiveAction
+      buildConfiguration = "Release"
+      revealArchiveInOrganizer = "YES">
+   </ArchiveAction>
+</Scheme>

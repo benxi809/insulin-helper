@@ -49,7 +49,26 @@ class _CameraFoodPageState extends State<CameraFoodPage> {
   /// 从AI眼镜拍照
   Future<void> _captureFromGlasses() async {
     if (!_glassesConfig.isConnected) {
-      setState(() => _error = 'AI眼镜未连接，请先在设置中连接');
+      final shouldGoSettings = await showDialog<bool>(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: const Text('连接AI眼镜'),
+          content: const Text('AI眼镜尚未连接，是否前往设置页面进行连接？'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, false),
+              child: const Text('取消'),
+            ),
+            FilledButton(
+              onPressed: () => Navigator.pop(ctx, true),
+              child: const Text('去连接'),
+            ),
+          ],
+        ),
+      );
+      if (shouldGoSettings == true && mounted) {
+        Navigator.pushNamed(context, '/ai_glasses_settings');
+      }
       return;
     }
 

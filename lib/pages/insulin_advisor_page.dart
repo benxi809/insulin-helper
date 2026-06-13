@@ -30,11 +30,15 @@ class _InsulinAdvisorPageState extends State<InsulinAdvisorPage> {
   Future<void> _loadData() async {
     setState(() => _loading = true);
 
-    _config = await _db.getConfig();
+    try {
+      _config = await _db.getConfig();
 
-    // 获取CGM历史数据（最近3天）
-    final threeDaysAgo = DateTime.now().subtract(const Duration(days: 3));
-    _cgmRecords = await _db.getCGMRecords(startDate: threeDaysAgo);
+      // 获取CGM历史数据（最近3天）
+      final threeDaysAgo = DateTime.now().subtract(const Duration(days: 3));
+      _cgmRecords = await _db.getCGMRecords(startDate: threeDaysAgo);
+    } catch (e) {
+      debugPrint('InsulinAdvisorPage._loadData error: $e');
+    }
 
     if (mounted) {
       setState(() => _loading = false);

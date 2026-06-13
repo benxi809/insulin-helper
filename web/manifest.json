@@ -1,6 +1,6 @@
 {
-    "name": "GluCare",
-    "short_name": "GluCare",
+    "name": "insulin_app",
+    "short_name": "insulin_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

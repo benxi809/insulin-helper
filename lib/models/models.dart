@@ -51,8 +51,7 @@ class GlucoseRecord {
   final double glucose; // mmol/L
   final DateTime timestamp;
   final GlucoseTag tag;
-
-  final String? note; // 备注
+  final String? note;
 
   GlucoseRecord({
     this.id,
@@ -148,6 +147,31 @@ enum DoseTag {
   basal, // 基础
 }
 
+/// 口服药物条目
+class OralMedication {
+  String name;      // 药物名称（如：二甲双胍）
+  String dosage;    // 剂量（如：500mg）
+  String frequency; // 频次（如：每日两次，随餐）
+
+  OralMedication({
+    this.name = '',
+    this.dosage = '',
+    this.frequency = '',
+  });
+
+  Map<String, dynamic> toMap() => {
+        'name': name,
+        'dosage': dosage,
+        'frequency': frequency,
+      };
+
+  factory OralMedication.fromMap(Map<String, dynamic> map) => OralMedication(
+        name: map['name'] as String? ?? '',
+        dosage: map['dosage'] as String? ?? '',
+        frequency: map['frequency'] as String? ?? '',
+      );
+}
+
 /// 用户配置
 /// 用户配置（含患者个人信息）
 class UserConfig {
@@ -168,10 +192,7 @@ class UserConfig {
   int? targetHba1c; // 目标糖化血红蛋白 (如7即7%)
   String medicationRegimen; // 用药方案描述
   double weight; // 体重 (kg)
-
-  // 目标血糖便捷访问
-  double get fastingTarget => targetGlucoseMin;
-  double get postprandialTarget => targetGlucoseMax;
+  List<OralMedication> oralMedications; // 口服药物列表
 
   // 提醒设置
   bool reminderBreakfast; // 早餐前7:00
@@ -195,6 +216,7 @@ class UserConfig {
     this.medicationRegimen = '每日多次注射（MDI）',
     this.targetHba1c = 7,
     this.weight = 65.0,
+    this.oralMedications = const [],
     this.reminderBreakfast = true,
     this.reminderLunch = true,
     this.reminderDinner = true,
@@ -217,6 +239,7 @@ class UserConfig {
         'medicationRegimen': medicationRegimen,
         'targetHba1c': targetHba1c,
         'weight': weight,
+        'oralMedications': oralMedications.map((m) => m.toMap()).toList(),
         'reminderBreakfast': reminderBreakfast ? 1 : 0,
         'reminderLunch': reminderLunch ? 1 : 0,
         'reminderDinner': reminderDinner ? 1 : 0,
@@ -241,6 +264,10 @@ class UserConfig {
         medicationRegimen: (map['medicationRegimen'] as String?) ?? '每日多次注射（MDI）',
         targetHba1c: (map['targetHba1c'] as int?) ?? 7,
         weight: (map['weight'] as num?)?.toDouble() ?? 65.0,
+        oralMedications: (map['oralMedications'] as List<dynamic>?)
+                ?.map((e) => OralMedication.fromMap(e as Map<String, dynamic>))
+                .toList() ??
+            [],
         reminderBreakfast: (map['reminderBreakfast'] as int?) == 1,
         reminderLunch: (map['reminderLunch'] as int?) == 1,
         reminderDinner: (map['reminderDinner'] as int?) == 1,
@@ -400,114 +427,4 @@ class FoodItem {
         'gramsPerUnit': gramsPerUnit,
         'category': category,
       };
-}
-
-/// 药品 — 用于用药方案管理
-class Medication {
-  final int? id;
-  final String name; // 药品名称（如"门冬胰岛素"）
-  final double dose; // 单次剂量
-  final String unit; // 剂量单位（如"U"、"mg"、"片"）
-  final String frequency; // 频率（"daily"、"every_other_day"、"weekly"）
-  final int sortOrder; // 排序
-
-  /// 服用时间点列表（JSON字符串，如 ["07:00","12:00","18:00","22:00"]）
-  final String doseTimesJson;
-  final bool isActive; // 是否启用
-  final DateTime? createdAt;
-  final DateTime? updatedAt;
-
-  Medication({
-    this.id,
-    required this.name,
-    required this.dose,
-    this.unit = 'U',
-    this.frequency = 'daily',
-    this.sortOrder = 0,
-    this.doseTimesJson = '[]',
-    this.isActive = true,
-    this.createdAt,
-    this.updatedAt,
-  });
-
-  List<String> get doseTimes {
-    return (doseTimesJson as List?)?.cast<String>() ?? [];
-  }
-
-  Map<String, dynamic> toMap() => {
-        'id': id,
-        'name': name,
-        'dose': dose,
-        'unit': unit,
-        'frequency': frequency,
-        'sortOrder': sortOrder,
-        'doseTimesJson': doseTimesJson,
-        'isActive': isActive ? 1 : 0,
-        'createdAt': (createdAt ?? DateTime.now()).toIso8601String(),
-        'updatedAt': DateTime.now().toIso8601String(),
-      };
-
-  factory Medication.fromMap(Map<String, dynamic> map) => Medication(
-        id: map['id'] as int?,
-        name: map['name'] as String? ?? '',
-        dose: (map['dose'] as num?)?.toDouble() ?? 0,
-        unit: map['unit'] as String? ?? 'U',
-        frequency: map['frequency'] as String? ?? 'daily',
-        sortOrder: map['sortOrder'] as int? ?? 0,
-        doseTimesJson: map['doseTimesJson'] as String? ?? '[]',
-        isActive: (map['isActive'] as int?) == 1,
-        createdAt: map['createdAt'] != null
-            ? DateTime.tryParse(map['createdAt'] as String)
-            : null,
-        updatedAt: map['updatedAt'] != null
-            ? DateTime.tryParse(map['updatedAt'] as String)
-            : null,
-      );
-}
-
-/// 用药打卡状态
-enum MedicationStatus {
-  pending, // 待服
-  taken, // 已服
-  skipped, // 跳过
-  missed, // 漏服
-}
-
-/// 用药打卡记录
-class MedicationLog {
-  final int? id;
-  final int medicationId; // 对应 Medication.id
-  final DateTime scheduledTime; // 计划服用时间
-  final DateTime? takenTime; // 实际服用时间
-  final MedicationStatus status;
-  final String? note; // 备注（如"忘记带了"）
-
-  MedicationLog({
-    this.id,
-    required this.medicationId,
-    required this.scheduledTime,
-    this.takenTime,
-    this.status = MedicationStatus.pending,
-    this.note,
-  });
-
-  Map<String, dynamic> toMap() => {
-        'id': id,
-        'medicationId': medicationId,
-        'scheduledTime': scheduledTime.toIso8601String(),
-        'takenTime': takenTime?.toIso8601String(),
-        'status': status.index,
-        'note': note,
-      };
-
-  factory MedicationLog.fromMap(Map<String, dynamic> map) => MedicationLog(
-        id: map['id'] as int?,
-        medicationId: map['medicationId'] as int? ?? 0,
-        scheduledTime: DateTime.parse(map['scheduledTime'] as String),
-        takenTime: map['takenTime'] != null
-            ? DateTime.tryParse(map['takenTime'] as String)
-            : null,
-        status: MedicationStatus.values[map['status'] as int? ?? 0],
-        note: map['note'] as String?,
-      );
 }

@@ -24,7 +24,11 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Future<void> _loadConfig() async {
-    _config = await _db.getConfig();
+    try {
+      _config = await _db.getConfig();
+    } catch (e) {
+      debugPrint('SettingsPage._loadConfig error: $e');
+    }
     if (mounted) setState(() => _loading = false);
   }
 
@@ -130,23 +134,23 @@ class _SettingsPageState extends State<SettingsPage> {
             icon: Icons.person,
             title: '患者信息',
             subtitle: '姓名 · 年龄 · 糖尿病类型 · 诊断记录',
-            onTap: () => Navigator.pushNamed(context, '/profile'),
+            onTap: () => Navigator.pushNamed(context, '/patient_profile'),
           ),
           const SizedBox(height: 12),
 
-          // ===== 设备连接 =====
-          _sectionHeader('设备连接'),
+          // ===== 设备管理 =====
+          _sectionHeader('设备管理'),
           const SizedBox(height: 4),
           _buildConfigTile(
-            icon: Icons.show_chart,
-            title: 'CGM 动态血糖仪',
-            subtitle: '德康 · 雅培 · 动态血糖监测',
+            icon: Icons.monitor_heart_outlined,
+            title: '连接 CGM 动态血糖仪',
+            subtitle: '德康 · 雅培 · 模拟数据',
             onTap: () => Navigator.pushNamed(context, '/cgm_settings'),
           ),
           _buildConfigTile(
-            icon: Icons.smartphone_outlined,
-            title: 'AI 智能眼镜',
-            subtitle: '拍照识别食物 · 雷鸟 · INMO',
+            icon: Icons.visibility_outlined,
+            title: '连接 AI 智能眼镜',
+            subtitle: '雷鸟X2 · INMO Air · 小米眼镜',
             onTap: () => Navigator.pushNamed(context, '/ai_glasses_settings'),
           ),
           const SizedBox(height: 12),
